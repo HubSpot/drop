@@ -1,0 +1,22 @@
+{
+  "name": "drop",
+  "main": "drop.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/HubSpot/drop",
+  "authors": [
+    "Adam Schwartz <aschwartz@hubspot.com>"
+  ],
+  "description": "Element containers for Tether",
+  "keywords": [
+    "dropdown",
+    "tether"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
