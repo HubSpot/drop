@@ -1,7 +1,7 @@
 {
   "name": "drop",
   "main": "drop.js",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "homepage": "https://github.com/HubSpot/drop",
   "authors": [
     "Adam Schwartz <aschwartz@hubspot.com>"
