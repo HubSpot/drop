@@ -4,17 +4,7 @@ module.exports = (grunt) ->
     coffee:
       compile:
         files:
-          'tether.js': 'tether.coffee'
-          'constraint.js': 'constraint.coffee'
-          'abutment.js': 'abutment.coffee'
-          'shift.js': 'shift.coffee'
-
           'drop.js': 'drop.coffee'
-
-          'tooltip.js': 'tooltip.coffee'
-
-          'markAttachment.js': 'markAttachment.coffee'
-          'docs/js/intro.js': 'docs/coffee/intro.coffee'
           'docs/welcome/js/welcome.js': 'docs/welcome/coffee/welcome.coffee'
 
     watch:
@@ -23,21 +13,17 @@ module.exports = (grunt) ->
         tasks: ['coffee', 'uglify', 'compass']
 
     uglify:
-      tether:
-        src: 'tether.js'
-        dest: 'tether.min.js'
+      drop:
+        src: 'drop.js'
+        dest: 'drop.min.js'
         options:
-          banner: '/*! tether.js <%= pkg.version %> */\n'
+          banner: '/*! drop.js <%= pkg.version %> */\n'
 
     compass:
       dist:
         options:
           sassDir: 'sass'
           cssDir: 'css'
-      introDocs:
-        options:
-          sassDir: 'docs/sass'
-          cssDir: 'docs/css'
       welcomeDocs:
         options:
           sassDir: 'docs/welcome/sass'
@@ -47,5 +33,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-compass'
+  grunt.loadNpmTasks 'grunt-bower-task'
 
-  grunt.registerTask 'default', ['coffee', 'uglify', 'compass']
+  grunt.registerTask 'default', ['coffee', 'uglify', 'compass', 'bower']
