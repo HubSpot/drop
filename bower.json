@@ -1,9 +1,5 @@
 {
   "name": "drop",
-  "main": [
-    "drop.js",
-    "drop.min.js"
-  ],
   "version": "0.1.4",
   "homepage": "https://github.com/HubSpot/drop",
   "authors": [
