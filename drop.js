@@ -47,7 +47,8 @@
         openOn: 'click',
         constrainToScrollParent: true,
         constrainToWindow: true,
-        className: ''
+        className: '',
+        tetherOptions: {}
       }
     };
     $.extend(true, drop, defaultOptions, options);
@@ -116,7 +117,7 @@
         constraints.push({
           to: 'scrollParent'
         });
-        return this.tether = new Tether({
+        options = {
           element: this.$drop[0],
           target: this.$target[0],
           attachment: sortAttach(dropAttach),
@@ -125,7 +126,8 @@
           targetOffset: '0 0',
           enabled: false,
           constraints: constraints
-        });
+        };
+        return this.tether = new Tether($.extend({}, options, this.options.tetherOptions));
       };
 
       DropInstance.prototype.setupEvents = function() {

@@ -38,6 +38,7 @@ createContext = (options) ->
       constrainToScrollParent: true
       constrainToWindow: true
       className: ''
+      tetherOptions: {}
 
   $.extend true, drop, defaultOptions, options
 
@@ -107,7 +108,7 @@ createContext = (options) ->
       constraints.push
         to: 'scrollParent'
 
-      @tether = new Tether
+      options =
         element: @$drop[0]
         target: @$target[0]
         attachment: sortAttach(dropAttach)
@@ -116,6 +117,8 @@ createContext = (options) ->
         targetOffset: '0 0'
         enabled: false
         constraints: constraints
+
+      @tether = new Tether $.extend {}, options, @options.tetherOptions
 
     setupEvents: ->
       return unless @options.openOn
