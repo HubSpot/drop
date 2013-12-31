@@ -1,4 +1,4 @@
-{extend, addClass, removeClass, hasClass} = Tether.Utils
+{extend, addClass, removeClass, hasClass, Evented} = Tether.Utils
 
 touchDevice = 'ontouchstart' of document.documentElement
 clickEvent = if touchDevice then 'touchstart' else 'click'
