@@ -1,4 +1,4 @@
-$ = jQuery
+{extend, addClass, removeClass, hasClass} = Tether.Utils
 
 touchDevice = 'ontouchstart' of document.documentElement
 clickEvent = if touchDevice then 'touchstart' else 'click'
@@ -27,7 +27,7 @@ createContext = (options) ->
   drop = ->
     new DropInstance arguments...
 
-  $.extend drop,
+  extend drop,
     createContext: createContext
     drops: []
 
@@ -40,9 +40,7 @@ createContext = (options) ->
       className: ''
       tetherOptions: {}
 
-  $.extend true, drop, defaultOptions, options
-
-  $(document).on 'dropopen.drop, dropclose.drop', -> drop.updateBodyClasses()
+  extend true, drop, defaultOptions, options
 
   drop.updateBodyClasses = ->
     # There is only one body, so despite the context concept, we still iterate through all
@@ -54,15 +52,15 @@ createContext = (options) ->
       break
 
     if anyOpen
-      $('body').addClass('drop-open')
+      addClass document.body, 'drop-open'
     else
-      $('body').removeClass('drop-open')
+      removeClass document.body, 'drop-open'
 
-  class DropInstance
+  class DropInstance extends Evented
     constructor: (@options) ->
-      @options = $.extend {}, drop.defaults, @options
+      @options = extend {}, drop.defaults, @options
 
-      @$target = $ @options.target
+      {@target} = @options
 
       drop.drops.push @
       allDrops.push @
@@ -72,15 +70,20 @@ createContext = (options) ->
       @setupTether()
 
     setupElements: ->
-      @$drop = $ '<div>'
-      @$drop.addClass 'drop'
-      @$drop.addClass @options.className
+      @drop = document.createElement 'div'
+      addClass @drop, 'drop'
 
-      @$dropContent = $ '<div>'
-      @$dropContent.addClass 'drop-content'
-      @$dropContent.append @options.content
+      if @options.className
+        addClass @drop, @options.className
 
-      @$drop.append @$dropContent
+      @dropContent = document.createElement 'div'
+      addClass @dropContent, 'drop-content'
+      if typeof @options.content is 'object'
+        @dropContent.appendChild @options.content
+      else
+        @dropContent.innerHTML = @options.content
+
+      @drop.appendChild @dropContent
 
     setupTether: ->
       # Tether expects two attachment points, one in the target element, one in the
@@ -109,8 +112,8 @@ createContext = (options) ->
         to: 'scrollParent'
 
       options =
-        element: @$drop[0]
-        target: @$target[0]
+        element: @drop
+        target: @target
         attachment: sortAttach(dropAttach)
         targetAttachment: sortAttach(@options.attach)
         offset: '0 0'
@@ -118,34 +121,34 @@ createContext = (options) ->
         enabled: false
         constraints: constraints
 
-      @tether = new Tether $.extend {}, options, @options.tetherOptions
+      @tether = new Tether extend {}, options, @options.tetherOptions
 
     setupEvents: ->
       return unless @options.openOn
       events = @options.openOn.split ' '
 
       if 'click' in events
-        @$target.bind clickEvent, => @toggle()
+        @target.addEventListener clickEvent, => @toggle()
 
-        $(document).bind clickEvent, (event) =>
+        document.addEventListener clickEvent, (event) =>
           return unless @isOpened()
 
           # Clicking inside dropdown
-          if $(event.target).is(@$drop[0]) or @$drop.find(event.target).length
+          if event.target is @drop or @drop.contains(event.target)
             return
 
           # Clicking target
-          if $(event.target).is(@$target[0]) or @$target.find(event.target).length
+          if event.target is @target or @target.contains(event.target)
             return
 
           @close()
 
       if 'hover' in events
-        @$target.bind 'mouseover', => @open()
-        @$target.bind 'mouseout', => @close()
+        @target.addEventListener 'mouseover', => @open()
+        @target.addEventListener 'mouseout', => @close()
 
     isOpened: ->
-      @$drop.hasClass('drop-open')
+      hasClass @drop, 'drop-open'
 
     toggle: ->
       if @isOpened()
@@ -154,31 +157,31 @@ createContext = (options) ->
         @open()
 
     open: ->
-      unless @$drop.parent().length
-        $('body').append @$drop
+      unless @drop.parentNode
+        document.body.appendChild @drop
 
-      @$target.addClass('drop-open')
-      @$drop.addClass('drop-open')
+      addClass @target, 'drop-open'
+      addClass @drop, 'drop-open'
 
-      @$drop.trigger
-        type: 'dropopen'
-        drop: @
+      @trigger 'open'
 
       @tether.enable()
 
-    close: ->
-      @$target.removeClass('drop-open')
-      @$drop.removeClass('drop-open')
+      drop.updateBodyClasses()
 
-      @$drop.trigger
-        type: 'dropclose'
-        drop: @
+    close: ->
+      removeClass @target, 'drop-open'
+      removeClass @drop, 'drop-open'
+
+      @trigger 'close'
 
       @tether.disable()
+
+      drop.updateBodyClasses()
 
   drop
 
 window.Drop = createContext()
 
-$ ->
+document.addEventListener 'DOMContentLoaded', ->
   Drop.updateBodyClasses()
