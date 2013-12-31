@@ -1,9 +1,10 @@
 {
   "name": "drop",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/HubSpot/drop",
   "authors": [
-    "Adam Schwartz <aschwartz@hubspot.com>"
+    "Adam Schwartz <aschwartz@hubspot.com>",
+    "Zack Bloom <zbloom@hubspot.com>"
   ],
   "description": "Element containers for Tether",
   "keywords": [
@@ -19,6 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "tether": "0.2.x"
+    "tether": "0.2.1"
   }
 }
