@@ -1,0 +1,14 @@
+@import compass/css3
+
+=drop($themePrefix: "drop")
+    .#{ $themePrefix }, .#{ $themePrefix } *
+
+        &, &:after, &:before
+            +box-sizing(border-box)
+
+    .#{ $themePrefix }
+        position: absolute
+        display: none
+
+        &.#{ $themePrefix }-open
+            display: block
