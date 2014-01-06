@@ -7,14 +7,14 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     border-radius: 5px;
-    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
     position: relative;
     font-family: inherit;
     background: white;
     color: inherit;
     padding: 1em;
     font-size: 1.1em;
-    line-height: 1.5em; }
+    line-height: 1.5em;
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); }
     .drop.drop-theme-arrows .drop-content:before {
       content: "";
       display: block;
