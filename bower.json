@@ -20,6 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "tether": "0.2.4"
+    "tether": "0.2.x"
   }
 }
