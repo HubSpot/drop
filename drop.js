@@ -148,7 +148,6 @@
           enabled: false,
           constraints: constraints
         };
-        console.log(this.options.position, 'a', options.attachment, 't', options.targetAttachment);
         if (this.options.tether !== false) {
           return this.tether = new Tether(extend({}, options, this.options.tether));
         }

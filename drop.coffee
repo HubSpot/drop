@@ -130,8 +130,6 @@ createContext = (options={}) ->
         enabled: false
         constraints: constraints
 
-      console.log @options.position, 'a', options.attachment, 't', options.targetAttachment
-
       if @options.tether isnt false
         @tether = new Tether extend {}, options, @options.tether
 
