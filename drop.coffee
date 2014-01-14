@@ -19,42 +19,47 @@ MIRROR_ATTACH =
   middle: 'middle'
   center: 'center'
 
-allDrops = []
+allDrops = {}
 
 # Drop can be included in external libraries.  Calling createContext gives you a fresh
 # copy of drop which won't interact with other copies on the page (beyond calling the document events).
-createContext = (options) ->
+createContext = (options={}) ->
   drop = ->
     new DropInstance arguments...
 
   extend drop,
     createContext: createContext
     drops: []
+    defaults: {}
 
   defaultOptions =
+    classPrefix: 'drop'
     defaults:
       attach: 'bottom left'
       openOn: 'click'
       constrainToScrollParent: true
       constrainToWindow: true
-      className: ''
+      classes: ''
       tetherOptions: {}
 
-  extend true, drop, defaultOptions, options
+  extend drop, defaultOptions, options
+  extend drop.defaults, defaultOptions.defaults, options.defaults
+
+  allDrops[drop.classPrefix] ?= []
 
   drop.updateBodyClasses = ->
     # There is only one body, so despite the context concept, we still iterate through all
-    # drops created in any context before applying the class.
+    # drops which share our classPrefix.
 
     anyOpen = false
-    for _drop in allDrops when _drop.isOpened()
+    for _drop in allDrops[drop.classPrefix] when _drop.isOpened()
       anyOpen = true
       break
 
     if anyOpen
-      addClass document.body, 'drop-open'
+      addClass document.body, "#{ drop.classPrefix }-open"
     else
-      removeClass document.body, 'drop-open'
+      removeClass document.body, "#{ drop.classPrefix }-open"
 
   class DropInstance extends Evented
     constructor: (@options) ->
@@ -62,8 +67,11 @@ createContext = (options) ->
 
       {@target} = @options
 
+      unless @target?
+        throw new Error 'Drop Error: You must provide a target.'
+
       drop.drops.push @
-      allDrops.push @
+      allDrops[drop.classPrefix].push @
 
       @setupElements()
       @setupEvents()
@@ -71,13 +79,13 @@ createContext = (options) ->
 
     setupElements: ->
       @drop = document.createElement 'div'
-      addClass @drop, 'drop'
+      addClass @drop, drop.classPrefix
 
-      if @options.className
-        addClass @drop, @options.className
+      if @options.classes
+        addClass @drop, @options.classes
 
       @dropContent = document.createElement 'div'
-      addClass @dropContent, 'drop-content'
+      addClass @dropContent, "#{ drop.classPrefix }-content"
       if typeof @options.content is 'object'
         @dropContent.appendChild @options.content
       else
@@ -90,7 +98,7 @@ createContext = (options) ->
       # drop.  We use a single one, and use the order as well, to allow us to put
       # the drop on either side of any of the four corners.  This magic converts between
       # the two:
-      dropAttach = @options.attach.split(' ')
+      dropAttach = @options.position.split(' ')
       dropAttach[0] = MIRROR_ATTACH[dropAttach[0]]
       dropAttach = dropAttach.join(' ')
 
@@ -115,13 +123,17 @@ createContext = (options) ->
         element: @drop
         target: @target
         attachment: sortAttach(dropAttach)
-        targetAttachment: sortAttach(@options.attach)
+        targetAttachment: sortAttach(@options.position)
+        classPrefix: drop.classPrefix
         offset: '0 0'
         targetOffset: '0 0'
         enabled: false
         constraints: constraints
 
-      @tether = new Tether extend {}, options, @options.tetherOptions
+      console.log @options.position, 'a', options.attachment, 't', options.targetAttachment
+
+      if @options.tether isnt false
+        @tether = new Tether extend {}, options, @options.tether
 
     setupEvents: ->
       return unless @options.openOn
@@ -148,7 +160,7 @@ createContext = (options) ->
         @target.addEventListener 'mouseout', => @close()
 
     isOpened: ->
-      hasClass @drop, 'drop-open'
+      hasClass @drop, "#{ drop.classPrefix }-open"
 
     toggle: ->
       if @isOpened()
@@ -160,22 +172,22 @@ createContext = (options) ->
       unless @drop.parentNode
         document.body.appendChild @drop
 
-      addClass @target, 'drop-open'
-      addClass @drop, 'drop-open'
+      addClass @target, "#{ drop.classPrefix }-open"
+      addClass @drop, "#{ drop.classPrefix }-open"
+
+      @tether?.enable()
 
       @trigger 'open'
-
-      @tether.enable()
 
       drop.updateBodyClasses()
 
     close: ->
-      removeClass @target, 'drop-open'
-      removeClass @drop, 'drop-open'
+      removeClass @target, "#{ drop.classPrefix }-open"
+      removeClass @drop, "#{ drop.classPrefix }-open"
 
       @trigger 'close'
 
-      @tether.disable()
+      @tether?.disable()
 
       drop.updateBodyClasses()
 

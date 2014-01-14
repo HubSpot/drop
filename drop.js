@@ -28,10 +28,13 @@
     center: 'center'
   };
 
-  allDrops = [];
+  allDrops = {};
 
   createContext = function(options) {
-    var DropInstance, defaultOptions, drop;
+    var DropInstance, defaultOptions, drop, _name;
+    if (options == null) {
+      options = {};
+    }
     drop = function() {
       return (function(func, args, ctor) {
         ctor.prototype = func.prototype;
@@ -41,24 +44,31 @@
     };
     extend(drop, {
       createContext: createContext,
-      drops: []
+      drops: [],
+      defaults: {}
     });
     defaultOptions = {
+      classPrefix: 'drop',
       defaults: {
         attach: 'bottom left',
         openOn: 'click',
         constrainToScrollParent: true,
         constrainToWindow: true,
-        className: '',
+        classes: '',
         tetherOptions: {}
       }
     };
-    extend(true, drop, defaultOptions, options);
+    extend(drop, defaultOptions, options);
+    extend(drop.defaults, defaultOptions.defaults, options.defaults);
+    if (allDrops[_name = drop.classPrefix] == null) {
+      allDrops[_name] = [];
+    }
     drop.updateBodyClasses = function() {
-      var anyOpen, _drop, _i, _len;
+      var anyOpen, _drop, _i, _len, _ref1;
       anyOpen = false;
-      for (_i = 0, _len = allDrops.length; _i < _len; _i++) {
-        _drop = allDrops[_i];
+      _ref1 = allDrops[drop.classPrefix];
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        _drop = _ref1[_i];
         if (!(_drop.isOpened())) {
           continue;
         }
@@ -66,9 +76,9 @@
         break;
       }
       if (anyOpen) {
-        return addClass(document.body, 'drop-open');
+        return addClass(document.body, "" + drop.classPrefix + "-open");
       } else {
-        return removeClass(document.body, 'drop-open');
+        return removeClass(document.body, "" + drop.classPrefix + "-open");
       }
     };
     DropInstance = (function(_super) {
@@ -78,8 +88,11 @@
         this.options = options;
         this.options = extend({}, drop.defaults, this.options);
         this.target = this.options.target;
+        if (this.target == null) {
+          throw new Error('Drop Error: You must provide a target.');
+        }
         drop.drops.push(this);
-        allDrops.push(this);
+        allDrops[drop.classPrefix].push(this);
         this.setupElements();
         this.setupEvents();
         this.setupTether();
@@ -87,12 +100,12 @@
 
       DropInstance.prototype.setupElements = function() {
         this.drop = document.createElement('div');
-        addClass(this.drop, 'drop');
-        if (this.options.className) {
-          addClass(this.drop, this.options.className);
+        addClass(this.drop, drop.classPrefix);
+        if (this.options.classes) {
+          addClass(this.drop, this.options.classes);
         }
         this.dropContent = document.createElement('div');
-        addClass(this.dropContent, 'drop-content');
+        addClass(this.dropContent, "" + drop.classPrefix + "-content");
         if (typeof this.options.content === 'object') {
           this.dropContent.appendChild(this.options.content);
         } else {
@@ -103,7 +116,7 @@
 
       DropInstance.prototype.setupTether = function() {
         var constraints, dropAttach;
-        dropAttach = this.options.attach.split(' ');
+        dropAttach = this.options.position.split(' ');
         dropAttach[0] = MIRROR_ATTACH[dropAttach[0]];
         dropAttach = dropAttach.join(' ');
         constraints = [];
@@ -128,13 +141,17 @@
           element: this.drop,
           target: this.target,
           attachment: sortAttach(dropAttach),
-          targetAttachment: sortAttach(this.options.attach),
+          targetAttachment: sortAttach(this.options.position),
+          classPrefix: drop.classPrefix,
           offset: '0 0',
           targetOffset: '0 0',
           enabled: false,
           constraints: constraints
         };
-        return this.tether = new Tether(extend({}, options, this.options.tetherOptions));
+        console.log(this.options.position, 'a', options.attachment, 't', options.targetAttachment);
+        if (this.options.tether !== false) {
+          return this.tether = new Tether(extend({}, options, this.options.tether));
+        }
       };
 
       DropInstance.prototype.setupEvents = function() {
@@ -172,7 +189,7 @@
       };
 
       DropInstance.prototype.isOpened = function() {
-        return hasClass(this.drop, 'drop-open');
+        return hasClass(this.drop, "" + drop.classPrefix + "-open");
       };
 
       DropInstance.prototype.toggle = function() {
@@ -184,21 +201,27 @@
       };
 
       DropInstance.prototype.open = function() {
+        var _ref1;
         if (!this.drop.parentNode) {
           document.body.appendChild(this.drop);
         }
-        addClass(this.target, 'drop-open');
-        addClass(this.drop, 'drop-open');
+        addClass(this.target, "" + drop.classPrefix + "-open");
+        addClass(this.drop, "" + drop.classPrefix + "-open");
+        if ((_ref1 = this.tether) != null) {
+          _ref1.enable();
+        }
         this.trigger('open');
-        this.tether.enable();
         return drop.updateBodyClasses();
       };
 
       DropInstance.prototype.close = function() {
-        removeClass(this.target, 'drop-open');
-        removeClass(this.drop, 'drop-open');
+        var _ref1;
+        removeClass(this.target, "" + drop.classPrefix + "-open");
+        removeClass(this.drop, "" + drop.classPrefix + "-open");
         this.trigger('close');
-        this.tether.disable();
+        if ((_ref1 = this.tether) != null) {
+          _ref1.disable();
+        }
         return drop.updateBodyClasses();
       };
 
