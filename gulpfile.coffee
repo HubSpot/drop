@@ -5,10 +5,14 @@ concat = require('gulp-concat')
 uglify = require('gulp-uglify')
 header = require('gulp-header')
 rename = require('gulp-rename')
+bower = require('gulp-bower')
 gutil = require('gulp-util')
 
 pkg = require('./package.json')
 banner = "/*! #{ pkg.name } #{ pkg.version } */\n"
+
+gulp.task 'bower', ->
+  bower().pipe(gulp.dest('./bower_components'))
 
 gulp.task 'coffee', ->
   try
@@ -50,10 +54,17 @@ gulp.task 'compass', ->
       .pipe(gulp.dest("./#{ path }css"))
 
 gulp.task 'default', ->
-  gulp.run 'js', 'compass'
+  gulp.run 'bower', ->
+    gulp.run 'js', 'compass', ->
 
   gulp.watch './**/*.coffee', ->
     gulp.run 'js'
 
   gulp.watch './**/*.sass', ->
     gulp.run 'compass'
+
+  gulp.watch './bower.json', ->
+    gulp.run 'bower'
+
+  gulp.watch './package.json', ->
+    gulp.run 'js'
