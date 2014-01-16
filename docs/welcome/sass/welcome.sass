@@ -82,6 +82,10 @@ table.showcase
 
     &.hero
         text-align: center
+        background: #eee
+
+        *
+            -webkit-user-select: none
 
         .tether-target-demo
             +inline-block
@@ -96,15 +100,16 @@ table.showcase
             +inline-block
             margin: 0 auto 20px
             background: pink
-            height: 200px
-            width: 200px
+            height: 300px
+            width: 400px
 
             .drop-target
-                +inline-block
-                padding: 20px
-                margin: 40px
-                color: #fff
-                background: blue
+                display: block
+                height: 100%
+                width: 100%
+                background: #ccc
+                line-height: 300px
+                font-size: 40px
 
     &.about
         background: #fff1dd

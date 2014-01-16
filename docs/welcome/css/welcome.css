@@ -72,7 +72,10 @@ table.showcase {
     table.showcase .showcase-inner p {
       text-align: center; }
   table.showcase.hero {
-    text-align: center; }
+    text-align: center;
+    background: #eeeeee; }
+    table.showcase.hero * {
+      -webkit-user-select: none; }
     table.showcase.hero .tether-target-demo {
       display: -moz-inline-stack;
       display: inline-block;
@@ -95,19 +98,14 @@ table.showcase {
       *display: inline;
       margin: 0 auto 20px;
       background: pink;
-      height: 200px;
-      width: 200px; }
+      height: 300px;
+      width: 400px; }
       table.showcase.hero .drop-demo .drop-target {
-        display: -moz-inline-stack;
-        display: inline-block;
-        vertical-align: middle;
-        *vertical-align: auto;
-        zoom: 1;
-        *display: inline;
-        padding: 20px;
-        margin: 40px;
-        color: white;
-        background: blue; }
+        display: block;
+        height: 100%;
+        width: 100%;
+        background: #cccccc;
+        line-height: 300px; }
   table.showcase.about {
     background: #fff1dd; }
     table.showcase.about a {
