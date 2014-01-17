@@ -174,10 +174,10 @@ createContext = (options={}) ->
       unless @drop.parentNode
         document.body.appendChild @drop
 
+      @tether?.enable()
+
       addClass @target, "#{ drop.classPrefix }-open"
       addClass @drop, "#{ drop.classPrefix }-open"
-
-      @tether?.enable()
 
       @trigger 'open'
 

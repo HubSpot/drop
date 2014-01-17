@@ -209,11 +209,11 @@
         if (!this.drop.parentNode) {
           document.body.appendChild(this.drop);
         }
-        addClass(this.target, "" + drop.classPrefix + "-open");
-        addClass(this.drop, "" + drop.classPrefix + "-open");
         if ((_ref1 = this.tether) != null) {
           _ref1.enable();
         }
+        addClass(this.target, "" + drop.classPrefix + "-open");
+        addClass(this.drop, "" + drop.classPrefix + "-open");
         this.trigger('open');
         return drop.updateBodyClasses();
       };
