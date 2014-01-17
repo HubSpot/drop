@@ -22,7 +22,8 @@
         target: $target[0],
         classes: 'drop-theme-arrows-bounce',
         position: position,
-        constrainToWindow: true,
+        constrainToWindow: false,
+        constrainToScrollParent: false,
         openOn: 'click',
         content: '<div style="height: 50px; width: 50px"></div>'
       });

@@ -126,6 +126,10 @@
             pin: 'top, bottom',
             attachment: 'together none'
           });
+        } else {
+          constraints.push({
+            to: 'scrollParent'
+          });
         }
         if (this.options.constrainToWindow !== false) {
           constraints.push({
@@ -133,10 +137,11 @@
             pin: true,
             attachment: 'together'
           });
+        } else {
+          constraints.push({
+            to: 'window'
+          });
         }
-        constraints.push({
-          to: 'scrollParent'
-        });
         options = {
           element: this.drop,
           target: this.target,
