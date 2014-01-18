@@ -6,7 +6,7 @@ body {
   font-family: "proxima-nova", "Helvetica Neue", sans-serif; }
 
 .drop-element.drop-theme-arrows-bounce.drop-out-of-bounds {
-  opacity: 0; }
+  display: none; }
 
 .button {
   display: inline-block;

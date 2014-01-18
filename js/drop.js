@@ -214,6 +214,7 @@
         }
         addClass(this.target, "" + drop.classPrefix + "-open");
         addClass(this.drop, "" + drop.classPrefix + "-open");
+        this.tether.position();
         this.trigger('open');
         return drop.updateBodyClasses();
       };

@@ -23,10 +23,8 @@ setupHero = ->
         'top center'
     ]
 
-    drops = {}
-
     for position in positions
-        drops[position] = new _Drop
+        new _Drop
             target: $target[0]
             classes: 'drop-theme-arrows-bounce'
             position: position
@@ -34,10 +32,5 @@ setupHero = ->
             constrainToScrollParent: false
             openOn: 'click'
             content: '<div style="height: 50px; width: 50px"></div>'
-
-        # drops[position].open()
-        # drops[position].close()
-
-    window.drops = drops # TODO - remove?
 
 init()

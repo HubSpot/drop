@@ -179,6 +179,8 @@ createContext = (options={}) ->
       addClass @target, "#{ drop.classPrefix }-open"
       addClass @drop, "#{ drop.classPrefix }-open"
 
+      @tether.position()
+
       @trigger 'open'
 
       drop.updateBodyClasses()
