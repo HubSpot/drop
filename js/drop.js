@@ -91,6 +91,9 @@
         if (this.target == null) {
           throw new Error('Drop Error: You must provide a target.');
         }
+        if (this.options.classes) {
+          addClass(this.target, this.options.classes);
+        }
         drop.drops.push(this);
         allDrops[drop.classPrefix].push(this);
         this.setupElements();

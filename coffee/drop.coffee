@@ -70,6 +70,9 @@ createContext = (options={}) ->
       unless @target?
         throw new Error 'Drop Error: You must provide a target.'
 
+      if @options.classes
+        addClass @target, @options.classes
+
       drop.drops.push @
       allDrops[drop.classPrefix].push @
 
