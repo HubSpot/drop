@@ -1,5 +1,5 @@
-/*! drop 0.3.5 */
-/*! tether 0.4.6 */
+/*! drop 0.3.6 */
+/*! tether 0.4.7 */
 (function() {
   var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
     __hasProp = {}.hasOwnProperty,
@@ -670,7 +670,7 @@
     };
 
     _Tether.prototype.updateAttachClasses = function(elementAttach, targetAttach) {
-      var add, all, side, sides, _i, _j, _len, _len1,
+      var add, all, side, sides, _i, _j, _len, _len1, _ref1,
         _this = this;
       if (elementAttach == null) {
         elementAttach = this.attachment;
@@ -679,7 +679,10 @@
         targetAttach = this.targetAttachment;
       }
       sides = ['left', 'top', 'bottom', 'right', 'middle', 'center'];
-      add = [];
+      if ((_ref1 = this._addAttachClasses) != null ? _ref1.length : void 0) {
+        this._addAttachClasses.splice(0, this._addAttachClasses.length);
+      }
+      add = this._addAttachClasses != null ? this._addAttachClasses : this._addAttachClasses = [];
       if (elementAttach.top) {
         add.push("" + (this.getClass('element-attached')) + "-" + elementAttach.top);
       }
@@ -702,8 +705,12 @@
         all.push("" + (this.getClass('target-attached')) + "-" + side);
       }
       return defer(function() {
-        updateClasses(_this.element, add, all);
-        return updateClasses(_this.target, add, all);
+        if (_this._addAttachClasses == null) {
+          return;
+        }
+        updateClasses(_this.element, _this._addAttachClasses, all);
+        updateClasses(_this.target, _this._addAttachClasses, all);
+        return _this._addAttachClasses = void 0;
       });
     };
 

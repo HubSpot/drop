@@ -1,6 +1,6 @@
 {
   "name": "drop",
-  "version": "0.3.4",
+  "version": "0.3.6",
   "homepage": "https://github.com/HubSpot/drop",
   "authors": [
     "Adam Schwartz <aschwartz@hubspot.com>",
@@ -20,6 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "tether": "0.4.5"
+    "tether": "0.4.7"
   }
 }
