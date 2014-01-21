@@ -1,0 +1,24 @@
+@import compass/css3
+@import compass/utilities/general/clearfix
+
+@import ../bower_components/tether/sass/mixins/pointer-events
+
+@import ../bower_components/tether/sass/helpers/tether
+@import ../bower_components/tether/sass/helpers/tether-theme-arrows
+
+@import helpers/drop-animation-scale
+
+$themePrefix: "drop"
+$themeName: "arrows-bounce-dark"
+$arrowSize: 12px
+$backgroundColor: #000
+$color: #fff
+$useDropShadow: false
+
++tether($themePrefix: $themePrefix)
++tether-theme-arrows($themePrefix: $themePrefix, $themeName: $themeName, $arrowSize: $arrowSize, $backgroundColor: $backgroundColor, $color: $color, $useDropShadow: $useDropShadow)
+
+$attachmentOffset: $arrowSize
+$easing: cubic-bezier(0, 0, 0.265, 1.55) // Bounce
+
++drop-animation-scale($themePrefix: $themePrefix, $themeName: $themeName, $attachmentOffset: $attachmentOffset, $easing: $easing)
