@@ -44,7 +44,7 @@ gulp.task 'js', ->
       gulp.run 'uglify', ->
 
 gulp.task 'compass', ->
-  for path in ['', 'docs/welcome/']
+  for path in ['', 'docs/welcome/', 'docs/welcome/examples/social-sharing/']
     gulp.src("./#{ path }sass/*")
       .pipe(compass(
         sass: "#{ path }sass"
