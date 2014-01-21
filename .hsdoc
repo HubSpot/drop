@@ -1,5 +1,5 @@
 title: "drop"
 description: "Dropdowns for Tether"
-source: "*.coffee"
+source: "coffee/*.coffee"
 examples: "**/*.md"
 assets: "{bower_components/*,*.js,*.coffee,css/*.css,docs/css/*.css,docs/js/*,js,docs/welcome/*,examples/*}"
