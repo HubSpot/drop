@@ -35,6 +35,35 @@ body {
   height: 100%;
   overflow: hidden; }
 
+.drop-hero.drop-element.drop-theme-arrows-bounce-dark .drop-content {
+  padding: 40px; }
+.drop-hero.drop-element.drop-theme-arrows-bounce-dark h1, .drop-hero.drop-element.drop-theme-arrows-bounce-dark h2, .drop-hero.drop-element.drop-theme-arrows-bounce-dark p {
+  text-align: center;
+  margin: 0;
+  font-weight: 100; }
+.drop-hero.drop-element.drop-theme-arrows-bounce-dark h1 {
+  margin-bottom: 40px; }
+.drop-hero.drop-element.drop-theme-arrows-bounce-dark h2 {
+  margin-bottom: 45px; }
+.drop-hero.drop-element.drop-theme-arrows-bounce-dark h1 {
+  font-size: 45px;
+  line-height: 1; }
+.drop-hero.drop-element.drop-theme-arrows-bounce-dark .button {
+  font-weight: 100;
+  color: white;
+  border-color: white;
+  width: 200px;
+  max-width: 100%; }
+@media (max-width: 768px) {
+  .drop-hero.drop-element.drop-theme-arrows-bounce-dark .drop-content {
+    padding: 20px; }
+  .drop-hero.drop-element.drop-theme-arrows-bounce-dark h1 {
+    font-size: 30px;
+    margin-bottom: 20px; }
+  .drop-hero.drop-element.drop-theme-arrows-bounce-dark h2 {
+    font-size: 18px;
+    margin-bottom: 25px; } }
+
 table.showcase {
   height: 100%;
   width: 100%;
@@ -76,35 +105,20 @@ table.showcase {
     table.showcase .showcase-inner p {
       text-align: center; }
   table.showcase.hero {
-    text-align: center;
-    background: #eeeeee; }
-    table.showcase.hero * {
-      -webkit-user-select: none; }
-    table.showcase.hero .tether-target-demo {
+    text-align: center; }
+    table.showcase.hero .drop-target {
       display: -moz-inline-stack;
       display: inline-block;
       vertical-align: middle;
       *vertical-align: auto;
       zoom: 1;
       *display: inline;
-      border: 2px dotted black;
-      margin: 5rem auto;
-      padding: 3rem; }
-      @media (max-width: 567px) {
-        table.showcase.hero .tether-target-demo {
-          padding: 1rem; } }
-    table.showcase.hero .drop-demo {
-      display: -moz-inline-stack;
-      display: inline-block;
-      vertical-align: middle;
-      *vertical-align: auto;
-      zoom: 1;
-      *display: inline;
-      margin: 0 auto 20px; }
-      table.showcase.hero .drop-demo .drop-target {
-        display: block;
-        padding: 20px;
-        background: #cccccc; }
+      margin: 0 auto 20px;
+      width: 300px;
+      height: 1px;
+      margin-bottom: 400px; }
+  table.showcase.examples {
+    background: #e0e0e0; }
   table.showcase.about {
     background: #fff1dd; }
     table.showcase.about a {
@@ -154,3 +168,51 @@ table.showcase {
           display: inline-block; }
           table.showcase.themes .themes-list li a.selected {
             opacity: 1; }
+
+.examples-wrap {
+  padding: 60px 0; }
+  .examples-wrap h1 {
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 100px; }
+  .examples-wrap h1, .examples-wrap h2, .examples-wrap h3 {
+    font-weight: normal; }
+  .examples-wrap h3 {
+    margin-top: 0;
+    line-height: 1;
+    margin-bottom: 30px; }
+  .examples-wrap .examples {
+    width: 800px;
+    max-width: 100%;
+    margin: 0 auto; }
+    .examples-wrap .examples .example {
+      margin-bottom: 100px;
+      text-align: center; }
+      .examples-wrap .examples .example .example-inner {
+        margin-bottom: 20px; }
+        .examples-wrap .examples .example .example-inner .drop-content {
+          display: none; }
+        .examples-wrap .examples .example .example-inner .drop-target {
+          cursor: pointer; }
+        .examples-wrap .examples .example .example-inner .drop-target-example-drop-theme-arrows-bounce-dark {
+          display: -moz-inline-stack;
+          display: inline-block;
+          vertical-align: middle;
+          *vertical-align: auto;
+          zoom: 1;
+          *display: inline;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          -ms-border-radius: 4px;
+          -o-border-radius: 4px;
+          border-radius: 4px;
+          padding: 0 20px;
+          height: 60px;
+          line-height: 60px;
+          background: black;
+          color: white;
+          font-size: 20px; }
+      .examples-wrap .examples .example .example-credit {
+        opacity: 0.5; }
+        .examples-wrap .examples .example .example-credit a {
+          color: inherit; }

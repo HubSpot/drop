@@ -1,4 +1,5 @@
 @import compass/css3
+@import compass/utilities/general/clearfix
 
 html, body
     height: 100%
@@ -40,6 +41,46 @@ body
 .hero-wrap
     height: 100%
     overflow: hidden
+
+.drop-hero.drop-element.drop-theme-arrows-bounce-dark
+
+    .drop-content
+        padding: 40px
+
+    h1, h2, p
+        text-align: center
+        margin: 0
+        font-weight: 100
+
+    h1
+        margin-bottom: 40px
+
+    h2
+        margin-bottom: 45px
+
+    h1
+        font-size: 45px
+        line-height: 1
+
+    .button
+        font-weight: 100
+        color: #fff
+        border-color: #fff
+        width: 200px
+        max-width: 100%
+
+    @media (max-width: 768px)
+
+        .drop-content
+            padding: 20px
+
+        h1
+            font-size: 30px
+            margin-bottom: 20px
+
+        h2
+            font-size: 18px
+            margin-bottom: 25px
 
 table.showcase
     height: 100%
@@ -90,28 +131,16 @@ table.showcase
 
     &.hero
         text-align: center
-        background: #eee
 
-        *
-            -webkit-user-select: none
-
-        .tether-target-demo
-            +inline-block
-            border: 2px dotted #000
-            margin: 5rem auto
-            padding: 3rem
-
-            @media (max-width: 567px)
-                padding: 1rem
-
-        .drop-demo
+        .drop-target
             +inline-block
             margin: 0 auto 20px
+            width: 300px
+            height: 1px
+            margin-bottom: 400px
 
-            .drop-target
-                display: block
-                padding: 20px
-                background: #ccc
+    &.examples
+        background: #e0e0e0
 
     &.about
         background: #fff1dd
@@ -170,3 +199,53 @@ table.showcase
 
                     &.selected
                         opacity: 1
+
+.examples-wrap
+    padding: 60px 0
+
+    h1
+        text-align: center
+        font-size: 45px
+        margin-bottom: 100px
+
+    h1, h2, h3
+        font-weight: normal
+
+    h3
+        margin-top: 0
+        line-height: 1
+        margin-bottom: 30px
+
+    .examples
+        width: 800px
+        max-width: 100%
+        margin: 0 auto
+
+        .example
+            margin-bottom: 100px
+            text-align: center
+
+            .example-inner
+                margin-bottom: 20px
+
+                .drop-content
+                    display: none
+
+                .drop-target
+                    cursor: pointer
+
+                .drop-target-example-drop-theme-arrows-bounce-dark
+                    +inline-block
+                    +border-radius(4px)
+                    padding: 0 20px
+                    height: 60px
+                    line-height: 60px
+                    background: #000
+                    color: #fff
+                    font-size: 20px
+
+            .example-credit
+                opacity: 0.5
+
+                a
+                    color: inherit
