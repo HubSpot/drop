@@ -113,52 +113,55 @@
       right: 100%;
       border-right-color: white; }
 
-.drop-element.drop-theme-arrows-bounce {
+.drop-element, .drop-element.drop-theme-arrows-bounce {
   -webkit-transform: translateZ(0);
   -webkit-transition: opacity 0.1s;
-  display: block;
   opacity: 0; }
-  .drop-element.drop-theme-arrows-bounce .drop-content {
+  .drop-element .drop-content, .drop-element.drop-theme-arrows-bounce .drop-content {
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0, 0, 0.265, 1.55);
     -webkit-transform: scale(0) translateZ(0); }
-  .drop-element.drop-theme-arrows-bounce.drop-open {
+  .drop-element.drop-open, .drop-element.drop-theme-arrows-bounce.drop-open {
+    display: none; }
+  .drop-element.drop-open-transitionend, .drop-element.drop-theme-arrows-bounce.drop-open-transitionend {
+    display: block; }
+  .drop-element.drop-after-open, .drop-element.drop-theme-arrows-bounce.drop-after-open {
     opacity: 1;
     -webkit-transition: none; }
-    .drop-element.drop-theme-arrows-bounce.drop-open .drop-content {
+    .drop-element.drop-after-open .drop-content, .drop-element.drop-theme-arrows-bounce.drop-after-open .drop-content {
       -webkit-transform: scale(1) translateZ(0); }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-center .drop-content {
+  .drop-element.drop-element-attached-bottom.drop-element-attached-center .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-center .drop-content {
     -webkit-transform-origin-x: 50%;
     -webkit-transform-origin-y: calc(100% + 12px); }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-center .drop-content {
+  .drop-element.drop-element-attached-top.drop-element-attached-center .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-center .drop-content {
     -webkit-transform-origin-x: 50%;
     -webkit-transform-origin-y: -12px; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-right.drop-element-attached-middle .drop-content {
+  .drop-element.drop-element-attached-right.drop-element-attached-middle .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-right.drop-element-attached-middle .drop-content {
     -webkit-transform-origin-x: calc(100% + 12px);
     -webkit-transform-origin-y: 50%; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-left.drop-element-attached-middle .drop-content {
+  .drop-element.drop-element-attached-left.drop-element-attached-middle .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-left.drop-element-attached-middle .drop-content {
     -webkit-transform-origin-x: -12px;
     -webkit-transform-origin-y: 50%; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content {
+  .drop-element.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content {
     -webkit-transform-origin-x: 0;
     -webkit-transform-origin-y: -12px; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-right.drop-target-attached-bottom .drop-content {
+  .drop-element.drop-element-attached-top.drop-element-attached-right.drop-target-attached-bottom .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-right.drop-target-attached-bottom .drop-content {
     -webkit-transform-origin-x: 100%;
     -webkit-transform-origin-y: -12px; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-top .drop-content {
+  .drop-element.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-top .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-top .drop-content {
     -webkit-transform-origin-x: 0;
     -webkit-transform-origin-y: calc(100% + 12px); }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-top .drop-content {
+  .drop-element.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-top .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-top .drop-content {
     -webkit-transform-origin-x: 100%;
     -webkit-transform-origin-y: calc(100% + 12px); }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-right.drop-target-attached-left .drop-content {
+  .drop-element.drop-element-attached-top.drop-element-attached-right.drop-target-attached-left .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-right.drop-target-attached-left .drop-content {
     -webkit-transform-origin-x: calc(100% + 12px);
     -webkit-transform-origin-y: 0; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-left.drop-target-attached-right .drop-content {
+  .drop-element.drop-element-attached-top.drop-element-attached-left.drop-target-attached-right .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-left.drop-target-attached-right .drop-content {
     -webkit-transform-origin-x: -12px;
     -webkit-transform-origin-y: 0; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-left .drop-content {
+  .drop-element.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-left .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-left .drop-content {
     -webkit-transform-origin-x: calc(100% + 12px);
     -webkit-transform-origin-y: 100%; }
-  .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-right .drop-content {
+  .drop-element.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-right .drop-content, .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-right .drop-content {
     -webkit-transform-origin-x: -12px;
     -webkit-transform-origin-y: 100%; }

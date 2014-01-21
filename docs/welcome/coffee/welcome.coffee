@@ -6,31 +6,28 @@ init = ->
     setupHero()
 
 setupHero = ->
-    $target = $('.drop-target')
+    drop1 = drop2 = undefined
 
-    positions = [
-        'top left'
-        'left top'
-        'left middle'
-        'left bottom'
-        'bottom left'
-        'bottom center'
-        'bottom right'
-        'right bottom'
-        'right middle'
-        'right top'
-        'top right'
-        'top center'
-    ]
+    drop1 = new _Drop
+        target: $('.drop-demo .drop-target')[0]
+        classes: 'drop-theme-arrows-bounce'
+        position: 'bottom right'
+        constrainToWindow: false
+        constrainToScrollParent: false
+        openOn: 'click'
+        content: '<div class="drop-target">Click Me</div>'
 
-    for position in positions
-        new _Drop
-            target: $target[0]
+    drop1.once 'open', ->
+        drop2 = new _Drop
+            target: $(drop1.dropContent).find('.drop-target')[0]
             classes: 'drop-theme-arrows-bounce'
-            position: position
+            position: 'bottom left'
             constrainToWindow: false
             constrainToScrollParent: false
             openOn: 'click'
-            content: '<div style="height: 50px; width: 50px"></div>'
+            content: '<div style="height: 100px; width: 100px"></div>'
+
+    drop1.on 'close', ->
+        drop2.close?()
 
 init()

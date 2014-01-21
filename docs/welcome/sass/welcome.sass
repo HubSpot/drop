@@ -12,6 +12,13 @@ body
     &.drop-out-of-bounds
         display: none
 
+.drop-element
+
+    .drop-target
+        display: block
+        padding: 20px
+        background: #ccc
+
 .button
     display: inline-block
     border: 2px solid #333
@@ -100,17 +107,11 @@ table.showcase
         .drop-demo
             +inline-block
             margin: 0 auto 20px
-            background: pink
-            height: 300px
-            width: 400px
 
             .drop-target
                 display: block
-                height: 100%
-                width: 100%
+                padding: 20px
                 background: #ccc
-                line-height: 300px
-                font-size: 40px
 
     &.about
         background: #fff1dd

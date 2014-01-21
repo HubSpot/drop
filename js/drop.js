@@ -208,24 +208,34 @@
       };
 
       DropInstance.prototype.open = function() {
-        var _ref1;
+        var _ref1,
+          _this = this;
         if (!this.drop.parentNode) {
           document.body.appendChild(this.drop);
         }
         if ((_ref1 = this.tether) != null) {
           _ref1.enable();
         }
-        addClass(this.target, "" + drop.classPrefix + "-open");
         addClass(this.drop, "" + drop.classPrefix + "-open");
+        addClass(this.drop, "" + drop.classPrefix + "-open-transitionend");
+        setTimeout(function() {
+          return addClass(_this.drop, "" + drop.classPrefix + "-after-open");
+        });
         this.tether.position();
         this.trigger('open');
         return drop.updateBodyClasses();
       };
 
       DropInstance.prototype.close = function() {
-        var _ref1;
-        removeClass(this.target, "" + drop.classPrefix + "-open");
+        var _ref1,
+          _this = this;
         removeClass(this.drop, "" + drop.classPrefix + "-open");
+        removeClass(this.drop, "" + drop.classPrefix + "-after-open");
+        this.drop.addEventListener('transitionend', function() {
+          if (!hasClass(_this.drop, "" + drop.classPrefix + "-open")) {
+            return removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
+          }
+        });
         this.trigger('close');
         if ((_ref1 = this.tether) != null) {
           _ref1.disable();

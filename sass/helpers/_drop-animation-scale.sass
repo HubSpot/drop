@@ -1,10 +1,9 @@
 @import compass/css3
 
-=drop-open-close-animation($themePrefix: "drop", $themeName: "default", $attachmentOffset: 0, $easing: "linear")
-    .#{ $themePrefix }-element.#{ $themePrefix }-theme-#{ $themeName }
+=drop-animation-scale($themePrefix: "drop", $themeName: "default", $attachmentOffset: 0, $easing: "linear")
+    .#{ $themePrefix }-element, .#{ $themePrefix }-element.#{ $themePrefix }-theme-#{ $themeName }
         -webkit-transform: translateZ(0)
         -webkit-transition: opacity .1s
-        display: block
         opacity: 0
 
         .#{ $themePrefix }-content
@@ -12,6 +11,12 @@
             -webkit-transform: scale(0) translateZ(0)
 
         &.#{ $themePrefix }-open
+            display: none
+
+        &.#{ $themePrefix }-open-transitionend
+            display: block
+
+        &.#{ $themePrefix }-after-open
             opacity: 1
             -webkit-transition: none
 

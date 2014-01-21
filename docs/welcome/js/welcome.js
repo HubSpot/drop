@@ -12,23 +12,31 @@
   };
 
   setupHero = function() {
-    var $target, position, positions, _i, _len, _results;
-    $target = $('.drop-target');
-    positions = ['top left', 'left top', 'left middle', 'left bottom', 'bottom left', 'bottom center', 'bottom right', 'right bottom', 'right middle', 'right top', 'top right', 'top center'];
-    _results = [];
-    for (_i = 0, _len = positions.length; _i < _len; _i++) {
-      position = positions[_i];
-      _results.push(new _Drop({
-        target: $target[0],
+    var drop1, drop2;
+    drop1 = drop2 = void 0;
+    drop1 = new _Drop({
+      target: $('.drop-demo .drop-target')[0],
+      classes: 'drop-theme-arrows-bounce',
+      position: 'bottom right',
+      constrainToWindow: false,
+      constrainToScrollParent: false,
+      openOn: 'click',
+      content: '<div class="drop-target">Click Me</div>'
+    });
+    drop1.once('open', function() {
+      return drop2 = new _Drop({
+        target: $(drop1.dropContent).find('.drop-target')[0],
         classes: 'drop-theme-arrows-bounce',
-        position: position,
+        position: 'bottom left',
         constrainToWindow: false,
         constrainToScrollParent: false,
         openOn: 'click',
-        content: '<div style="height: 50px; width: 50px"></div>'
-      }));
-    }
-    return _results;
+        content: '<div style="height: 100px; width: 100px"></div>'
+      });
+    });
+    return drop1.on('close', function() {
+      return typeof drop2.close === "function" ? drop2.close() : void 0;
+    });
   };
 
   init();

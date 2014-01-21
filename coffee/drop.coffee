@@ -179,8 +179,11 @@ createContext = (options={}) ->
 
       @tether?.enable()
 
-      addClass @target, "#{ drop.classPrefix }-open"
       addClass @drop, "#{ drop.classPrefix }-open"
+      addClass @drop, "#{ drop.classPrefix }-open-transitionend"
+
+      setTimeout =>
+        addClass @drop, "#{ drop.classPrefix }-after-open"
 
       @tether.position()
 
@@ -189,8 +192,12 @@ createContext = (options={}) ->
       drop.updateBodyClasses()
 
     close: ->
-      removeClass @target, "#{ drop.classPrefix }-open"
       removeClass @drop, "#{ drop.classPrefix }-open"
+      removeClass @drop, "#{ drop.classPrefix }-after-open"
+
+      @drop.addEventListener 'transitionend', =>
+        unless hasClass @drop, "#{ drop.classPrefix }-open"
+          removeClass @drop, "#{ drop.classPrefix }-open-transitionend"
 
       @trigger 'close'
 

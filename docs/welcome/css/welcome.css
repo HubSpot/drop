@@ -8,6 +8,11 @@ body {
 .drop-element.drop-theme-arrows-bounce.drop-out-of-bounds {
   display: none; }
 
+.drop-element .drop-target {
+  display: block;
+  padding: 20px;
+  background: #cccccc; }
+
 .button {
   display: inline-block;
   border: 2px solid #333333;
@@ -95,17 +100,11 @@ table.showcase {
       *vertical-align: auto;
       zoom: 1;
       *display: inline;
-      margin: 0 auto 20px;
-      background: pink;
-      height: 300px;
-      width: 400px; }
+      margin: 0 auto 20px; }
       table.showcase.hero .drop-demo .drop-target {
         display: block;
-        height: 100%;
-        width: 100%;
-        background: #cccccc;
-        line-height: 300px;
-        font-size: 40px; }
+        padding: 20px;
+        background: #cccccc; }
   table.showcase.about {
     background: #fff1dd; }
     table.showcase.about a {
