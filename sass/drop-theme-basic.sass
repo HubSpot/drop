@@ -1,0 +1,13 @@
+@import compass/css3
+@import compass/utilities/general/clearfix
+
+@import ../bower_components/tether/sass/helpers/tether
+@import ../bower_components/tether/sass/helpers/tether-theme-basic
+
+$themePrefix: "drop"
+$themeName: "basic"
+$backgroundColor: #eee
+$color: #444
+
++tether($themePrefix: $themePrefix)
++tether-theme-basic($themePrefix: $themePrefix, $themeName: $themeName, $backgroundColor: $backgroundColor, $color: $color)
