@@ -22,22 +22,22 @@
     <link rel="stylesheet" href="/drop/docs/welcome/css/welcome.css" />
 </head>
 <body>
-    <div class="hero-wrap">
-        <table class="showcase hero"><tr><td>
-            <div class="showcase-inner">
-                <a class="drop-target"></a>
-            </div>
-        </td></tr></table>
+    <div class="showcase hero">
+        <div class="showcase-inner">
+            <a class="drop-target"></a>
+        </div>
     </div>
 
-    <table class="showcase examples"><tr><td>
+    <div class="showcase examples">
         <div class="showcase-inner">
             <div class="examples-wrap">
                 <h1>Examples</h1>
                 <div class="examples">
                     <div class="example" data-theme="drop-theme-arrows-bounce-dark">
-                        <h2>"The Popup"</h2>
-                        <h3>Scale Bounce with Arrows</h3>
+                        <div class="example-info">
+                            <h2>"The Popup"</h2>
+                            <h3>Scale Bounce with Arrows</h3>
+                        </div>
                         <div class="example-inner">
                             <a class="drop-target drop-target-example-drop-theme-arrows-bounce-dark">Size</a>
                             <div class="drop-content">
@@ -46,8 +46,10 @@
                         </div>
                     </div>
                     <div class="example" data-theme="drop-example-theme-social-sharing">
-                        <h2>"The Social Share"</h2>
-                        <h3>List Flyout</h3>
+                        <div class="example-info">
+                            <h2>"The Social Share"</h2>
+                            <h3>List Flyout</h3>
+                        </div>
                         <div class="example-inner">
                             <a class="drop-target">Share</a>
                             <div class="drop-content">
@@ -58,13 +60,12 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="example-credit">
-                            Inspired by <a target="_blank" href="http://tympanus.net/Development/SimpleDropDownEffects/index2.html">Codrop's Simple Dropdown Effects</a>
-                        </div>
                     </div>
                     <div class="example" data-theme="drop-theme-basic drop-target-example-hover-card" data-open-on="hover">
-                        <h2>"The Hover Card"</h2>
-                        <h3>Facebook-style Image Hover Card</h3>
+                        <div class="example-info">
+                            <h2>"The Hover Card"</h2>
+                            <h3>Facebook-style Image Hover Card</h3>
+                        </div>
                         <div class="example-inner">
                             <div class="drop-target drop-target-example-hover-card">
                                 <img src="/drop/docs/welcome/images/elias.png" />
@@ -95,9 +96,10 @@
                         </div>
                     </div>
                     <br>
-                    <br>
-                    <br>
                     <center><h3>More coming soon...</h3></center>
+                    <br>
+                    <br>
+                    <br>
                     <!--
                     <div class="example">
                         <h2>The Context Menu</h2>
@@ -111,9 +113,9 @@
                 </div>
             </div>
         </div>
-    </td></tr></table>
+    </div>
 
-    <table class="showcase about"><tr><td>
+    <div class="showcase about">
         <div class="showcase-inner">
             <h1>How to Use</h1>
             <p>Drop is an open-source javascript and CSS library which makes amazing dropdowns. It's powered by <a href="/tether">Tether.js</a>.</p>
@@ -123,9 +125,9 @@
 <span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>drop.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
             <p>And that's it! Learn more by visiting the <a href="/drop">documentation</a>.
         </div>
-    </td></tr></table>
+    </div>
 
-    <table class="showcase last-showcase no-next-arrow share"><tr><td>
+    <div class="showcase last-showcase no-next-arrow share">
         <div class="showcase-inner">
             <h1>Share</h1>
             <h2>Help us spread the word.</h2>
@@ -173,7 +175,7 @@
                 </div>
             </p>
         </div>
-    </td></tr></table>
+    </div>
 
     <script src="/drop/drop.js"></script>
 

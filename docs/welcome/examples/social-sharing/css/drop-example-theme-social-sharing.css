@@ -121,7 +121,8 @@
   height: 60px;
   line-height: 60px;
   font-size: 20px;
-  width: 137px; }
+  width: 137px;
+  text-align: center; }
 .drop-example-theme-social-sharing.drop-element {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -178,7 +179,7 @@
           -moz-user-select: none;
           user-select: none;
           width: 100%;
-          background: white;
+          background: #e0e0e0;
           line-height: 60px;
           height: 60px;
           padding: 0 30px 0 75px;

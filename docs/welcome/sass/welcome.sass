@@ -38,10 +38,6 @@ body
     background: #333
     color: #fff
 
-.hero-wrap
-    height: 100%
-    overflow: hidden
-
 .drop-hero.drop-element.drop-theme-arrows-bounce-dark
 
     .drop-content
@@ -82,32 +78,40 @@ body
             font-size: 18px
             margin-bottom: 25px
 
-table.showcase
-    height: 100%
-    width: 100%
+.showcase
     position: relative
 
-    &:after
-        content: ""
-        display: block
-        position: absolute
-        left: 0
-        right: 0
-        bottom: 20px
-        margin: auto
-        height: 0
-        width: 0
-        border-width: 18px
-        border-style: solid
-        border-color: transparent
-        border-top-color: rgba(0, 0, 0, 0.2)
+    @media (min-width: 900px)
+        display: table
+        height: 100%
+        width: 100%
 
-    &.no-next-arrow:after
-        display: none
+        &:after
+            content: ""
+            display: block
+            position: absolute
+            left: 0
+            right: 0
+            bottom: 20px
+            margin: auto
+            height: 0
+            width: 0
+            border-width: 18px
+            border-style: solid
+            border-color: transparent
+            border-top-color: rgba(0, 0, 0, 0.2)
+
+        &.no-next-arrow:after
+            display: none
 
     .showcase-inner
-        margin: 40px auto 60px
-        padding: 10px
+        padding: 20px 10px
+
+        @media (min-width: 900px)
+            padding: 10px
+            margin: 40px auto 60px
+            display: table-cell
+            vertical-align: middle
 
         h1
             font-size: 50px
@@ -123,13 +127,11 @@ table.showcase
             font-weight: 300
             margin: 1em 0 1em
 
-            @media (max-width: 567px)
-                font-size: 14px
-
         p
             text-align: center
 
     &.hero
+        +background-image(linear-gradient(135deg, #8eaaff, #80ff84))
         text-align: center
 
         .drop-target
@@ -139,14 +141,22 @@ table.showcase
             height: 1px
             margin-bottom: 400px
 
+            @media (max-width: 900px)
+                margin-bottom: 250px
+
+            @media (max-width: 567px)
+
+                h2
+                    font-size: 14px
+
     &.examples
-        background: #e0e0e0
+        background: #fff
 
     &.about
-        background: #fff1dd
+        +background-image(linear-gradient(135deg, #fff5e7, #ffedfe))
 
         a
-            color: #c96c24
+            color: #7c4b78
 
         p
             +box-sizing(border-box)
@@ -167,46 +177,21 @@ table.showcase
             margin-left: auto
             margin-right: auto
 
-    &.themes
-        background: #eee
-
-        &.select-theme-dark
-            background: #323232
-
-            h1, h2
-                color: #e6e6e6
-
-        &.select-theme-chosen
-            background: #fff
-
-        .themes-list
-            margin: 4em auto
-            padding: 0
-            list-style: none
-            text-align: center
-            font-size: 18px
-
-            li
-                padding: 0
-                margin: 0
-                display: inline
-
-                a
-                    cursor: pointer
-                    opacity: 0.3
-                    padding: .5em
-                    display: inline-block
-
-                    &.selected
-                        opacity: 1
+            @media (max-width: 700px)
+                width: auto
 
 .examples-wrap
-    padding: 60px 0
+
+    @media (min-width: 900px)
+        padding: 60px 0
 
     h1
         text-align: center
         font-size: 45px
-        margin-bottom: 100px
+        margin-bottom: 50px
+
+        @media (min-width: 900px)
+            margin-bottom: 100px
 
     h1, h2, h3
         font-weight: normal
@@ -217,13 +202,17 @@ table.showcase
         margin-bottom: 30px
 
     .examples
-        width: 800px
-        max-width: 100%
         margin: 0 auto
+
+        @media (min-width: 900px)
+            width: 800px
 
         .example
             margin-bottom: 100px
             text-align: center
+
+            h2
+                margin-bottom: 10px
 
             .example-inner
                 margin-bottom: 20px
@@ -257,6 +246,30 @@ table.showcase
 
                 a
                     color: inherit
+
+            @media (min-width: 900px)
+                +pie-clearfix
+
+                .example-info
+                    float: left
+                    width: 300px
+                    text-align: left
+
+                    h2, h3
+                        text-align: left
+
+                    h2
+                        line-height: 1
+                        margin-top: 0
+                        margin-bottom: 10px
+
+                    h3
+                        color: #888
+
+                .example-inner
+                    float: right
+                    width: 300px
+                    text-align: right
 
 $hoverCardWidth: 400px
 $hoverCardHeight: 246px
