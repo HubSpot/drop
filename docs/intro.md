@@ -6,9 +6,7 @@
 
 ## Drop
 
-Drop is an extremely powerful javascript and CSS library for creating dropdowns and other displays positioned with [Tether.js](http://github.hubspot.com/tether/docs/welcome).
-
-Drop uses [Tether](http://github.hubspot.com/tether) to efficiently position its element container.
+Drop is an extremely powerful javascript and CSS library for creating dropdowns and other floating displays. Drops use [Tether.js](http://github.hubspot.com/tether) to efficiently position themselves.
 
 ### Features
 
@@ -23,7 +21,7 @@ Because Drop is built on [Tether](http://github.hubspot.com/tether), you get all
 - Drops can be nested within other drops.
 - Drops can be attached to any of 12 attachment points on the target.
 - Attachment points can be tweaked for perfect alignment using custom offsets.
-- Drops look and works great with other Tether libraries (including [Select](http://github.hubspot.com/select/docs/welcome/select), [Tooltip](http://github.hubspot.com/tooltip/docs/welcome/select), and [Shepherd](http://github.hubspot.com/shepherd/docs/welcome/select)).
+- Drops look and work great with other Tether libraries, including [Select](http://github.hubspot.com/select/docs/welcome/select), [Tooltip](http://github.hubspot.com/tooltip/docs/welcome/select), and [Shepherd](http://github.hubspot.com/shepherd/docs/welcome/select).
 
 ### Dependencies
 
@@ -70,8 +68,8 @@ The default options are:
 defaultOptions =
     attach: 'bottom left'
     openOn: 'click'
-    constrainToScrollParent: true
     constrainToWindow: true
+    constrainToScrollParent: true
     classes: ''
     tetherOptions: {}
 ```
@@ -99,7 +97,7 @@ More information about attachment can be found in the [Tether documentation](htt
 
 #### `openOn`
 
-Specifies what action is taken to the target to open the drop. If you set this to `undefined` or `null` you will need to manually call `.open()` and `.close()` on the `drop` instance.
+Specifies what event on the target opens the drop. If you set this to `undefined` or `null` you will need to manually call `.open()`/`.close()` on the `drop` instance.
 
 ```coffeescript
 'click'
@@ -108,7 +106,12 @@ Specifies what action is taken to the target to open the drop. If you set this t
 
 #### `constrainToWindow`
 
-Uses [Tether's](http://github.hubspot.com/tether) constraints list to keep the drop within the visible window, or viewport. This will cause dropdowns to open up on the bottom of the page and vice-versa. Dropdowns will also be pinned to the edge of the window if the user scrolls after opening a drop with `openOn: 'click'`.
+If set to `true`, uses [Tether's](http://github.hubspot.com/tether) `constraints` list to keep the drop within the visible window, or viewport. This will cause drops with bottom attachments to switch to top when colliding with the bottom of the page and vice-versa. Dropdowns will also pin to the edge of the window if the user scrolls away from the target after opening a drop.
+
+```coffeescript
+true
+false
+```
 
 #### `constrainToScrollParent`
 
