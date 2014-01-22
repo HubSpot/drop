@@ -161,8 +161,29 @@ createContext = (options={}) ->
           @close()
 
       if 'hover' in events
-        @target.addEventListener 'mouseover', => @open()
-        @target.addEventListener 'mouseout', => @close()
+        onUs = false
+
+        over = =>
+          onUs = true
+
+          @open()
+
+        outTimeout = null
+        out = =>
+          onUs = false
+
+          clearTimeout outTimeout if outTimeout?
+          outTimeout = setTimeout =>
+            if not onUs
+              @close()
+
+            outTimeout = null
+          , 50
+
+        @target.addEventListener 'mouseover', over
+        @drop.addEventListener 'mouseover', over
+        @target.addEventListener 'mouseout', out
+        @drop.addEventListener 'mouseout', out
 
     isOpened: ->
       hasClass @drop, "#{ drop.classPrefix }-open"

@@ -162,7 +162,7 @@
       };
 
       DropInstance.prototype.setupEvents = function() {
-        var events,
+        var events, onUs, out, outTimeout, over,
           _this = this;
         if (!this.options.openOn) {
           return;
@@ -186,12 +186,28 @@
           });
         }
         if (__indexOf.call(events, 'hover') >= 0) {
-          this.target.addEventListener('mouseover', function() {
+          onUs = false;
+          over = function() {
+            onUs = true;
             return _this.open();
-          });
-          return this.target.addEventListener('mouseout', function() {
-            return _this.close();
-          });
+          };
+          outTimeout = null;
+          out = function() {
+            onUs = false;
+            if (outTimeout != null) {
+              clearTimeout(outTimeout);
+            }
+            return outTimeout = setTimeout(function() {
+              if (!onUs) {
+                _this.close();
+              }
+              return outTimeout = null;
+            }, 50);
+          };
+          this.target.addEventListener('mouseover', over);
+          this.drop.addEventListener('mouseover', over);
+          this.target.addEventListener('mouseout', out);
+          return this.drop.addEventListener('mouseout', out);
         }
       };
 

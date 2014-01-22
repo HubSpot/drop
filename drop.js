@@ -1,5 +1,5 @@
-/*! drop 0.3.4 */
-/*! tether 0.4.7 */
+/*! drop 0.3.7 */
+/*! tether 0.4.8 */
 (function() {
   var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
     __hasProp = {}.hasOwnProperty,
@@ -19,7 +19,10 @@
     scrollParent = void 0;
     parent = el;
     while (parent = parent.parentNode) {
-      if (!(style = getComputedStyle(parent))) {
+      try {
+        style = getComputedStyle(parent);
+      } catch (_error) {}
+      if (style == null) {
         return parent;
       }
       if (/(auto|scroll)/.test(style['overflow'] + style['overflow-y'] + style['overflow-x'])) {
@@ -1511,7 +1514,7 @@
       };
 
       DropInstance.prototype.setupEvents = function() {
-        var events,
+        var events, onUs, out, outTimeout, over,
           _this = this;
         if (!this.options.openOn) {
           return;
@@ -1535,12 +1538,28 @@
           });
         }
         if (__indexOf.call(events, 'hover') >= 0) {
-          this.target.addEventListener('mouseover', function() {
+          onUs = false;
+          over = function() {
+            onUs = true;
             return _this.open();
-          });
-          return this.target.addEventListener('mouseout', function() {
-            return _this.close();
-          });
+          };
+          outTimeout = null;
+          out = function() {
+            onUs = false;
+            if (outTimeout != null) {
+              clearTimeout(outTimeout);
+            }
+            return outTimeout = setTimeout(function() {
+              if (!onUs) {
+                _this.close();
+              }
+              return outTimeout = null;
+            }, 50);
+          };
+          this.target.addEventListener('mouseover', over);
+          this.drop.addEventListener('mouseover', over);
+          this.target.addEventListener('mouseout', out);
+          return this.drop.addEventListener('mouseout', out);
         }
       };
 
