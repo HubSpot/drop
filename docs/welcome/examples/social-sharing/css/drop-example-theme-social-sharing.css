@@ -129,10 +129,10 @@
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-transition: opacity 500ms;
-  -moz-transition: opacity 500ms;
-  -o-transition: opacity 500ms;
-  transition: opacity 500ms;
+  -webkit-transition: opacity 360ms;
+  -moz-transition: opacity 360ms;
+  -o-transition: opacity 360ms;
+  transition: opacity 360ms;
   opacity: 0.999;
   width: 177px; }
   .drop-example-theme-social-sharing.drop-element.drop-open {
@@ -204,129 +204,129 @@
           -ms-transform: translate3d(0, -60px, 0);
           -o-transform: translate3d(0, -60px, 0);
           transform: translate3d(0, -60px, 0);
-          -webkit-transition: -webkit-transform 300ms ease;
+          -webkit-transition: -webkit-transform 240ms ease;
           -webkit-transition-delay: 0ms;
-          -moz-transition: -moz-transform 300ms ease 0ms;
-          -o-transition: -o-transform 300ms ease 0ms;
-          transition: transform 300ms ease 0ms; }
+          -moz-transition: -moz-transform 240ms ease 0ms;
+          -o-transition: -o-transform 240ms ease 0ms;
+          transition: transform 240ms ease 0ms; }
         .drop-example-theme-social-sharing.drop-element .drop-content ul li:nth-child(2) span {
           -webkit-transform: translate3d(0, -120px, 0);
           -moz-transform: translate3d(0, -120px, 0);
           -ms-transform: translate3d(0, -120px, 0);
           -o-transform: translate3d(0, -120px, 0);
           transform: translate3d(0, -120px, 0);
-          -webkit-transition: -webkit-transform 300ms ease;
-          -webkit-transition-delay: 100ms;
-          -moz-transition: -moz-transform 300ms ease 100ms;
-          -o-transition: -o-transform 300ms ease 100ms;
-          transition: transform 300ms ease 100ms; }
+          -webkit-transition: -webkit-transform 240ms ease;
+          -webkit-transition-delay: 60ms;
+          -moz-transition: -moz-transform 240ms ease 60ms;
+          -o-transition: -o-transform 240ms ease 60ms;
+          transition: transform 240ms ease 60ms; }
         .drop-example-theme-social-sharing.drop-element .drop-content ul li:nth-child(3) span {
           -webkit-transform: translate3d(0, -180px, 0);
           -moz-transform: translate3d(0, -180px, 0);
           -ms-transform: translate3d(0, -180px, 0);
           -o-transform: translate3d(0, -180px, 0);
           transform: translate3d(0, -180px, 0);
-          -webkit-transition: -webkit-transform 300ms ease;
-          -webkit-transition-delay: 200ms;
-          -moz-transition: -moz-transform 300ms ease 200ms;
-          -o-transition: -o-transform 300ms ease 200ms;
-          transition: transform 300ms ease 200ms; }
+          -webkit-transition: -webkit-transform 240ms ease;
+          -webkit-transition-delay: 120ms;
+          -moz-transition: -moz-transform 240ms ease 120ms;
+          -o-transition: -o-transform 240ms ease 120ms;
+          transition: transform 240ms ease 120ms; }
   .drop-example-theme-social-sharing.drop-element.drop-after-open .drop-content ul li:nth-child(1) span {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
-    -webkit-transition-delay: 200ms;
-    -moz-transition: -moz-transform 300ms ease 200ms;
-    -o-transition: -o-transform 300ms ease 200ms;
-    transition: transform 300ms ease 200ms; }
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 120ms;
+    -moz-transition: -moz-transform 240ms ease 120ms;
+    -o-transition: -o-transform 240ms ease 120ms;
+    transition: transform 240ms ease 120ms; }
   .drop-example-theme-social-sharing.drop-element.drop-after-open .drop-content ul li:nth-child(2) span {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
-    -webkit-transition-delay: 100ms;
-    -moz-transition: -moz-transform 300ms ease 100ms;
-    -o-transition: -o-transform 300ms ease 100ms;
-    transition: transform 300ms ease 100ms; }
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 60ms;
+    -moz-transition: -moz-transform 240ms ease 60ms;
+    -o-transition: -o-transform 240ms ease 60ms;
+    transition: transform 240ms ease 60ms; }
   .drop-example-theme-social-sharing.drop-element.drop-after-open .drop-content ul li:nth-child(3) span {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
+    -webkit-transition: -webkit-transform 240ms ease;
     -webkit-transition-delay: 0ms;
-    -moz-transition: -moz-transform 300ms ease 0ms;
-    -o-transition: -o-transform 300ms ease 0ms;
-    transition: transform 300ms ease 0ms; }
+    -moz-transition: -moz-transform 240ms ease 0ms;
+    -o-transition: -o-transform 240ms ease 0ms;
+    transition: transform 240ms ease 0ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom .drop-content ul li:nth-child(1) span {
     -webkit-transform: translate3d(0, 180px, 0);
     -moz-transform: translate3d(0, 180px, 0);
     -ms-transform: translate3d(0, 180px, 0);
     -o-transform: translate3d(0, 180px, 0);
     transform: translate3d(0, 180px, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
-    -webkit-transition-delay: 200ms;
-    -moz-transition: -moz-transform 300ms ease 200ms;
-    -o-transition: -o-transform 300ms ease 200ms;
-    transition: transform 300ms ease 200ms; }
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 120ms;
+    -moz-transition: -moz-transform 240ms ease 120ms;
+    -o-transition: -o-transform 240ms ease 120ms;
+    transition: transform 240ms ease 120ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom .drop-content ul li:nth-child(2) span {
     -webkit-transform: translate3d(0, 120px, 0);
     -moz-transform: translate3d(0, 120px, 0);
     -ms-transform: translate3d(0, 120px, 0);
     -o-transform: translate3d(0, 120px, 0);
     transform: translate3d(0, 120px, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
-    -webkit-transition-delay: 100ms;
-    -moz-transition: -moz-transform 300ms ease 100ms;
-    -o-transition: -o-transform 300ms ease 100ms;
-    transition: transform 300ms ease 100ms; }
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 60ms;
+    -moz-transition: -moz-transform 240ms ease 60ms;
+    -o-transition: -o-transform 240ms ease 60ms;
+    transition: transform 240ms ease 60ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom .drop-content ul li:nth-child(3) span {
     -webkit-transform: translate3d(0, 60px, 0);
     -moz-transform: translate3d(0, 60px, 0);
     -ms-transform: translate3d(0, 60px, 0);
     -o-transform: translate3d(0, 60px, 0);
     transform: translate3d(0, 60px, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
+    -webkit-transition: -webkit-transform 240ms ease;
     -webkit-transition-delay: 0ms;
-    -moz-transition: -moz-transform 300ms ease 0ms;
-    -o-transition: -o-transform 300ms ease 0ms;
-    transition: transform 300ms ease 0ms; }
+    -moz-transition: -moz-transform 240ms ease 0ms;
+    -o-transition: -o-transform 240ms ease 0ms;
+    transition: transform 240ms ease 0ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom.drop-after-open .drop-content ul li:nth-child(1) span {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
+    -webkit-transition: -webkit-transform 240ms ease;
     -webkit-transition-delay: 0ms;
-    -moz-transition: -moz-transform 300ms ease 0ms;
-    -o-transition: -o-transform 300ms ease 0ms;
-    transition: transform 300ms ease 0ms; }
+    -moz-transition: -moz-transform 240ms ease 0ms;
+    -o-transition: -o-transform 240ms ease 0ms;
+    transition: transform 240ms ease 0ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom.drop-after-open .drop-content ul li:nth-child(2) span {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
-    -webkit-transition-delay: 100ms;
-    -moz-transition: -moz-transform 300ms ease 100ms;
-    -o-transition: -o-transform 300ms ease 100ms;
-    transition: transform 300ms ease 100ms; }
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 60ms;
+    -moz-transition: -moz-transform 240ms ease 60ms;
+    -o-transition: -o-transform 240ms ease 60ms;
+    transition: transform 240ms ease 60ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom.drop-after-open .drop-content ul li:nth-child(3) span {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 300ms ease;
-    -webkit-transition-delay: 200ms;
-    -moz-transition: -moz-transform 300ms ease 200ms;
-    -o-transition: -o-transform 300ms ease 200ms;
-    transition: transform 300ms ease 200ms; }
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 120ms;
+    -moz-transition: -moz-transform 240ms ease 120ms;
+    -o-transition: -o-transform 240ms ease 120ms;
+    transition: transform 240ms ease 120ms; }

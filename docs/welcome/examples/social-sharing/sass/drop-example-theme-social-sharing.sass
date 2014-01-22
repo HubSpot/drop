@@ -24,7 +24,7 @@
 
     &.drop-element
         +transform(translateZ(0))
-        +transition(opacity 500ms)
+        +transition(opacity 360ms)
         opacity: .999
         width: 137px + 40px
 
@@ -97,29 +97,29 @@
 
                     &:nth-child(1) span
                         +transform(translate3d(0, -60px, 0))
-                        +transition(transform 300ms ease 0ms)
+                        +transition(transform 240ms ease 0ms)
 
                     &:nth-child(2) span
                         +transform(translate3d(0, -120px, 0))
-                        +transition(transform 300ms ease 100ms)
+                        +transition(transform 240ms ease 60ms)
 
                     &:nth-child(3) span
                         +transform(translate3d(0, -180px, 0))
-                        +transition(transform 300ms ease 200ms)
+                        +transition(transform 240ms ease 120ms)
 
         &.drop-after-open .drop-content ul li
 
             &:nth-child(1) span
                 +transform(translate3d(0, 0, 0))
-                +transition(transform 300ms ease 200ms)
+                +transition(transform 240ms ease 120ms)
 
             &:nth-child(2) span
                 +transform(translate3d(0, 0, 0))
-                +transition(transform 300ms ease 100ms)
+                +transition(transform 240ms ease 60ms)
 
             &:nth-child(3) span
                 +transform(translate3d(0, 0, 0))
-                +transition(transform 300ms ease 0ms)
+                +transition(transform 240ms ease 0ms)
 
         &.drop-element-attached-bottom
 
@@ -127,26 +127,26 @@
 
                 &:nth-child(1) span
                     +transform(translate3d(0, 180px, 0))
-                    +transition(transform 300ms ease 200ms)
+                    +transition(transform 240ms ease 120ms)
 
                 &:nth-child(2) span
                     +transform(translate3d(0, 120px, 0))
-                    +transition(transform 300ms ease 100ms)
+                    +transition(transform 240ms ease 60ms)
 
                 &:nth-child(3) span
                     +transform(translate3d(0, 60px, 0))
-                    +transition(transform 300ms ease 0ms)
+                    +transition(transform 240ms ease 0ms)
 
             &.drop-after-open .drop-content ul li
 
                 &:nth-child(1) span
                     +transform(translate3d(0, 0, 0))
-                    +transition(transform 300ms ease 0ms)
+                    +transition(transform 240ms ease 0ms)
 
                 &:nth-child(2) span
                     +transform(translate3d(0, 0, 0))
-                    +transition(transform 300ms ease 100ms)
+                    +transition(transform 240ms ease 60ms)
 
                 &:nth-child(3) span
                     +transform(translate3d(0, 0, 0))
-                    +transition(transform 300ms ease 200ms)
+                    +transition(transform 240ms ease 120ms)
