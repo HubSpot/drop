@@ -21,7 +21,7 @@
       constrainToWindow: false,
       constrainToScrollParent: false,
       openOn: ' ',
-      content: '<h1>Drop</h1>\n<h2>The best dropdown library on<br/>either side of the Mississippi.</h2>\n<p>\n    <a class="button" href="http://github.com/HubSpot/drop">★ On Github</a>\n</p>'
+      content: '<h1>Drop.js</h1>\n<h2>The world\'s most powerful<br/>dropdown library yet.<br/><small style="opacity: 0.6; margin-top: 1em; display: block">Built on <a href="/tether/docs/welcome" target="_blank" style="color: inherit">Tether</a>.</small></h2>\n<p>\n    <a class="button" href="http://github.com/HubSpot/drop">★ On Github</a>\n</p>'
     });
     return $(function() {
       return setTimeout((function() {

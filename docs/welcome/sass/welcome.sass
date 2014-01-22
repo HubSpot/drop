@@ -134,6 +134,14 @@ body
         +background-image(linear-gradient(135deg, #8eaaff, #80ff84))
         text-align: center
 
+        &:after
+            -webkit-animation: up-and-down 4s linear infinite
+            -moz-animation: up-and-down 4s linear infinite
+            -ms-animation: up-and-down 4s linear infinite
+            -o-animation: up-and-down 4s linear infinite
+            animation: up-and-down 4s linear infinite
+            border-top-color: rgba(0, 0, 0, 0.4)
+
         .drop-target
             +inline-block
             margin: 0 auto 20px
@@ -142,7 +150,7 @@ body
             margin-bottom: 400px
 
             @media (max-width: 900px)
-                margin-bottom: 250px
+                margin-bottom: 300px
 
             @media (max-width: 567px)
 
@@ -416,3 +424,47 @@ $hoverCardArrowHeight: 7px
 
             img
                 bottom: - $hoverCardArrowHeight
+
+@-webkit-keyframes up-and-down
+    0%
+        -webkit-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
+    50%
+        -webkit-transform: translate3d(0, 0, 0)
+        transform: translate3d(0, 0, 0)
+    100%
+        -webkit-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
+
+@-moz-keyframes up-and-down
+    0%
+        -moz-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
+    50%
+        -moz-transform: translate3d(0, 0, 0)
+        transform: translate3d(0, 0, 0)
+    100%
+        -moz-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
+
+@-o-keyframes up-and-down
+    0%
+        -o-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
+    50%
+        -o-transform: translate3d(0, 0, 0)
+        transform: translate3d(0, 0, 0)
+    100%
+        -o-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
+
+@-o-keyframes up-and-down
+    0%
+        -o-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
+    50%
+        -o-transform: translate3d(0, 0, 0)
+        transform: translate3d(0, 0, 0)
+    100%
+        -o-transform: translate3d(0, -20px, 0)
+        transform: translate3d(0, -20px, 0)
