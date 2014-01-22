@@ -244,8 +244,162 @@ table.showcase
                     color: #fff
                     font-size: 20px
 
+                .drop-target-example-hover-card
+
+                    &, img
+                        +border-radius(3px)
+                        +inline-block
+                        height: 50px
+                        width: 50px
+
             .example-credit
                 opacity: 0.5
 
                 a
                     color: inherit
+
+$hoverCardWidth: 400px
+$hoverCardHeight: 246px
+$hoverCardArrowWidth: 14px
+$hoverCardArrowHeight: 7px
+
+.drop-theme-basic.drop-target-example-hover-card.drop-element
+    +transform(translateZ(0))
+    +transition(opacity .2s)
+    opacity: 0
+
+    &.drop-open
+        display: none
+
+    &.drop-open-transitionend
+        display: block
+
+    &.drop-after-open
+        opacity: 1
+
+    .drop-content
+        +border-radius(4px)
+        +box-shadow(none)
+        +transform(translateZ(0))
+        +filter(drop-shadow(0 2px 4px rgba(0, 0, 0, .3)))
+        background: transparent
+        padding: 0
+        width: $hoverCardWidth
+        height: $hoverCardHeight
+
+        .hover-card-mask, .hover-card-image
+
+            img
+                position: absolute
+                width: $hoverCardWidth
+                height: $hoverCardHeight
+
+        .hover-card-mask
+            display: none
+            position: absolute
+            left: 0
+            right: 0
+            margin: auto
+            width: $hoverCardArrowWidth
+            height: $hoverCardArrowHeight
+            -webkit-mask-position: 0
+            -webkit-mask-repeat: no-repeat
+
+            img
+                left: - (($hoverCardWidth - $hoverCardArrowWidth) / 2)
+
+        .hover-card-image
+            +border-radius(4px)
+            position: absolute
+            overflow: hidden
+            width: $hoverCardWidth
+            height: $hoverCardHeight
+
+            &:after
+                +background-image(linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)))
+                content: ""
+                position: absolute
+                top: 50%
+                left: 0
+                bottom: 0
+                right: 0
+
+        .drop-content-inner
+            position: absolute
+            top: 0
+            left: 0
+            bottom: 0
+            right: 0
+
+            .avatar
+                position: absolute
+                left: 20px
+                bottom: 20px
+
+                img
+                    +border-radius(4px)
+                    height: 100px
+                    width: 100px
+                    display: block
+
+            .name, .title
+                position: absolute
+                color: #fff
+                line-height: 1
+
+            .name
+                left: 138px
+                bottom: 44px
+                font-size: 27px
+
+            .title
+                left: 140px
+                bottom: 24px
+                font-size: 16px
+                font-weight: 100
+
+    &.drop-pinned .drop-content .hover-card-image
+
+        img
+            top: 0
+            bottom: auto
+
+    &.drop-element-attached-top, &.drop-element-attached-bottom
+
+        .drop-content
+
+            .hover-card-mask
+                display: block
+
+            .hover-card-image
+                height: $hoverCardHeight - $hoverCardArrowHeight
+
+    &.drop-element-attached-top .drop-content
+
+        .hover-card-mask
+            top: 0
+            -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAHAQMAAAACie5aAAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAB1JREFUCNdjYGZgYG9g4D/AIP+Awf4DQ/0Phv9/AC9MBvpONp+aAAAAAElFTkSuQmCC)
+
+            img
+                top: 0
+
+        .hover-card-image
+            top: $hoverCardArrowHeight
+
+            img
+                top: - $hoverCardArrowHeight
+
+    &.drop-element-attached-bottom .drop-content
+
+        .hover-card-mask
+            bottom: 0
+            -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAHAQMAAAACie5aAAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAB1JREFUCNdj+P+Hof4Hg/0HBvkHDPwHGNgbGJgZAGA8Bvqkms0ZAAAAAElFTkSuQmCC)
+
+            img
+                bottom: 0
+
+        .hover-card-image
+            bottom: $hoverCardArrowHeight
+
+            img
+                bottom: - $hoverCardArrowHeight
