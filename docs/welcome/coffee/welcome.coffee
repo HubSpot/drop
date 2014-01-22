@@ -28,6 +28,7 @@ setupExamples = ->
     $('.example').each ->
         $example = $ @
         theme = $example.data('theme')
+        openOn = $example.data('open-on') or 'click'
 
         $target = $example.find('.drop-target')
         $target.addClass theme
@@ -40,7 +41,7 @@ setupExamples = ->
             position: 'bottom center'
             constrainToWindow: true
             constrainToScrollParent: false
-            openOn: 'click'
+            openOn: openOn
             content: content
 
 init()
