@@ -32,9 +32,10 @@
 
   setupExamples = function() {
     return $('.example').each(function() {
-      var $example, $target, content, drop, theme;
+      var $example, $target, content, drop, openOn, theme;
       $example = $(this);
       theme = $example.data('theme');
+      openOn = $example.data('open-on') || 'click';
       $target = $example.find('.drop-target');
       $target.addClass(theme);
       content = $example.find('.drop-content').html();
@@ -44,7 +45,7 @@
         position: 'bottom center',
         constrainToWindow: true,
         constrainToScrollParent: false,
-        openOn: 'click',
+        openOn: openOn,
         content: content
       });
     });
