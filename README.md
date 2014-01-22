@@ -1,4 +1,5 @@
-drop
-====
+## Drop
 
-A library for creating elements for use with Tether. Docs are coming soon. For now, check out [Tether](https://github.com/HubSpot/tether) and [its docs](http://github.hubspot.com/tether/).
+Drop.js is a powerful Javascript and CSS library for creating dropdowns and other floating displays.
+
+### [Demo](http://github.hubspot.com/drop/docs/welcome) &nbsp;&nbsp; [Documentation](http://github.hubspot.com/drop)
