@@ -6,7 +6,7 @@
 
 ## Drop
 
-Drop is a Javascript and CSS library for creating dropdowns and other popups attached to elements on the page. Drops use [Tether.js](http://github.hubspot.com/tether) to efficiently position themselves.
+Drop is a Javascript and CSS library for creating dropdowns and other popups attached to elements on the page. Drop uses [Tether.js](http://github.hubspot.com/tether) to efficiently position its elements.
 
 Thank you for considering Drop, we believe it's the best way of creating dropdown-style elements available right now.
 
@@ -14,15 +14,12 @@ Thank you for considering Drop, we believe it's the best way of creating dropdow
 
 Because Drop is built on [Tether](http://github.hubspot.com/tether), you get all of the benefits of its effecient and powerful positioning.
 
-- Automatically repositions on page resizes and scrolls, with screen and scroll parent collision detection.
-- Positioning is done with `transform: translate` to avoid repaints, always supporting `60fps` scrolling, even with many drops open at the same time.
-
-- Flexible animation structure supports all possible CSS transitions for opening and closing, or if desired, no animation at all.
-- Can be nested within other drops.
-- Can be attached to any of 12 attachment points on the target.
-
-- Attachment points can be tweaked for perfect alignment using custom offsets.
-- Drops look and work great with other Tether libraries, including [Select](http://github.hubspot.com/select/docs/welcome/select), [Tooltip](http://github.hubspot.com/tooltip/docs/welcome/select), and [Shepherd](http://github.hubspot.com/shepherd/docs/welcome/select).
+- Drops automatically reposition on page resizes and scrolls, reorienting to stay in view.
+- Drop uses GPU accelerated positioning to maintain 60fps scrolling, even with dozens or hundreds of drops on screen and complex animation
+- Drops can be nested within other drops
+- Drops can be attached to any of 12 attachment points on the target, or you can leverage the full power of Tether to position your drop anywhere.
+- Drops can be configured to open when the user clicks or hovers.
+- A development team at [HubSpot](http://github.hubspot.com) who care about making it do everything you need.
 
 ### Dependencies
 
