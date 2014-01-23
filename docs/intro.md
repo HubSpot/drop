@@ -6,7 +6,7 @@
 
 ## Drop
 
-Drop is an extremely powerful javascript and CSS library for creating dropdowns and other floating displays. Drops use [Tether.js](http://github.hubspot.com/tether) to efficiently position themselves.
+Drop is a Javascript and CSS library for creating dropdowns and other popups attached to elements on the page. Drops use [Tether.js](http://github.hubspot.com/tether) to efficiently position themselves.
 
 ### Features
 
@@ -33,16 +33,19 @@ IE9+ and all modern browsers
 
 ### Initialization
 
-To initialize a drop, simply create a `new Drop`, specifying the target to attach it to.
+To initialize a drop, create a `Drop` instance:
 
 ```coffeescript
 drop = new Drop
-    target: document.querySelector('.drop-target')
+  target: document.querySelector('.drop-target')
+  content: 'Welcome to the future!'
+  attach: 'bottom left'
+  openOn: 'click'
 ```
 
 ### Methods
 
-These can be called on the `drop` instance returned when creating a drop.
+These can be called on the `Drop` instance returned when creating a drop.
 
 #### `open`
 
@@ -73,6 +76,15 @@ defaultOptions =
     classes: ''
     tetherOptions: {}
 ```
+
+#### `target`
+
+The element (or a selector for an element) the Drop should stay adjacent to on the page.  An action on this element like
+a click or hover can be set to open the drop.
+
+#### `content`
+
+The content which should be rendered into the Drop.  Can be a DOM element or an HTML string.
 
 #### `attach`
 
