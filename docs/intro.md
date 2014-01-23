@@ -8,18 +8,19 @@
 
 Drop is a Javascript and CSS library for creating dropdowns and other popups attached to elements on the page. Drops use [Tether.js](http://github.hubspot.com/tether) to efficiently position themselves.
 
+Thank you for considering Drop, we believe it's the best way of creating dropdown-style elements available right now.
+
 ### Features
 
 Because Drop is built on [Tether](http://github.hubspot.com/tether), you get all of the benefits of its effecient and powerful positioning.
 
-- Automatically repositions on page resizes and scrolls.
-- Highly efficicient and precise positioning.
-    - Positioning done with `transform: translate` to avoid repaints, always supporting `60fps` scrolling, even with many drops open at the same time.
-- Automatic collision detection with the edge of the page means your dropdowns are never cut off by the edge of the page and can even flip up/down or left/right automatically.
+- Automatically repositions on page resizes and scrolls, with screen and scroll parent collision detection.
+- Positioning is done with `transform: translate` to avoid repaints, always supporting `60fps` scrolling, even with many drops open at the same time.
+
 - Flexible animation structure supports all possible CSS transitions for opening and closing, or if desired, no animation at all.
-- Drops can be opened/closed with click or mouseover/out.
-- Drops can be nested within other drops.
-- Drops can be attached to any of 12 attachment points on the target.
+- Can be nested within other drops.
+- Can be attached to any of 12 attachment points on the target.
+
 - Attachment points can be tweaked for perfect alignment using custom offsets.
 - Drops look and work great with other Tether libraries, including [Select](http://github.hubspot.com/select/docs/welcome/select), [Tooltip](http://github.hubspot.com/tooltip/docs/welcome/select), and [Shepherd](http://github.hubspot.com/shepherd/docs/welcome/select).
 
@@ -45,37 +46,27 @@ drop = new Drop
 
 ### Methods
 
-These can be called on the `Drop` instance returned when creating a drop.
+These methods can be called on the `Drop` instance returned when creating a drop.
 
-#### `open`
+#### `open()`
 
 Opens the drop. Specifically, this adds `drop-open` and other classes to the drop.
 
-#### `close`
+#### `close()`
 
 Opens the drop. Specifically, this removes `drop-open` and other classes from the drop. Closed drops will still remain in the DOM.
 
-#### `toggle`
+#### `toggle()`
 
 Will close the drop if opened, and open if closed.
 
-#### `isOpened`
+#### `isOpened()`
 
 Returns true if the drop is openened.
 
 ### Options
 
-The default options are:
-
-```coffeescript
-defaultOptions =
-    attach: 'bottom left'
-    openOn: 'click'
-    constrainToWindow: true
-    constrainToScrollParent: true
-    classes: ''
-    tetherOptions: {}
-```
+The following options can be passed to the drop constructor:
 
 #### `target`
 
@@ -136,3 +127,19 @@ Additional class names to be added to the drop. These can be set to apply a them
 #### `tetherOptions`
 
 Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://github.hubspot.com/tether) for more information.
+
+#### Defaults
+
+The default option values are:
+
+```coffeescript
+defaultOptions =
+    attach: 'bottom left'
+    openOn: 'click'
+    constrainToWindow: true
+    constrainToScrollParent: true
+    classes: ''
+    tetherOptions: {}
+```
+
+
