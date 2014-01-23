@@ -16,7 +16,7 @@ setupHero = ->
         openOn: ' '
         content: '''
             <h1>Drop.js</h1>
-            <h2>The world's most powerful<br/>dropdown library yet.<br/><small style="opacity: 0.6; margin-top: 1em; display: block">Built on <a href="/tether/docs/welcome" target="_blank" style="color: inherit">Tether</a>.</small></h2>
+            <h2>The fast and capable<br/>dropdown library<br/><small style="opacity: 0.6; margin-top: 1em; display: block">Built on <a href="/tether/docs/welcome" target="_blank" style="color: inherit">Tether</a>.</small></h2>
             <p>
                 <a class="button" href="http://github.com/HubSpot/drop">★ On Github</a>
             </p>
