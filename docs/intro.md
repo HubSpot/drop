@@ -139,4 +139,7 @@ defaultOptions =
     tetherOptions: {}
 ```
 
+### Body Class
 
+Drop adds a class to the body whenever a drop is open.  It defaults to `drop-open`, see
+the Embedding doc for more details.
