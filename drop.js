@@ -1,4 +1,4 @@
-/*! drop 0.3.8 */
+/*! drop 0.3.9 */
 /*! tether 0.5.0 */
 (function() {
   var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
@@ -1409,7 +1409,7 @@
     defaultOptions = {
       classPrefix: 'drop',
       defaults: {
-        attach: 'bottom left',
+        position: 'bottom left',
         openOn: 'click',
         constrainToScrollParent: true,
         constrainToWindow: true,

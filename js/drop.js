@@ -50,7 +50,7 @@
     defaultOptions = {
       classPrefix: 'drop',
       defaults: {
-        attach: 'bottom left',
+        position: 'bottom left',
         openOn: 'click',
         constrainToScrollParent: true,
         constrainToWindow: true,
