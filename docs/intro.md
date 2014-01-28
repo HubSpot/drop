@@ -37,7 +37,7 @@ To initialize a drop, create a `Drop` instance:
 drop = new Drop
   target: document.querySelector('.drop-target')
   content: 'Welcome to the future!'
-  attach: 'bottom left'
+  position: 'bottom left'
   openOn: 'click'
 ```
 
@@ -74,9 +74,9 @@ a click or hover can be set to open the drop.
 
 The content which should be rendered into the Drop.  Can be a DOM element or an HTML string.
 
-#### `attach`
+#### `position`
 
-Attach specifies the attachment point (on the target) to attach the drop to. Options include:
+Position specifies the attachment point (on the target) to attach the drop to. Options include:
 
 ```coffeescript
 'top left'
@@ -131,7 +131,7 @@ The default option values are:
 
 ```coffeescript
 defaultOptions =
-    attach: 'bottom left'
+    position: 'bottom left'
     openOn: 'click'
     constrainToWindow: true
     constrainToScrollParent: true
