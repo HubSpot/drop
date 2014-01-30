@@ -3,7 +3,7 @@
   "version": "0.4.0",
   "homepage": "https://github.com/HubSpot/drop",
   "authors": [
-    "Adam Schwartz <aschwartz@hubspot.com>",j
+    "Adam Schwartz <aschwartz@hubspot.com>",
     "Zack Bloom <zbloom@hubspot.com>"
   ],
   "description": "Client-side library for creating dropdowns",
