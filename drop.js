@@ -1,4 +1,4 @@
-/*! drop 0.3.9 */
+/*! drop 0.3.10 */
 /*! tether 0.5.2 */
 (function() {
   var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
