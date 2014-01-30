@@ -1,15 +1,7 @@
 {extend, addClass, removeClass, hasClass, Evented} = Tether.Utils
 
-debounce = (fn) ->
-  block = false
-
-  ->
-    return if block
-    block = true
-    setTimeout ->
-      block = false
-
-    fn.apply @, arguments
+touchDevice = 'ontouchstart' of document.documentElement
+clickEvent = if touchDevice then 'touchstart' else 'click'
 
 sortAttach = (str) ->
   [first, second] = str.split(' ')
@@ -153,8 +145,9 @@ createContext = (options={}) ->
       events = @options.openOn.split ' '
 
       if 'click' in events
-        openHandler = debounce => @toggle()
-        closeHandler = debounce (event) =>
+        @target.addEventListener clickEvent, => @toggle()
+
+        document.addEventListener clickEvent, (event) =>
           return unless @isOpened()
 
           # Clicking inside dropdown
@@ -166,10 +159,6 @@ createContext = (options={}) ->
             return
 
           @close()
-
-        for event in ['click', 'touchstart']
-          @target.addEventListener event, openHandler
-          document.addEventListener event, closeHandler
 
       if 'hover' in events
         onUs = false

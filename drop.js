@@ -1358,27 +1358,16 @@
 }).call(this);
 
 (function() {
-  var Evented, MIRROR_ATTACH, addClass, allDrops, createContext, debounce, extend, hasClass, removeClass, sortAttach, _ref,
+  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvent, createContext, extend, hasClass, removeClass, sortAttach, touchDevice, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   _ref = Tether.Utils, extend = _ref.extend, addClass = _ref.addClass, removeClass = _ref.removeClass, hasClass = _ref.hasClass, Evented = _ref.Evented;
 
-  debounce = function(fn) {
-    var block;
-    block = false;
-    return function() {
-      if (block) {
-        return;
-      }
-      block = true;
-      setTimeout(function() {
-        return block = false;
-      });
-      return fn.apply(this, arguments);
-    };
-  };
+  touchDevice = 'ontouchstart' in document.documentElement;
+
+  clickEvent = touchDevice ? 'touchstart' : 'click';
 
   sortAttach = function(str) {
     var first, second, _ref1, _ref2;
@@ -1532,17 +1521,17 @@
       };
 
       DropInstance.prototype.setupEvents = function() {
-        var closeHandler, event, events, onUs, openHandler, out, outTimeout, over, _i, _len, _ref1,
+        var events, onUs, out, outTimeout, over,
           _this = this;
         if (!this.options.openOn) {
           return;
         }
         events = this.options.openOn.split(' ');
         if (__indexOf.call(events, 'click') >= 0) {
-          openHandler = debounce(function() {
+          this.target.addEventListener(clickEvent, function() {
             return _this.toggle();
           });
-          closeHandler = debounce(function(event) {
+          document.addEventListener(clickEvent, function(event) {
             if (!_this.isOpened()) {
               return;
             }
@@ -1554,12 +1543,6 @@
             }
             return _this.close();
           });
-          _ref1 = ['click', 'touchstart'];
-          for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-            event = _ref1[_i];
-            this.target.addEventListener(event, openHandler);
-            document.addEventListener(event, closeHandler);
-          }
         }
         if (__indexOf.call(events, 'hover') >= 0) {
           onUs = false;
