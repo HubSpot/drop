@@ -166,31 +166,33 @@
       };
 
       DropInstance.prototype.setupEvents = function() {
-        var clickEvent, events, onUs, out, outTimeout, over, _i, _len,
+        var clickEvent, closeHandler, events, onUs, openHandler, out, outTimeout, over, _i, _len,
           _this = this;
         if (!this.options.openOn) {
           return;
         }
         events = this.options.openOn.split(' ');
-        if (__indexOf.call(events, 'click') >= 0) {
+        if (__indexOf.call(events, 'click') >= 0 || __indexOf.call(events, 'hover') >= 0) {
+          openHandler = function(event) {
+            _this.toggle();
+            return event.preventDefault();
+          };
+          closeHandler = function(event) {
+            if (!_this.isOpened()) {
+              return;
+            }
+            if (event.target === _this.drop || _this.drop.contains(event.target)) {
+              return;
+            }
+            if (event.target === _this.target || _this.target.contains(event.target)) {
+              return;
+            }
+            return _this.close();
+          };
           for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
             clickEvent = clickEvents[_i];
-            this.target.addEventListener(clickEvent, function(event) {
-              _this.toggle();
-              return event.preventDefault();
-            });
-            document.addEventListener(clickEvent, function(event) {
-              if (!_this.isOpened()) {
-                return;
-              }
-              if (event.target === _this.drop || _this.drop.contains(event.target)) {
-                return;
-              }
-              if (event.target === _this.target || _this.target.contains(event.target)) {
-                return;
-              }
-              return _this.close();
-            });
+            this.target.addEventListener(clickEvent, openHandler);
+            document.addEventListener(clickEvent, closeHandler);
           }
         }
         if (__indexOf.call(events, 'hover') >= 0) {

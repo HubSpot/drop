@@ -1,9 +1,9 @@
 {
   "name": "drop",
-  "version": "0.3.10",
+  "version": "0.4.0",
   "homepage": "https://github.com/HubSpot/drop",
   "authors": [
-    "Adam Schwartz <aschwartz@hubspot.com>",
+    "Adam Schwartz <aschwartz@hubspot.com>",j
     "Zack Bloom <zbloom@hubspot.com>"
   ],
   "description": "Client-side library for creating dropdowns",
@@ -21,6 +21,6 @@
     "tests"
   ],
   "dependencies": {
-    "tether": "~0.5.0"
+    "tether": "~0.5.2"
   }
 }

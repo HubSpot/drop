@@ -1,8 +1,8 @@
 {extend, addClass, removeClass, hasClass, Evented} = Tether.Utils
 
-touchDevice = 'ontouchstart' of document.documentElement 
+touchDevice = 'ontouchstart' of document.documentElement
 clickEvents = ['click']
-clickEvents.push('touchstart') if touchDevice 
+clickEvents.push('touchstart') if touchDevice
 
 sortAttach = (str) ->
   [first, second] = str.split(' ')
@@ -145,24 +145,27 @@ createContext = (options={}) ->
       return unless @options.openOn
       events = @options.openOn.split ' '
 
-      if 'click' in events
+      if 'click' in events or 'hover' in events
+        openHandler = (event) =>
+          @toggle()
+          event.preventDefault()
+
+        closeHandler = (event) =>
+          return unless @isOpened()
+
+          # Clicking inside dropdown
+          if event.target is @drop or @drop.contains(event.target)
+            return
+
+          # Clicking target
+          if event.target is @target or @target.contains(event.target)
+            return
+  
+          @close()
+
         for clickEvent in clickEvents
-          @target.addEventListener clickEvent, (event) =>
-            @toggle()
-            event.preventDefault()
-
-          document.addEventListener clickEvent, (event) =>
-            return unless @isOpened()
-
-            # Clicking inside dropdown
-            if event.target is @drop or @drop.contains(event.target)
-              return
-
-            # Clicking target
-            if event.target is @target or @target.contains(event.target)
-              return
-    
-            @close()
+          @target.addEventListener clickEvent, openHandler
+          document.addEventListener clickEvent, closeHandler
 
       if 'hover' in events
         onUs = false
