@@ -1,5 +1,5 @@
 /*! drop 0.3.9 */
-/*! tether 0.5.0 */
+/*! tether 0.5.2 */
 (function() {
   var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
     __hasProp = {}.hasOwnProperty,
@@ -612,7 +612,7 @@
             if (this.target !== document.body) {
               out.height = Math.max(out.height, 24);
             }
-            scrollPercentage = target.scrollTop / (target.scrollHeight - height);
+            scrollPercentage = this.target.scrollTop / (target.scrollHeight - height);
             out.top = scrollPercentage * (height - out.height - fitAdj) + bounds.top + parseFloat(style.borderTopWidth);
             if (this.target === document.body) {
               out.height = Math.max(out.height, 24);
@@ -814,7 +814,7 @@
         _ref4 = ['Top', 'Left', 'Bottom', 'Right'];
         for (_j = 0, _len1 = _ref4.length; _j < _len1; _j++) {
           side = _ref4[_j];
-          offsetBorder[side] = parseFloat(offsetParentStyle["border" + side + "Width"]);
+          offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle["border" + side + "Width"]);
         }
         offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
         offsetPosition.bottom = document.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
@@ -1358,7 +1358,7 @@
 }).call(this);
 
 (function() {
-  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvent, createContext, extend, hasClass, removeClass, sortAttach, touchDevice, _ref,
+  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, extend, hasClass, removeClass, sortAttach, touchDevice, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -1367,7 +1367,11 @@
 
   touchDevice = 'ontouchstart' in document.documentElement;
 
-  clickEvent = touchDevice ? 'touchstart' : 'click';
+  clickEvents = ['click'];
+
+  if (touchDevice) {
+    clickEvents.push('touchstart');
+  }
 
   sortAttach = function(str) {
     var first, second, _ref1, _ref2;
@@ -1521,28 +1525,32 @@
       };
 
       DropInstance.prototype.setupEvents = function() {
-        var events, onUs, out, outTimeout, over,
+        var clickEvent, events, onUs, out, outTimeout, over, _i, _len,
           _this = this;
         if (!this.options.openOn) {
           return;
         }
         events = this.options.openOn.split(' ');
         if (__indexOf.call(events, 'click') >= 0) {
-          this.target.addEventListener(clickEvent, function() {
-            return _this.toggle();
-          });
-          document.addEventListener(clickEvent, function(event) {
-            if (!_this.isOpened()) {
-              return;
-            }
-            if (event.target === _this.drop || _this.drop.contains(event.target)) {
-              return;
-            }
-            if (event.target === _this.target || _this.target.contains(event.target)) {
-              return;
-            }
-            return _this.close();
-          });
+          for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
+            clickEvent = clickEvents[_i];
+            this.target.addEventListener(clickEvent, function(event) {
+              _this.toggle();
+              return event.preventDefault();
+            });
+            document.addEventListener(clickEvent, function(event) {
+              if (!_this.isOpened()) {
+                return;
+              }
+              if (event.target === _this.drop || _this.drop.contains(event.target)) {
+                return;
+              }
+              if (event.target === _this.target || _this.target.contains(event.target)) {
+                return;
+              }
+              return _this.close();
+            });
+          }
         }
         if (__indexOf.call(events, 'hover') >= 0) {
           onUs = false;
