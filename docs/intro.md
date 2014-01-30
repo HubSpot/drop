@@ -2,7 +2,22 @@
 <link rel="stylesheet" href="/drop/css/drop-theme-arrows-bounce.css" />
 <link rel="stylesheet" href="/drop/css/drop-theme-arrows-bounce-dark.css" />
 <script src="/drop/drop.min.js"></script>
-<script>$(function(){ $('.drop-target').each(function(){ var options = $.extend({}, { target: this, classes: 'drop-theme-arrows-bounce-dark', position: 'bottom left', constrainToWindow: true, constrainToScrollParent: true, openOn: 'click' }, $(this).data('options')); $(this).data('drop', new Drop(options); })); });</script>
+<script>
+  $(function(){
+    $('.drop-target').each(function(){
+      var options = $.extend({}, {
+        target: this,
+        classes: 'drop-theme-arrows-bounce-dark',
+        position: 'bottom left',
+        constrainToWindow: true,
+        constrainToScrollParent: true,
+        openOn: 'click'
+      }, $(this).data('options'));
+      
+      new Drop(options);
+    }) 
+  });
+</script>
 
 ## Drop
 
