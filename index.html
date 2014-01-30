@@ -1,0 +1,154 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>drop</title><link rel="icon" href="http://static.hubspot.com/favicon.ico"><link rel="stylesheet" href="https://static2cdn.hubspot.com/hubspot_public_assets/static-1.112/shared/sass/hubspot_public_assets.css"><link rel="stylesheet" href="https://static.hubspot.com/bundles/navigation.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/print.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/highlight-theme-github.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/navigation-tweaks.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/documentation.css"><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/codemirror.css"><link rel="stylesheet" href="//github.hubspot.com/drop//resources/executr/build/css/executr.css"><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/codemirror.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/mode/coffeescript/coffeescript.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/mode/javascript/javascript.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/coffee-script.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/underscore.min.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/js2coffee.min.js"></script><script src="//github.hubspot.com/drop//resources/executr/build/js/executr.js"></script><script src="//github.hubspot.com/drop//resources/executr/build/js/executr-run.js"></script><script src="//use.typekit.net/ghy0wve.js"></script><script>try{Typekit.load();}catch(e){}
+</script></head><body><div id="hs-nav-v3" class="nav-width-flex signed-out-nav">
+    <div class="hs-nav-section main-nav">
+        <div class="nav-section-inner">
+            <ul class="nav-links-left">
+                <li class="first"><a class="nav-logo" href="http://www.hubspot.com/"><img height="34" src="https://static.hubspot.com/style-guide/img/nav-sprocket.png" width="29"></a></li>
+                <li>
+                    <a href="http://dev.hubspot.com">
+                        HubSpot Dev &amp; Design
+                    </a>
+                </li>
+                <li>
+                    <a class="current-nav-item" href="http://hubspot.github.com">
+                        Open Source
+                    </a>
+                </li>
+                <li>
+                    <a href="http://dev.hubspot.com/blog">
+                        Blog
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav-links-right">
+                <li class="first">
+                    <a href="http://dev.hubspot.com/jobs/" class="sign-in">We're Hiring Engineers</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="hs-doc-marquee"><div class="hs-page-width-normal"><div class="row-fluid"><div class="span6"><h1>drop</h1><h3 class="hs-doc-marquee-description"></h3><p class="hs-doc-marquee-release">0.3.10</p><p class="hs-doc-marquee-stars"><iframe src="http://ghbtns.com/github-btn.html?user=HubSpot&repo=drop&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="240" height="30"></iframe></p></div><div class="span6"><div class="hs-doc-marquee-buttons"><a class="hs-doc-marquee-button" href="http://github.com/HubSpot/drop">Star on GitHub</a><a class="hs-doc-marquee-button" href="http://github.com/HubSpot/drop/archive/v0.3.10.zip">Download ZIP (v0.3.10)</a></div></div></div></div></div><div class="hs-page-width-normal"><div class="row-fluid"><div class="span3"><div class="hs-doc-sidenav"><nav><ul class="hs-public-sidenav"><li class="current-nav-item"><a href="">Home</a></li><li><b>Overview</b></li><li class=""><a href="overview/embedding_drop">Embedding Drop</a></li><li class=""><a href="overview/drop_vs_tether">Drop Vs Tether</a></li><li class=""><a href="overview/styling">Styling</a></li></ul></nav></div></div><div class="span9"><div class="hs-doc-content"><p><link rel="stylesheet" href="/drop/css/drop-theme-basic.css" /></p>
+<p><link rel="stylesheet" href="/drop/css/drop-theme-arrows-bounce.css" /></p>
+<p><link rel="stylesheet" href="/drop/css/drop-theme-arrows-bounce-dark.css" /></p>
+<script src="/drop/drop.min.js"></script>
+<script>
+  $(function(){
+    $('.drop-target').each(function(){
+      var options = $.extend({}, {
+        target: this,
+        classes: 'drop-theme-arrows-bounce-dark',
+        position: 'bottom left',
+        constrainToWindow: true,
+        constrainToScrollParent: true,
+        openOn: 'click'
+      }, $(this).data('options'));
+
+      new Drop(options);
+    }) 
+  });
+</script>
+
+<h2 id="drop">Drop</h2>
+<p>Drop is a Javascript and CSS library for creating dropdowns and other popups attached to elements on the page. Drop uses <a href="http://github.hubspot.com/tether">Tether.js</a> to efficiently position its elements.</p>
+<p>Thank you for considering Drop, we believe it&#39;s the best way of creating dropdown-style elements available right now.</p>
+<h3 id="features">Features</h3>
+<p>Because Drop is built on <a href="http://github.hubspot.com/tether">Tether</a>, you get all of the benefits of its effecient and powerful positioning.</p>
+<ul>
+<li>Drops automatically reposition on page resizes and scrolls, reorienting to stay in view.</li>
+<li>Drop uses GPU accelerated positioning to maintain 60fps scrolling, even with dozens or hundreds of drops on screen and complex animation</li>
+<li>Drops can be nested within other drops</li>
+<li>Drops can be attached to any of 12 attachment points on the target, or you can leverage the full power of Tether to position your drop anywhere.</li>
+<li>Drops can be configured to open when the user clicks or hovers.</li>
+<li>A development team at <a href="http://github.hubspot.com">HubSpot</a> who care about making it do everything you need.</li>
+</ul>
+<h3 id="dependencies">Dependencies</h3>
+<p>None!</p>
+<h3 id="browser-support">Browser Support</h3>
+<p>IE9+ and all modern browsers</p>
+<h3 id="initialization">Initialization</h3>
+<p>To initialize a drop, create a <code>Drop</code> instance:</p>
+<pre><code class="lang-coffeescript">drop = <span class="keyword">new</span> Drop
+  target: document.querySelector(<span class="string">'.drop-target'</span>)
+  content: <span class="string">'Welcome to the future!'</span>
+  position: <span class="string">'bottom left'</span>
+  openOn: <span class="string">'click'</span></code></pre>
+<h3 id="methods">Methods</h3>
+<p>These methods can be called on the <code>Drop</code> instance returned when creating a drop.</p>
+<h4 id="-open-"><code>open()</code></h4>
+<p>Opens the drop. Specifically, this adds <code>drop-open</code> and other classes to the drop.</p>
+<h4 id="-close-"><code>close()</code></h4>
+<p>Opens the drop. Specifically, this removes <code>drop-open</code> and other classes from the drop. Closed drops will still remain in the DOM.</p>
+<h4 id="-toggle-"><code>toggle()</code></h4>
+<p>Will close the drop if opened, and open if closed.</p>
+<h4 id="-isopened-"><code>isOpened()</code></h4>
+<p>Returns true if the drop is openened.</p>
+<h3 id="options">Options</h3>
+<p>The following options can be passed to the drop constructor:</p>
+<h4 id="-target-"><code>target</code></h4>
+<p>The element (or a selector for an element) the Drop should stay adjacent to on the page.  An action on this element like
+a click or hover can be set to open the drop.</p>
+<h4 id="-content-"><code>content</code></h4>
+<p>The content which should be rendered into the Drop.  Can be a DOM element or an HTML string.</p>
+<h4 id="-position-"><code>position</code></h4>
+<p>Position specifies the attachment point (on the target) to attach the drop to. Options include:</p>
+<pre><code class="lang-coffeescript"><span class="string">'top left'</span>
+<span class="string">'left top'</span>
+<span class="string">'left middle'</span>
+<span class="string">'left bottom'</span>
+<span class="string">'bottom left'</span>
+<span class="string">'bottom center'</span>
+<span class="string">'bottom right'</span>
+<span class="string">'right bottom'</span>
+<span class="string">'right middle'</span>
+<span class="string">'right top'</span>
+<span class="string">'top right'</span>
+<span class="string">'top center'</span></code></pre>
+<p>More information about attachment can be found in the <a href="http://github.hubspot.com/tether">Tether documentation</a>.</p>
+<h4 id="-openon-"><code>openOn</code></h4>
+<p>Specifies what event on the target opens the drop. If you set this to <code>undefined</code> or <code>null</code> you will need to manually call <code>.open()</code>/<code>.close()</code> on the <code>drop</code> instance.</p>
+<pre><code class="lang-coffeescript"><span class="string">'click'</span>
+<span class="string">'hover'</span></code></pre>
+<h4 id="-constraintowindow-"><code>constrainToWindow</code></h4>
+<p>If set to <code>true</code>, uses <a href="http://github.hubspot.com/tether">Tether&#39;s</a> <code>constraints</code> list to keep the drop within the visible window, or viewport. This will cause drops with bottom attachments to switch to top when colliding with the bottom of the page and vice-versa. Dropdowns will also pin to the edge of the window if the user scrolls away from the target after opening a drop.</p>
+<pre><code class="lang-coffeescript"><span class="literal">true</span>
+<span class="literal">false</span></code></pre>
+<h4 id="-constraintoscrollparent-"><code>constrainToScrollParent</code></h4>
+<p>Similar to <code>constrainToWindow</code> but for the target element&#39;s first scroll parent, that is the first parent which has <code>overflow: auto</code> or <code>overflow: scroll</code> set, or the body, whichever comes first.</p>
+<h4 id="-classes-"><code>classes</code></h4>
+<p>Additional class names to be added to the drop. These can be set to apply a theme (for example, <a href="https://github.com/HubSpot/drop/blob/master/css/drop-theme-arrows-bounce-dark.css"><code>drop-theme-arrows-bounce-dark</code></a>) and/or they can be set to apply custom styling to child elements of the drop.</p>
+<h4 id="-tetheroptions-"><code>tetherOptions</code></h4>
+<p>Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the <a href="http://github.hubspot.com/tether">Tether documentation</a> for more information.</p>
+<h4 id="defaults">Defaults</h4>
+<p>The default option values are:</p>
+<pre><code class="lang-coffeescript">defaultOptions =
+    position: <span class="string">'bottom left'</span>
+    openOn: <span class="string">'click'</span>
+    constrainToWindow: <span class="literal">true</span>
+    constrainToScrollParent: <span class="literal">true</span>
+    classes: <span class="string">''</span>
+    tetherOptions: {}</code></pre>
+<h3 id="body-class">Body Class</h3>
+<p>Drop adds a class to the body whenever a drop is open.  It defaults to <code>drop-open</code>, see
+the Embedding doc for more details.</p>
+</div></div></div></div><div class="hs3-public-footer"><div class="row-fluid hs-page-width-normal"><div class="span3 hidden-phone"><h3>HubSpot</h3><ul><li><a href="http://www.hubspot.com">Home</a></li><li><a href="http://www.hubspot.com/software">Products</a></li><li><a href="http://www.hubspot.com/internet-marketing-company/">About</a></li></ul></div><div class="span3"><h3>Projects</h3><ul><li><a href="http://github.hubspot.com/messenger">Messenger</a></li><li><a href="http://github.hubspot.com/facewall">Facewall</a></li><li><a href="http://github.hubspot.com/jquery-zoomer">jQuery Zoomer</a></li><li><a href="http://github.hubspot.com/humanize">Humanize</a></li><li><a href="http://github.hubspot.com/teeble">Teeble</a></li></ul></div><div class="span3"><h3>Development Team</h3><ul><li><a href="http://dev.hubspot.com">Home</a></li><li><a href="http://dev.hubspot.com/teams">Teams</a></li><li><a href="http://dev.hubspot.com/people">People</a></li><li><a href="http://dev.hubspot.com/jobs">Jobs</a></li></ul></div><div class="span3 hidden-phone"><h3>Developer API</h3><ul><li><a href="http://developers.hubspot.com/">Developer Documentation</a></li></ul></div></div></div><!-- Start of Async HubSpot Analytics Code -->
+<script type="text/javascript">
+    (function(d,s,i,r) {
+        if (d.getElementById(i)){return;}
+        var n=d.createElement(s),e=d.getElementsByTagName(s)[0];
+        n.id=i;n.src='//js.hubspot.com/analytics/'+(Math.ceil(new Date()/r)*r)+'/51294.js';
+        e.parentNode.insertBefore(n, e);
+    })(document,"script","hs-analytics",300000);
+</script>
+<!-- End of Async HubSpot Analytics Code -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45159009-1', 'hubspot.com');
+  ga('send', 'pageview');
+</script>
+</body></html>
