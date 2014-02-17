@@ -1628,6 +1628,10 @@
         return drop.updateBodyClasses();
       };
 
+      DropInstance.prototype.content = function(content) {
+        this.dropContent.innerHTML = content;
+      };
+
       return DropInstance;
 
     })(Evented);
