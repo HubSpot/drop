@@ -138,8 +138,8 @@ createContext = (options={}) ->
         enabled: false
         constraints: constraints
 
-      if @options.tether isnt false
-        @tether = new Tether extend {}, options, @options.tether
+      if @options.tetherOptions isnt false
+        @tether = new Tether extend {}, options, @options.tetherOptions
 
     setupEvents: ->
       return unless @options.openOn
