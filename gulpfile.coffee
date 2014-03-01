@@ -7,6 +7,7 @@ header = require('gulp-header')
 rename = require('gulp-rename')
 bower = require('gulp-bower')
 gutil = require('gulp-util')
+wrap = require('gulp-wrap-umd')
 
 pkg = require('./package.json')
 banner = "/*! #{ pkg.name } #{ pkg.version } */\n"
@@ -28,6 +29,10 @@ gulp.task 'coffee', ->
 gulp.task 'concat', ->
   gulp.src(['./bower_components/tether/tether.js', 'js/drop.js'])
     .pipe(concat('drop.js'))
+    .pipe(wrap(
+      namespace: 'Drop'
+      exports: 'Drop'
+    ))
     .pipe(header(banner))
     .pipe(gulp.dest('./'))
 

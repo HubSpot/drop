@@ -1,3 +1,5 @@
+Tether = this.Tether
+
 {extend, addClass, removeClass, hasClass, Evented} = Tether.Utils
 
 touchDevice = 'ontouchstart' of document.documentElement
@@ -160,7 +162,7 @@ createContext = (options={}) ->
           # Clicking target
           if event.target is @target or @target.contains(event.target)
             return
-  
+
           @close()
 
         for clickEvent in clickEvents
@@ -235,7 +237,7 @@ createContext = (options={}) ->
 
   drop
 
-window.Drop = createContext()
+this.Drop = createContext()
 
 document.addEventListener 'DOMContentLoaded', ->
   Drop.updateBodyClasses()
