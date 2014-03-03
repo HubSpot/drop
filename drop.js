@@ -1,13 +1,25 @@
-/*! drop 0.4.0 */
-/*! tether 0.5.2 */
+/*! drop 0.4.1 */
+/*! tether 0.6.1 */
+
+
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require,exports,module);
+  } else {
+    root.Tether = factory();
+  }
+}(this, function(require,exports,module) {
+
 (function() {
   var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
     __hasProp = {}.hasOwnProperty,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = [].slice;
 
-  if (window.Tether == null) {
-    window.Tether = {};
+  if (this.Tether == null) {
+    this.Tether = {};
   }
 
   getScrollParent = function(el) {
@@ -724,7 +736,7 @@
     };
 
     _Tether.prototype.position = function(flushChanges) {
-      var elementPos, elementStyle, height, left, manualOffset, manualTargetOffset, module, next, offset, offsetBorder, offsetParent, offsetParentSize, offsetParentStyle, offsetPosition, ret, scrollLeft, scrollTop, side, targetAttachment, targetOffset, targetPos, targetSize, top, width, _i, _j, _len, _len1, _ref1, _ref2, _ref3, _ref4,
+      var elementPos, elementStyle, height, left, manualOffset, manualTargetOffset, module, next, offset, offsetBorder, offsetParent, offsetParentSize, offsetParentStyle, offsetPosition, ret, scrollLeft, scrollTop, side, targetAttachment, targetOffset, targetPos, targetSize, top, width, _i, _j, _len, _len1, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6,
         _this = this;
       if (flushChanges == null) {
         flushChanges = true;
@@ -772,6 +784,7 @@
           top: top,
           targetAttachment: targetAttachment,
           targetPos: targetPos,
+          attachment: this.attachment,
           elementPos: elementPos,
           offset: offset,
           targetOffset: targetOffset,
@@ -789,9 +802,7 @@
       next = {
         page: {
           top: top,
-          bottom: document.body.scrollHeight - top - height,
-          left: left,
-          right: document.body.scrollWidth - left - width
+          left: left
         },
         viewport: {
           top: top - pageYOffset,
@@ -800,7 +811,11 @@
           right: pageXOffset - left - width + innerWidth
         }
       };
-      if (((_ref3 = this.options.optimizations) != null ? _ref3.moveElement : void 0) !== false && (this.targetModifier == null)) {
+      if (((_ref3 = document.body.style.position) !== '' && _ref3 !== 'static') || ((_ref4 = document.body.parentElement.style.position) !== '' && _ref4 !== 'static')) {
+        next.page.bottom = document.body.scrollHeight - top - height;
+        next.page.right = document.body.scrollWidth - left - width;
+      }
+      if (((_ref5 = this.options.optimizations) != null ? _ref5.moveElement : void 0) !== false && (this.targetModifier == null)) {
         offsetParent = this.cache('target-offsetparent', function() {
           return getOffsetParent(_this.target);
         });
@@ -811,9 +826,9 @@
         elementStyle = getComputedStyle(this.element);
         offsetParentSize = offsetPosition;
         offsetBorder = {};
-        _ref4 = ['Top', 'Left', 'Bottom', 'Right'];
-        for (_j = 0, _len1 = _ref4.length; _j < _len1; _j++) {
-          side = _ref4[_j];
+        _ref6 = ['Top', 'Left', 'Bottom', 'Right'];
+        for (_j = 0, _len1 = _ref6.length; _j < _len1; _j++) {
+          side = _ref6[_j];
           offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle["border" + side + "Width"]);
         }
         offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
@@ -962,7 +977,7 @@
 
   Tether.position = position;
 
-  window.Tether = extend(_Tether, Tether);
+  this.Tether = extend(_Tether, Tether);
 
 }).call(this);
 
@@ -1357,6 +1372,10 @@
 
 }).call(this);
 
+return Tether;
+
+}));
+
 (function() {
   var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, extend, hasClass, removeClass, sortAttach, touchDevice, _ref,
     __hasProp = {}.hasOwnProperty,
@@ -1519,8 +1538,8 @@
           enabled: false,
           constraints: constraints
         };
-        if (this.options.tether !== false) {
-          return this.tether = new Tether(extend({}, options, this.options.tether));
+        if (this.options.tetherOptions !== false) {
+          return this.tether = new Tether(extend({}, options, this.options.tetherOptions));
         }
       };
 

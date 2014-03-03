@@ -160,8 +160,8 @@
           enabled: false,
           constraints: constraints
         };
-        if (this.options.tether !== false) {
-          return this.tether = new Tether(extend({}, options, this.options.tether));
+        if (this.options.tetherOptions !== false) {
+          return this.tether = new Tether(extend({}, options, this.options.tetherOptions));
         }
       };
 
