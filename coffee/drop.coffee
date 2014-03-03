@@ -120,7 +120,6 @@ createContext = (options={}) ->
       if @options.constrainToWindow isnt false
         constraints.push
           to: 'window'
-          pin: true
           attachment: 'together'
       else
         # To get 'out of bounds' classes
