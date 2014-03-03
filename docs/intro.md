@@ -76,6 +76,10 @@ Will close the drop if opened, and open if closed.
 
 Returns true if the drop is openened.
 
+#### `position()`
+
+Reposition the drop.  Call if you change the content of the drop or the position of the element its attached to.
+
 ### Options
 
 The following options can be passed to the drop constructor:

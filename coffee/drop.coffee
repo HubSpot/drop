@@ -232,6 +232,10 @@ createContext = (options={}) ->
 
       drop.updateBodyClasses()
 
+    position: ->
+      if @isOpened()
+        @tether?.position()
+
   drop
 
 window.Drop = createContext()
