@@ -212,7 +212,7 @@ createContext = (options={}) ->
       setTimeout =>
         addClass @drop, "#{ drop.classPrefix }-after-open"
 
-      @tether.position()
+      @tether?.position()
 
       @trigger 'open'
 
