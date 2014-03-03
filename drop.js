@@ -1,4 +1,4 @@
-/*! drop 0.4.1 */
+/*! drop 0.5.0 */
 /*! tether 0.6.1 */
 
 
@@ -1489,14 +1489,14 @@ return Tether;
         if (this.options.classes) {
           addClass(this.drop, this.options.classes);
         }
-        this.dropContent = document.createElement('div');
-        addClass(this.dropContent, "" + drop.classPrefix + "-content");
+        this.content = document.createElement('div');
+        addClass(this.content, "" + drop.classPrefix + "-content");
         if (typeof this.options.content === 'object') {
-          this.dropContent.appendChild(this.options.content);
+          this.content.appendChild(this.options.content);
         } else {
-          this.dropContent.innerHTML = this.options.content;
+          this.content.innerHTML = this.options.content;
         }
-        return this.drop.appendChild(this.dropContent);
+        return this.drop.appendChild(this.content);
       };
 
       DropInstance.prototype.setupTether = function() {
@@ -1519,7 +1519,6 @@ return Tether;
         if (this.options.constrainToWindow !== false) {
           constraints.push({
             to: 'window',
-            pin: true,
             attachment: 'together'
           });
         } else {
@@ -1612,7 +1611,7 @@ return Tether;
       };
 
       DropInstance.prototype.open = function() {
-        var _ref1,
+        var _ref1, _ref2,
           _this = this;
         if (!this.drop.parentNode) {
           document.body.appendChild(this.drop);
@@ -1625,7 +1624,9 @@ return Tether;
         setTimeout(function() {
           return addClass(_this.drop, "" + drop.classPrefix + "-after-open");
         });
-        this.tether.position();
+        if ((_ref2 = this.tether) != null) {
+          _ref2.position();
+        }
         this.trigger('open');
         return drop.updateBodyClasses();
       };
@@ -1645,6 +1646,13 @@ return Tether;
           _ref1.disable();
         }
         return drop.updateBodyClasses();
+      };
+
+      DropInstance.prototype.position = function() {
+        var _ref1;
+        if (this.isOpened()) {
+          return (_ref1 = this.tether) != null ? _ref1.position() : void 0;
+        }
       };
 
       return DropInstance;
