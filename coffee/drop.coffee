@@ -88,14 +88,14 @@ createContext = (options={}) ->
       if @options.classes
         addClass @drop, @options.classes
 
-      @dropContent = document.createElement 'div'
-      addClass @dropContent, "#{ drop.classPrefix }-content"
+      @content = document.createElement 'div'
+      addClass @content, "#{ drop.classPrefix }-content"
       if typeof @options.content is 'object'
-        @dropContent.appendChild @options.content
+        @content.appendChild @options.content
       else
-        @dropContent.innerHTML = @options.content
+        @content.innerHTML = @options.content
 
-      @drop.appendChild @dropContent
+      @drop.appendChild @content
 
     setupTether: ->
       # Tether expects two attachment points, one in the target element, one in the

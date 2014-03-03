@@ -154,6 +154,11 @@ defaultOptions =
     tetherOptions: {}
 ```
 
+### Changing Content
+
+You can access the DOM element which contains the drop's content at `.content`.  If you manipulate this content, make sure to call `.position()` to ensure that the
+drop remains positioned correctly.
+
 ### Body Class
 
 Drop adds a class to the body whenever a drop is open.  It defaults to `drop-open`, see
