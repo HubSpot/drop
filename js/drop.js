@@ -1,8 +1,10 @@
 (function() {
-  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, extend, hasClass, removeClass, sortAttach, touchDevice, _ref,
+  var Evented, MIRROR_ATTACH, Tether, addClass, allDrops, clickEvents, createContext, extend, hasClass, removeClass, sortAttach, touchDevice, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  Tether = this.Tether;
 
   _ref = Tether.Utils, extend = _ref.extend, addClass = _ref.addClass, removeClass = _ref.removeClass, hasClass = _ref.hasClass, Evented = _ref.Evented;
 
@@ -160,8 +162,8 @@
           enabled: false,
           constraints: constraints
         };
-        if (this.options.tether !== false) {
-          return this.tether = new Tether(extend({}, options, this.options.tether));
+        if (this.options.tetherOptions !== false) {
+          return this.tether = new Tether(extend({}, options, this.options.tetherOptions));
         }
       };
 
@@ -275,7 +277,7 @@
     return drop;
   };
 
-  window.Drop = createContext();
+  this.Drop = createContext();
 
   document.addEventListener('DOMContentLoaded', function() {
     return Drop.updateBodyClasses();
