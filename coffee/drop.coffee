@@ -261,11 +261,14 @@ createContext = (options={}) ->
     destroy: ->
       @remove()
 
+      @tether?.destroy()
+
       for {element, event, handler} in @_boundEvents
         element.removeEventListener event, handler
 
       @_boundEvents = []
 
+      @tether = null
       @drop = null
       @content = null
       @target = null
