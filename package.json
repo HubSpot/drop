@@ -1,9 +1,9 @@
 {
   "name": "drop",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "",
   "authors": [
-    "Zack Bloom <zbloom@hubspot.com>",
+    "Zack Bloom <zackbloom@gmail.com>",
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>"
   ],
   "license": "MIT",
