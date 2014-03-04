@@ -68,17 +68,25 @@ Opens the drop. Specifically, this adds `drop-open` and other classes to the dro
 
 Opens the drop. Specifically, this removes `drop-open` and other classes from the drop. Closed drops will still remain in the DOM.
 
+#### `remove()`
+
+Remove the drop from the DOM.  The drop will be readded when it's next opened.  It can be used as an alternative to `close`.
+
 #### `toggle()`
 
 Will close the drop if opened, and open if closed.
 
 #### `isOpened()`
 
-Returns true if the drop is openened.
+Returns true if the drop is opened.
 
 #### `position()`
 
 Reposition the drop.  Call if you change the content of the drop or the position of the element its attached to.
+
+#### `destroy()`
+
+Remove the drop along with all of it's event bindings.  Calling any method after `destroy` is undefined.
 
 ### Options
 
@@ -140,9 +148,18 @@ Similar to `constrainToWindow` but for the target element's first scroll parent,
 
 Additional class names to be added to the drop. These can be set to apply a theme (for example, [`drop-theme-arrows-bounce-dark`](https://github.com/HubSpot/drop/blob/master/css/drop-theme-arrows-bounce-dark.css)) and/or they can be set to apply custom styling to child elements of the drop.
 
+#### `remove`
+
+Set to `false` if you'd like the drop element to be removed from the DOM when the drop is closed, and recreated when it's opened.
+
+```coffeescript
+true
+false
+```
+
 #### `tetherOptions`
 
-Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://tether.io) for more information.
+Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://tether.io) for more information.  Set to `false` to disable tether.
 
 #### Defaults
 

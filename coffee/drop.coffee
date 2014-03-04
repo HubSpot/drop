@@ -41,6 +41,7 @@ createContext = (options={}) ->
       constrainToScrollParent: true
       constrainToWindow: true
       classes: ''
+      remove: false
       tetherOptions: {}
 
   extend drop, defaultOptions, options
@@ -77,9 +78,16 @@ createContext = (options={}) ->
       drop.drops.push @
       allDrops[drop.classPrefix].push @
 
+      @_boundEvents = []
+
       @setupElements()
       @setupEvents()
       @setupTether()
+
+    _on: (element, event, handler) ->
+      @_boundEvents.push {element, event, handler}
+
+      element.addEventListener event, handler
 
     setupElements: ->
       @drop = document.createElement 'div'
@@ -163,8 +171,8 @@ createContext = (options={}) ->
           @close()
 
         for clickEvent in clickEvents
-          @target.addEventListener clickEvent, openHandler
-          document.addEventListener clickEvent, closeHandler
+          @_on @target, clickEvent, openHandler
+          @_on document, clickEvent, closeHandler
 
       if 'hover' in events
         onUs = false
@@ -186,10 +194,10 @@ createContext = (options={}) ->
             outTimeout = null
           , 50
 
-        @target.addEventListener 'mouseover', over
-        @drop.addEventListener 'mouseover', over
-        @target.addEventListener 'mouseout', out
-        @drop.addEventListener 'mouseout', out
+        @_on @target, 'mouseover', over
+        @_on @drop, 'mouseover', over
+        @_on @target, 'mouseout', out
+        @_on @drop, 'mouseout', out
 
     isOpened: ->
       hasClass @drop, "#{ drop.classPrefix }-open"
@@ -201,6 +209,8 @@ createContext = (options={}) ->
         @open()
 
     open: ->
+      return if @isOpened()
+
       unless @drop.parentNode
         document.body.appendChild @drop
 
@@ -219,12 +229,16 @@ createContext = (options={}) ->
       drop.updateBodyClasses()
 
     close: ->
+      return unless @isOpened()
+
       removeClass @drop, "#{ drop.classPrefix }-open"
       removeClass @drop, "#{ drop.classPrefix }-after-open"
 
-      @drop.addEventListener 'transitionend', =>
+      @drop.addEventListener 'transitionend', handler = =>
         unless hasClass @drop, "#{ drop.classPrefix }-open"
           removeClass @drop, "#{ drop.classPrefix }-open-transitionend"
+
+        @drop.removeEventListener 'transitionend', handler
 
       @trigger 'close'
 
@@ -232,9 +246,29 @@ createContext = (options={}) ->
 
       drop.updateBodyClasses()
 
+      if @options.remove
+        @remove()
+
+    remove: ->
+      @close()
+
+      @drop.parentNode?.removeChild(@drop)
+
     position: ->
       if @isOpened()
         @tether?.position()
+
+    destroy: ->
+      @remove()
+
+      for {element, event, handler} in @_boundEvents
+        element.removeEventListener event, handler
+
+      @_boundEvents = []
+
+      @drop = null
+      @content = null
+      @target = null
 
   drop
 

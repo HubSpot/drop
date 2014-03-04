@@ -59,6 +59,7 @@
         constrainToScrollParent: true,
         constrainToWindow: true,
         classes: '',
+        remove: false,
         tetherOptions: {}
       }
     };
@@ -100,10 +101,20 @@
         }
         drop.drops.push(this);
         allDrops[drop.classPrefix].push(this);
+        this._boundEvents = [];
         this.setupElements();
         this.setupEvents();
         this.setupTether();
       }
+
+      DropInstance.prototype._on = function(element, event, handler) {
+        this._boundEvents.push({
+          element: element,
+          event: event,
+          handler: handler
+        });
+        return element.addEventListener(event, handler);
+      };
 
       DropInstance.prototype.setupElements = function() {
         this.drop = document.createElement('div');
@@ -190,8 +201,8 @@
           };
           for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
             clickEvent = clickEvents[_i];
-            this.target.addEventListener(clickEvent, openHandler);
-            document.addEventListener(clickEvent, closeHandler);
+            this._on(this.target, clickEvent, openHandler);
+            this._on(document, clickEvent, closeHandler);
           }
         }
         if (__indexOf.call(events, 'hover') >= 0) {
@@ -213,10 +224,10 @@
               return outTimeout = null;
             }, 50);
           };
-          this.target.addEventListener('mouseover', over);
-          this.drop.addEventListener('mouseover', over);
-          this.target.addEventListener('mouseout', out);
-          return this.drop.addEventListener('mouseout', out);
+          this._on(this.target, 'mouseover', over);
+          this._on(this.drop, 'mouseover', over);
+          this._on(this.target, 'mouseout', out);
+          return this._on(this.drop, 'mouseout', out);
         }
       };
 
@@ -235,6 +246,9 @@
       DropInstance.prototype.open = function() {
         var _ref1, _ref2,
           _this = this;
+        if (this.isOpened()) {
+          return;
+        }
         if (!this.drop.parentNode) {
           document.body.appendChild(this.drop);
         }
@@ -254,20 +268,33 @@
       };
 
       DropInstance.prototype.close = function() {
-        var _ref1,
+        var handler, _ref1,
           _this = this;
+        if (!this.isOpened()) {
+          return;
+        }
         removeClass(this.drop, "" + drop.classPrefix + "-open");
         removeClass(this.drop, "" + drop.classPrefix + "-after-open");
-        this.drop.addEventListener('transitionend', function() {
+        this.drop.addEventListener('transitionend', handler = function() {
           if (!hasClass(_this.drop, "" + drop.classPrefix + "-open")) {
-            return removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
+            removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
           }
+          return _this.drop.removeEventListener('transitionend', handler);
         });
         this.trigger('close');
         if ((_ref1 = this.tether) != null) {
           _ref1.disable();
         }
-        return drop.updateBodyClasses();
+        drop.updateBodyClasses();
+        if (this.options.remove) {
+          return this.remove();
+        }
+      };
+
+      DropInstance.prototype.remove = function() {
+        var _ref1;
+        this.close();
+        return (_ref1 = this.drop.parentNode) != null ? _ref1.removeChild(this.drop) : void 0;
       };
 
       DropInstance.prototype.position = function() {
@@ -275,6 +302,20 @@
         if (this.isOpened()) {
           return (_ref1 = this.tether) != null ? _ref1.position() : void 0;
         }
+      };
+
+      DropInstance.prototype.destroy = function() {
+        var element, event, handler, _i, _len, _ref1, _ref2;
+        this.remove();
+        _ref1 = this._boundEvents;
+        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+          _ref2 = _ref1[_i], element = _ref2.element, event = _ref2.event, handler = _ref2.handler;
+          element.removeEventListener(event, handler);
+        }
+        this._boundEvents = [];
+        this.drop = null;
+        this.content = null;
+        return this.target = null;
       };
 
       return DropInstance;

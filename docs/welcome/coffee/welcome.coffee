@@ -43,4 +43,5 @@ setupExamples = ->
             openOn: openOn
             content: content
 
+
 init()
