@@ -112,7 +112,7 @@ Position specifies the attachment point (on the target) to attach the drop to. O
 'top center'
 ```
 
-More information about attachment can be found in the [Tether documentation](http://github.hubspot.com/tether).
+More information about attachment can be found in the [Tether documentation](http://tether.io).
 
 #### `openOn`
 
@@ -125,7 +125,7 @@ Specifies what event on the target opens the drop. If you set this to `undefined
 
 #### `constrainToWindow`
 
-If set to `true`, uses [Tether's](http://github.hubspot.com/tether) `constraints` list to keep the drop within the visible window, or viewport. This will cause drops with bottom attachments to switch to top when colliding with the bottom of the page and vice-versa. Dropdowns will also pin to the edge of the window if the user scrolls away from the target after opening a drop.
+If set to `true`, uses [Tether's](http://github.hubspot.com/tether) `constraints` list to flip the drop when it would otherwise be outside the viewport. This will cause drops with bottom attachments to switch to top when colliding with the bottom of the page and vice-versa. Dropdowns will not pin to the edge of the window if the user scrolls away from the target after opening a drop, but you can add that behavior by adding constraints through the `tetherOptions` option.
 
 ```coffeescript
 true
@@ -142,7 +142,7 @@ Additional class names to be added to the drop. These can be set to apply a them
 
 #### `tetherOptions`
 
-Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://github.hubspot.com/tether) for more information.
+Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://tether.io) for more information.
 
 #### Defaults
 
@@ -157,6 +157,19 @@ defaultOptions =
     classes: ''
     tetherOptions: {}
 ```
+
+### Events
+
+The drop instance has a few additional methods which are used for event binding:
+
+- `on(eventName, handler, [ctx])`
+- `off(eventName, [handler])`
+- `once(eventName, handelr, [ctx])`
+
+The following events are fired:
+
+- `open`
+- `close`
 
 ### Changing Content
 
