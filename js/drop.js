@@ -181,6 +181,10 @@
         if (!this.options.openOn) {
           return;
         }
+        if (this.options.openOn === 'always') {
+          setTimeout(this.open.bind(this));
+          return;
+        }
         events = this.options.openOn.split(' ');
         if (__indexOf.call(events, 'click') >= 0 || __indexOf.call(events, 'hover') >= 0) {
           openHandler = function(event) {
@@ -305,14 +309,18 @@
       };
 
       DropInstance.prototype.destroy = function() {
-        var element, event, handler, _i, _len, _ref1, _ref2;
+        var element, event, handler, _i, _len, _ref1, _ref2, _ref3;
         this.remove();
-        _ref1 = this._boundEvents;
-        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-          _ref2 = _ref1[_i], element = _ref2.element, event = _ref2.event, handler = _ref2.handler;
+        if ((_ref1 = this.tether) != null) {
+          _ref1.destroy();
+        }
+        _ref2 = this._boundEvents;
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          _ref3 = _ref2[_i], element = _ref3.element, event = _ref3.event, handler = _ref3.handler;
           element.removeEventListener(event, handler);
         }
         this._boundEvents = [];
+        this.tether = null;
         this.drop = null;
         this.content = null;
         return this.target = null;

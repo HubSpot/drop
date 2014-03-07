@@ -125,10 +125,12 @@ More information about attachment can be found in the [Tether documentation](htt
 #### `openOn`
 
 Specifies what event on the target opens the drop. If you set this to `undefined` or `null` you will need to manually call `.open()`/`.close()` on the `drop` instance.
+`'always'` will open the drop immediately when it's rendered and leave it open.
 
 ```coffeescript
 'click'
 'hover'
+'always'
 ```
 
 #### `constrainToWindow`

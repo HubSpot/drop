@@ -150,6 +150,10 @@ createContext = (options={}) ->
 
     setupEvents: ->
       return unless @options.openOn
+      if @options.openOn is 'always'
+        setTimeout @open.bind(@)
+        return
+
       events = @options.openOn.split ' '
 
       if 'click' in events or 'hover' in events
