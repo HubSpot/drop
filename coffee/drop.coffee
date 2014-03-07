@@ -22,6 +22,10 @@ MIRROR_ATTACH =
 
 allDrops = {}
 
+removeFromArray = (arr, item) ->
+  while (index = arr.indexOf(item)) isnt -1
+    arr.splice index, 1
+
 # Drop can be included in external libraries.  Calling createContext gives you a fresh
 # copy of drop which won't interact with other copies on the page (beyond calling the document events).
 createContext = (options={}) ->
@@ -276,6 +280,9 @@ createContext = (options={}) ->
       @drop = null
       @content = null
       @target = null
+
+      removeFromArray allDrops[drop.classPrefix], @
+      removeFromArray drop.drops, @
 
   drop
 
