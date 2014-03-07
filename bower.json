@@ -13,6 +13,7 @@
     "tether"
   ],
   "license": "MIT",
+  "main": "drop.js",
   "ignore": [
     "**/.*",
     "node_modules",
