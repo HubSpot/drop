@@ -1,5 +1,5 @@
 /*! drop 0.5.3 */
-/*! tether 0.6.3 */
+/*! tether 0.6.4 */
 
 
 (function(root, factory) {
@@ -19,7 +19,9 @@
     __slice = [].slice;
 
   if (this.Tether == null) {
-    this.Tether = {};
+    this.Tether = {
+      modules: []
+    };
   }
 
   getScrollParent = function(el) {
@@ -292,7 +294,7 @@
 
   })();
 
-  Tether.Utils = {
+  this.Tether.Utils = {
     getScrollParent: getScrollParent,
     getBounds: getBounds,
     getOffsetParent: getOffsetParent,
@@ -310,13 +312,15 @@
 }).call(this);
 
 (function() {
-  var MIRROR_LR, MIRROR_TB, OFFSET_MAP, addClass, addOffset, attachmentToOffset, autoToFixedAttachment, defer, extend, flush, getBounds, getOffsetParent, getOuterSize, getScrollParent, getSize, now, offsetToPx, parseAttachment, parseOffset, position, removeClass, tethers, transformKey, updateClasses, within, _Tether, _ref,
+  var MIRROR_LR, MIRROR_TB, OFFSET_MAP, Tether, addClass, addOffset, attachmentToOffset, autoToFixedAttachment, defer, extend, flush, getBounds, getOffsetParent, getOuterSize, getScrollParent, getSize, now, offsetToPx, parseAttachment, parseOffset, position, removeClass, tethers, transformKey, updateClasses, within, _Tether, _ref,
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  if (typeof Tether === "undefined" || Tether === null) {
+  if (this.Tether == null) {
     throw new Error("You must include the utils.js file before tether.js");
   }
+
+  Tether = this.Tether;
 
   _ref = Tether.Utils, getScrollParent = _ref.getScrollParent, getSize = _ref.getSize, getOuterSize = _ref.getOuterSize, getBounds = _ref.getBounds, getOffsetParent = _ref.getOffsetParent, extend = _ref.extend, addClass = _ref.addClass, removeClass = _ref.removeClass, updateClasses = _ref.updateClasses, defer = _ref.defer, flush = _ref.flush;
 
@@ -989,7 +993,7 @@
   var BOUNDS_FORMAT, MIRROR_ATTACH, defer, extend, getBoundingRect, getBounds, getOuterSize, getSize, updateClasses, _ref,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  _ref = Tether.Utils, getOuterSize = _ref.getOuterSize, getBounds = _ref.getBounds, getSize = _ref.getSize, extend = _ref.extend, updateClasses = _ref.updateClasses, defer = _ref.defer;
+  _ref = this.Tether.Utils, getOuterSize = _ref.getOuterSize, getBounds = _ref.getBounds, getSize = _ref.getSize, extend = _ref.extend, updateClasses = _ref.updateClasses, defer = _ref.defer;
 
   MIRROR_ATTACH = {
     left: 'right',
@@ -1028,7 +1032,7 @@
     return to;
   };
 
-  Tether.modules.push({
+  this.Tether.modules.push({
     position: function(_arg) {
       var addClasses, allClasses, attachment, bounds, changeAttachX, changeAttachY, cls, constraint, eAttachment, height, left, oob, oobClass, p, pin, pinned, pinnedClass, removeClass, side, tAttachment, targetAttachment, targetHeight, targetSize, targetWidth, to, top, width, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8,
         _this = this;
@@ -1297,9 +1301,9 @@
 (function() {
   var defer, getBounds, updateClasses, _ref;
 
-  _ref = Tether.Utils, getBounds = _ref.getBounds, updateClasses = _ref.updateClasses, defer = _ref.defer;
+  _ref = this.Tether.Utils, getBounds = _ref.getBounds, updateClasses = _ref.updateClasses, defer = _ref.defer;
 
-  Tether.modules.push({
+  this.Tether.modules.push({
     position: function(_arg) {
       var abutted, addClasses, allClasses, bottom, height, left, right, side, sides, targetPos, top, width, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref1, _ref2, _ref3, _ref4, _ref5,
         _this = this;
@@ -1355,7 +1359,7 @@
 }).call(this);
 
 (function() {
-  Tether.modules.push({
+  this.Tether.modules.push({
     position: function(_arg) {
       var left, result, shift, shiftLeft, shiftTop, top, _ref;
       top = _arg.top, left = _arg.left;
@@ -1393,7 +1397,7 @@
 
 }).call(this);
 
-return Tether;
+return this.Tether;
 
 }));
 
@@ -1594,7 +1598,7 @@ return Tether;
           return;
         }
         events = this.options.openOn.split(' ');
-        if (__indexOf.call(events, 'click') >= 0 || __indexOf.call(events, 'hover') >= 0) {
+        if (__indexOf.call(events, 'click') >= 0) {
           openHandler = function(event) {
             _this.toggle();
             return event.preventDefault();

@@ -160,7 +160,7 @@ createContext = (options={}) ->
 
       events = @options.openOn.split ' '
 
-      if 'click' in events or 'hover' in events
+      if 'click' in events
         openHandler = (event) =>
           @toggle()
           event.preventDefault()

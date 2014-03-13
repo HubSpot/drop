@@ -195,7 +195,7 @@
           return;
         }
         events = this.options.openOn.split(' ');
-        if (__indexOf.call(events, 'click') >= 0 || __indexOf.call(events, 'hover') >= 0) {
+        if (__indexOf.call(events, 'click') >= 0) {
           openHandler = function(event) {
             _this.toggle();
             return event.preventDefault();
