@@ -88,10 +88,10 @@ createContext = (options={}) ->
       @setupEvents()
       @setupTether()
 
-    _on: (element, event, handler) ->
-      @_boundEvents.push {element, event, handler}
+    _on: (element, event, handler, useCapture) ->
+      @_boundEvents.push {element, event, handler, useCapture}
 
-      element.addEventListener event, handler
+      element.addEventListener event, handler, useCapture
 
     setupElements: ->
       @drop = document.createElement 'div'
@@ -175,12 +175,16 @@ createContext = (options={}) ->
           # Clicking target
           if event.target is @target or @target.contains(event.target)
             return
-  
-          @close()
+
+          for tether in @tether.attachedTethers
+            if event.target is tether.element or tether.element.contains(event.target)
+              return
+
+          setTimeout(@close.bind @, 0)
 
         for clickEvent in clickEvents
           @_on @target, clickEvent, openHandler
-          @_on document, clickEvent, closeHandler
+          @_on document, clickEvent, closeHandler, true
 
       if 'hover' in events
         onUs = false
@@ -217,7 +221,7 @@ createContext = (options={}) ->
         @open()
 
     open: ->
-      return if @isOpened()
+      return if @wasDestroyed or @isOpened()
 
       unless @drop.parentNode
         document.body.appendChild @drop
@@ -237,7 +241,7 @@ createContext = (options={}) ->
       drop.updateBodyClasses()
 
     close: ->
-      return unless @isOpened()
+      return if @wasDestroyed or not @isOpened()
 
       removeClass @drop, "#{ drop.classPrefix }-open"
       removeClass @drop, "#{ drop.classPrefix }-after-open"
@@ -271,8 +275,8 @@ createContext = (options={}) ->
 
       @tether?.destroy()
 
-      for {element, event, handler} in @_boundEvents
-        element.removeEventListener event, handler
+      for {element, event, handler, useCapture} in @_boundEvents
+        element.removeEventListener event, handler, useCapture
 
       @_boundEvents = []
 
@@ -280,6 +284,7 @@ createContext = (options={}) ->
       @drop = null
       @content = null
       @target = null
+      @wasDestroyed = true
 
       removeFromArray allDrops[drop.classPrefix], @
       removeFromArray drop.drops, @

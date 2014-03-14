@@ -116,13 +116,14 @@
         this.setupTether();
       }
 
-      DropInstance.prototype._on = function(element, event, handler) {
+      DropInstance.prototype._on = function(element, event, handler, useCapture) {
         this._boundEvents.push({
           element: element,
           event: event,
-          handler: handler
+          handler: handler,
+          useCapture: useCapture
         });
-        return element.addEventListener(event, handler);
+        return element.addEventListener(event, handler, useCapture);
       };
 
       DropInstance.prototype.setupElements = function() {
@@ -201,6 +202,7 @@
             return event.preventDefault();
           };
           closeHandler = function(event) {
+            var tether, _i, _len, _ref1;
             if (!_this.isOpened()) {
               return;
             }
@@ -210,12 +212,19 @@
             if (event.target === _this.target || _this.target.contains(event.target)) {
               return;
             }
-            return _this.close();
+            _ref1 = _this.tether.attachedTethers;
+            for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+              tether = _ref1[_i];
+              if (event.target === tether.element || tether.element.contains(event.target)) {
+                return;
+              }
+            }
+            return setTimeout(_this.close.bind(_this, 0));
           };
           for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
             clickEvent = clickEvents[_i];
             this._on(this.target, clickEvent, openHandler);
-            this._on(document, clickEvent, closeHandler);
+            this._on(document, clickEvent, closeHandler, true);
           }
         }
         if (__indexOf.call(events, 'hover') >= 0) {
@@ -259,7 +268,7 @@
       DropInstance.prototype.open = function() {
         var _ref1, _ref2,
           _this = this;
-        if (this.isOpened()) {
+        if (this.wasDestroyed || this.isOpened()) {
           return;
         }
         if (!this.drop.parentNode) {
@@ -283,7 +292,7 @@
       DropInstance.prototype.close = function() {
         var handler, _ref1,
           _this = this;
-        if (!this.isOpened()) {
+        if (this.wasDestroyed || !this.isOpened()) {
           return;
         }
         removeClass(this.drop, "" + drop.classPrefix + "-open");
@@ -318,21 +327,22 @@
       };
 
       DropInstance.prototype.destroy = function() {
-        var element, event, handler, _i, _len, _ref1, _ref2, _ref3;
+        var element, event, handler, useCapture, _i, _len, _ref1, _ref2, _ref3;
         this.remove();
         if ((_ref1 = this.tether) != null) {
           _ref1.destroy();
         }
         _ref2 = this._boundEvents;
         for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-          _ref3 = _ref2[_i], element = _ref3.element, event = _ref3.event, handler = _ref3.handler;
-          element.removeEventListener(event, handler);
+          _ref3 = _ref2[_i], element = _ref3.element, event = _ref3.event, handler = _ref3.handler, useCapture = _ref3.useCapture;
+          element.removeEventListener(event, handler, useCapture);
         }
         this._boundEvents = [];
         this.tether = null;
         this.drop = null;
         this.content = null;
         this.target = null;
+        this.wasDestroyed = true;
         removeFromArray(allDrops[drop.classPrefix], this);
         return removeFromArray(drop.drops, this);
       };
