@@ -1671,7 +1671,7 @@ return this.Tether;
       DropInstance.prototype.open = function() {
         var _ref1, _ref2,
           _this = this;
-        if (this.isOpened()) {
+        if (this.wasDestroyed || this.isOpened()) {
           return;
         }
         if (!this.drop.parentNode) {
@@ -1695,7 +1695,7 @@ return this.Tether;
       DropInstance.prototype.close = function() {
         var handler, _ref1,
           _this = this;
-        if (!this.isOpened()) {
+        if (this.wasDestroyed || !this.isOpened()) {
           return;
         }
         removeClass(this.drop, "" + drop.classPrefix + "-open");
@@ -1745,6 +1745,7 @@ return this.Tether;
         this.drop = null;
         this.content = null;
         this.target = null;
+        this.wasDestroyed = true;
         removeFromArray(allDrops[drop.classPrefix], this);
         return removeFromArray(drop.drops, this);
       };

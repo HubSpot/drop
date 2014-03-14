@@ -221,7 +221,7 @@ createContext = (options={}) ->
         @open()
 
     open: ->
-      return if @isOpened()
+      return if @wasDestroyed or @isOpened()
 
       unless @drop.parentNode
         document.body.appendChild @drop
@@ -241,7 +241,7 @@ createContext = (options={}) ->
       drop.updateBodyClasses()
 
     close: ->
-      return unless @isOpened()
+      return if @wasDestroyed or not @isOpened()
 
       removeClass @drop, "#{ drop.classPrefix }-open"
       removeClass @drop, "#{ drop.classPrefix }-after-open"
@@ -284,6 +284,7 @@ createContext = (options={}) ->
       @drop = null
       @content = null
       @target = null
+      @wasDestroyed = true
 
       removeFromArray allDrops[drop.classPrefix], @
       removeFromArray drop.drops, @
