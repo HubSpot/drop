@@ -215,7 +215,7 @@
             _ref1 = _this.tether.attachedTethers;
             for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
               tether = _ref1[_i];
-              if (tether.element.contains(event.target)) {
+              if (event.target === tether.element || tether.element.contains(event.target)) {
                 return;
               }
             }

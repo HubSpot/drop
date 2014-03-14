@@ -177,7 +177,7 @@ createContext = (options={}) ->
             return
 
           for tether in @tether.attachedTethers
-            if tether.element.contains(event.target)
+            if event.target is tether.element or tether.element.contains(event.target)
               return
 
           setTimeout(@close.bind @, 0)
