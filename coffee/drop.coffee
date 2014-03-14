@@ -175,7 +175,11 @@ createContext = (options={}) ->
           # Clicking target
           if event.target is @target or @target.contains(event.target)
             return
-  
+
+          for tether in @tether.attachedTethers
+            if tether.element.contains(event.target)
+              return
+
           @close()
 
         for clickEvent in clickEvents

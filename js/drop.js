@@ -201,6 +201,7 @@
             return event.preventDefault();
           };
           closeHandler = function(event) {
+            var tether, _i, _len, _ref1;
             if (!_this.isOpened()) {
               return;
             }
@@ -209,6 +210,13 @@
             }
             if (event.target === _this.target || _this.target.contains(event.target)) {
               return;
+            }
+            _ref1 = _this.tether.attachedTethers;
+            for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+              tether = _ref1[_i];
+              if (tether.element.contains(event.target)) {
+                return;
+              }
             }
             return _this.close();
           };
