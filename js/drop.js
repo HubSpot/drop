@@ -257,10 +257,13 @@
       };
 
       DropInstance.prototype.open = function() {
-        var _ref1, _ref2,
+        var _base, _ref1, _ref2,
           _this = this;
         if (this.isOpened()) {
           return;
+        }
+        if ((typeof (_base = this.options).onOpenIntent === "function" ? _base.onOpenIntent() : void 0) === false) {
+          return false;
         }
         if (!this.drop.parentNode) {
           document.body.appendChild(this.drop);
@@ -281,10 +284,13 @@
       };
 
       DropInstance.prototype.close = function() {
-        var handler, _ref1,
+        var handler, _base, _ref1,
           _this = this;
         if (!this.isOpened()) {
           return;
+        }
+        if ((typeof (_base = this.options).onCloseIntent === "function" ? _base.onCloseIntent() : void 0) === false) {
+          return false;
         }
         removeClass(this.drop, "" + drop.classPrefix + "-open");
         removeClass(this.drop, "" + drop.classPrefix + "-after-open");
@@ -306,7 +312,9 @@
 
       DropInstance.prototype.remove = function() {
         var _ref1;
-        this.close();
+        if (this.close() === false) {
+          return;
+        }
         return (_ref1 = this.drop.parentNode) != null ? _ref1.removeChild(this.drop) : void 0;
       };
 

@@ -175,7 +175,7 @@ createContext = (options={}) ->
           # Clicking target
           if event.target is @target or @target.contains(event.target)
             return
-  
+
           @close()
 
         for clickEvent in clickEvents
@@ -218,6 +218,7 @@ createContext = (options={}) ->
 
     open: ->
       return if @isOpened()
+      return false if @options.onOpenIntent?() is false
 
       unless @drop.parentNode
         document.body.appendChild @drop
@@ -238,6 +239,7 @@ createContext = (options={}) ->
 
     close: ->
       return unless @isOpened()
+      return false if @options.onCloseIntent?() is false
 
       removeClass @drop, "#{ drop.classPrefix }-open"
       removeClass @drop, "#{ drop.classPrefix }-after-open"
@@ -258,7 +260,7 @@ createContext = (options={}) ->
         @remove()
 
     remove: ->
-      @close()
+      return if @close() is false
 
       @drop.parentNode?.removeChild(@drop)
 
