@@ -13,7 +13,7 @@ setupHero = ->
         position: 'bottom center'
         constrainToWindow: false
         constrainToScrollParent: false
-        openOn: ' '
+        openOn: 'always'
         content: '''
             <h1>Drop.js</h1>
             <h2>The fast and capable<br/>dropdown library<br/><small style="opacity: 0.6; margin-top: 1em; display: block">Built on <a href="/tether/docs/welcome" target="_blank" style="color: inherit">Tether</a>.</small></h2>
@@ -21,7 +21,6 @@ setupHero = ->
                 <a class="button" href="http://github.com/HubSpot/drop">★ On Github</a>
             </p>
         '''
-    $ -> setTimeout (-> drop.open()), 500
 
 setupExamples = ->
     $('.example').each ->
@@ -42,5 +41,6 @@ setupExamples = ->
             constrainToScrollParent: false
             openOn: openOn
             content: content
+
 
 init()

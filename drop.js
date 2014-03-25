@@ -1,13 +1,27 @@
-/*! drop 0.3.10 */
-/*! tether 0.5.2 */
+/*! drop 0.5.4 */
+/*! tether 0.6.5 */
+
+
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require,exports,module);
+  } else {
+    root.Tether = factory();
+  }
+}(this, function(require,exports,module) {
+
 (function() {
-  var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
+  var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollBarSize, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
     __hasProp = {}.hasOwnProperty,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = [].slice;
 
-  if (window.Tether == null) {
-    window.Tether = {};
+  if (this.Tether == null) {
+    this.Tether = {
+      modules: []
+    };
   }
 
   getScrollParent = function(el) {
@@ -110,6 +124,38 @@
     return el.offsetParent || document.documentElement;
   };
 
+  getScrollBarSize = function() {
+    var inner, outer, width, widthContained, widthScroll;
+    inner = document.createElement('div');
+    inner.style.width = '100%';
+    inner.style.height = '200px';
+    outer = document.createElement('div');
+    extend(outer.style, {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      pointerEvents: 'none',
+      visibility: 'hidden',
+      width: '200px',
+      height: '150px',
+      overflow: 'hidden'
+    });
+    outer.appendChild(inner);
+    document.body.appendChild(outer);
+    widthContained = inner.offsetWidth;
+    outer.style.overflow = 'scroll';
+    widthScroll = inner.offsetWidth;
+    if (widthContained === widthScroll) {
+      widthScroll = outer.clientWidth;
+    }
+    document.body.removeChild(outer);
+    width = widthContained - widthScroll;
+    return {
+      width: width,
+      height: width
+    };
+  };
+
   extend = function(out) {
     var args, key, obj, val, _i, _len, _ref;
     if (out == null) {
@@ -138,7 +184,9 @@
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         cls = _ref[_i];
-        _results.push(el.classList.remove(cls));
+        if (cls.trim()) {
+          _results.push(el.classList.remove(cls));
+        }
       }
       return _results;
     } else {
@@ -153,7 +201,9 @@
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         cls = _ref[_i];
-        _results.push(el.classList.add(cls));
+        if (cls.trim()) {
+          _results.push(el.classList.add(cls));
+        }
       }
       return _results;
     } else {
@@ -276,7 +326,7 @@
 
   })();
 
-  Tether.Utils = {
+  this.Tether.Utils = {
     getScrollParent: getScrollParent,
     getBounds: getBounds,
     getOffsetParent: getOffsetParent,
@@ -288,21 +338,24 @@
     defer: defer,
     flush: flush,
     uniqueId: uniqueId,
-    Evented: Evented
+    Evented: Evented,
+    getScrollBarSize: getScrollBarSize
   };
 
 }).call(this);
 
 (function() {
-  var MIRROR_LR, MIRROR_TB, OFFSET_MAP, addClass, addOffset, attachmentToOffset, autoToFixedAttachment, defer, extend, flush, getBounds, getOffsetParent, getOuterSize, getScrollParent, getSize, now, offsetToPx, parseAttachment, parseOffset, position, removeClass, tethers, transformKey, updateClasses, within, _Tether, _ref,
+  var MIRROR_LR, MIRROR_TB, OFFSET_MAP, Tether, addClass, addOffset, attachmentToOffset, autoToFixedAttachment, defer, extend, flush, getBounds, getOffsetParent, getOuterSize, getScrollBarSize, getScrollParent, getSize, now, offsetToPx, parseAttachment, parseOffset, position, removeClass, tethers, transformKey, updateClasses, within, _Tether, _ref,
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  if (typeof Tether === "undefined" || Tether === null) {
+  if (this.Tether == null) {
     throw new Error("You must include the utils.js file before tether.js");
   }
 
-  _ref = Tether.Utils, getScrollParent = _ref.getScrollParent, getSize = _ref.getSize, getOuterSize = _ref.getOuterSize, getBounds = _ref.getBounds, getOffsetParent = _ref.getOffsetParent, extend = _ref.extend, addClass = _ref.addClass, removeClass = _ref.removeClass, updateClasses = _ref.updateClasses, defer = _ref.defer, flush = _ref.flush;
+  Tether = this.Tether;
+
+  _ref = Tether.Utils, getScrollParent = _ref.getScrollParent, getSize = _ref.getSize, getOuterSize = _ref.getOuterSize, getBounds = _ref.getBounds, getOffsetParent = _ref.getOffsetParent, extend = _ref.extend, addClass = _ref.addClass, removeClass = _ref.removeClass, updateClasses = _ref.updateClasses, defer = _ref.defer, flush = _ref.flush, getScrollBarSize = _ref.getScrollBarSize;
 
   within = function(a, b, diff) {
     if (diff == null) {
@@ -724,7 +777,7 @@
     };
 
     _Tether.prototype.position = function(flushChanges) {
-      var elementPos, elementStyle, height, left, manualOffset, manualTargetOffset, module, next, offset, offsetBorder, offsetParent, offsetParentSize, offsetParentStyle, offsetPosition, ret, scrollLeft, scrollTop, side, targetAttachment, targetOffset, targetPos, targetSize, top, width, _i, _j, _len, _len1, _ref1, _ref2, _ref3, _ref4,
+      var elementPos, elementStyle, height, left, manualOffset, manualTargetOffset, module, next, offset, offsetBorder, offsetParent, offsetParentSize, offsetParentStyle, offsetPosition, ret, scrollLeft, scrollTop, scrollbarSize, side, targetAttachment, targetOffset, targetPos, targetSize, top, width, _i, _j, _len, _len1, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6,
         _this = this;
       if (flushChanges == null) {
         flushChanges = true;
@@ -772,11 +825,13 @@
           top: top,
           targetAttachment: targetAttachment,
           targetPos: targetPos,
+          attachment: this.attachment,
           elementPos: elementPos,
           offset: offset,
           targetOffset: targetOffset,
           manualOffset: manualOffset,
-          manualTargetOffset: manualTargetOffset
+          manualTargetOffset: manualTargetOffset,
+          scrollbarSize: scrollbarSize
         });
         if ((ret == null) || typeof ret !== 'object') {
           continue;
@@ -789,9 +844,7 @@
       next = {
         page: {
           top: top,
-          bottom: document.body.scrollHeight - top - height,
-          left: left,
-          right: document.body.scrollWidth - left - width
+          left: left
         },
         viewport: {
           top: top - pageYOffset,
@@ -800,7 +853,19 @@
           right: pageXOffset - left - width + innerWidth
         }
       };
-      if (((_ref3 = this.options.optimizations) != null ? _ref3.moveElement : void 0) !== false && (this.targetModifier == null)) {
+      if (document.body.scrollWidth > window.innerWidth) {
+        scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
+        next.viewport.bottom -= scrollbarSize.height;
+      }
+      if (document.body.scrollHeight > window.innerHeight) {
+        scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
+        next.viewport.right -= scrollbarSize.width;
+      }
+      if (((_ref3 = document.body.style.position) !== '' && _ref3 !== 'static') || ((_ref4 = document.body.parentElement.style.position) !== '' && _ref4 !== 'static')) {
+        next.page.bottom = document.body.scrollHeight - top - height;
+        next.page.right = document.body.scrollWidth - left - width;
+      }
+      if (((_ref5 = this.options.optimizations) != null ? _ref5.moveElement : void 0) !== false && (this.targetModifier == null)) {
         offsetParent = this.cache('target-offsetparent', function() {
           return getOffsetParent(_this.target);
         });
@@ -811,9 +876,9 @@
         elementStyle = getComputedStyle(this.element);
         offsetParentSize = offsetPosition;
         offsetBorder = {};
-        _ref4 = ['Top', 'Left', 'Bottom', 'Right'];
-        for (_j = 0, _len1 = _ref4.length; _j < _len1; _j++) {
-          side = _ref4[_j];
+        _ref6 = ['Top', 'Left', 'Bottom', 'Right'];
+        for (_j = 0, _len1 = _ref6.length; _j < _len1; _j++) {
+          side = _ref6[_j];
           offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle["border" + side + "Width"]);
         }
         offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
@@ -962,7 +1027,7 @@
 
   Tether.position = position;
 
-  window.Tether = extend(_Tether, Tether);
+  this.Tether = extend(_Tether, Tether);
 
 }).call(this);
 
@@ -970,7 +1035,7 @@
   var BOUNDS_FORMAT, MIRROR_ATTACH, defer, extend, getBoundingRect, getBounds, getOuterSize, getSize, updateClasses, _ref,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  _ref = Tether.Utils, getOuterSize = _ref.getOuterSize, getBounds = _ref.getBounds, getSize = _ref.getSize, extend = _ref.extend, updateClasses = _ref.updateClasses, defer = _ref.defer;
+  _ref = this.Tether.Utils, getOuterSize = _ref.getOuterSize, getBounds = _ref.getBounds, getSize = _ref.getSize, extend = _ref.extend, updateClasses = _ref.updateClasses, defer = _ref.defer;
 
   MIRROR_ATTACH = {
     left: 'right',
@@ -1009,7 +1074,7 @@
     return to;
   };
 
-  Tether.modules.push({
+  this.Tether.modules.push({
     position: function(_arg) {
       var addClasses, allClasses, attachment, bounds, changeAttachX, changeAttachY, cls, constraint, eAttachment, height, left, oob, oobClass, p, pin, pinned, pinnedClass, removeClass, side, tAttachment, targetAttachment, targetHeight, targetSize, targetWidth, to, top, width, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8,
         _this = this;
@@ -1112,6 +1177,15 @@
               eAttachment.top = 'top';
             }
           }
+          if (tAttachment.top === 'middle') {
+            if (top + height > bounds[3] && eAttachment.top === 'top') {
+              top -= height;
+              eAttachment.top = 'bottom';
+            } else if (top < bounds[1] && eAttachment.top === 'bottom') {
+              top += height;
+              eAttachment.top = 'top';
+            }
+          }
         }
         if (changeAttachX === 'target' || changeAttachX === 'both') {
           if (left < bounds[0] && tAttachment.left === 'left') {
@@ -1145,6 +1219,14 @@
             } else if (eAttachment.left === 'right') {
               left -= targetWidth;
               tAttachment.left = 'left';
+              left += width;
+              eAttachment.left = 'left';
+            }
+          } else if (tAttachment.left === 'center') {
+            if (left + width > bounds[2] && eAttachment.left === 'left') {
+              left -= width;
+              eAttachment.left = 'right';
+            } else if (left < bounds[0] && eAttachment.left === 'right') {
               left += width;
               eAttachment.left = 'left';
             }
@@ -1261,9 +1343,9 @@
 (function() {
   var defer, getBounds, updateClasses, _ref;
 
-  _ref = Tether.Utils, getBounds = _ref.getBounds, updateClasses = _ref.updateClasses, defer = _ref.defer;
+  _ref = this.Tether.Utils, getBounds = _ref.getBounds, updateClasses = _ref.updateClasses, defer = _ref.defer;
 
-  Tether.modules.push({
+  this.Tether.modules.push({
     position: function(_arg) {
       var abutted, addClasses, allClasses, bottom, height, left, right, side, sides, targetPos, top, width, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref1, _ref2, _ref3, _ref4, _ref5,
         _this = this;
@@ -1319,7 +1401,7 @@
 }).call(this);
 
 (function() {
-  Tether.modules.push({
+  this.Tether.modules.push({
     position: function(_arg) {
       var left, result, shift, shiftLeft, shiftTop, top, _ref;
       top = _arg.top, left = _arg.left;
@@ -1357,28 +1439,25 @@
 
 }).call(this);
 
+return this.Tether;
+
+}));
+
 (function() {
-  var Evented, MIRROR_ATTACH, addClass, allDrops, createContext, debounce, extend, hasClass, removeClass, sortAttach, _ref,
+  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, extend, hasClass, removeClass, removeFromArray, sortAttach, touchDevice, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   _ref = Tether.Utils, extend = _ref.extend, addClass = _ref.addClass, removeClass = _ref.removeClass, hasClass = _ref.hasClass, Evented = _ref.Evented;
 
-  debounce = function(fn) {
-    var block;
-    block = false;
-    return function() {
-      if (block) {
-        return;
-      }
-      block = true;
-      setTimeout(function() {
-        return block = false;
-      });
-      return fn.apply(this, arguments);
-    };
-  };
+  touchDevice = 'ontouchstart' in document.documentElement;
+
+  clickEvents = ['click'];
+
+  if (touchDevice) {
+    clickEvents.push('touchstart');
+  }
 
   sortAttach = function(str) {
     var first, second, _ref1, _ref2;
@@ -1399,6 +1478,15 @@
   };
 
   allDrops = {};
+
+  removeFromArray = function(arr, item) {
+    var index, _results;
+    _results = [];
+    while ((index = arr.indexOf(item)) !== -1) {
+      _results.push(arr.splice(index, 1));
+    }
+    return _results;
+  };
 
   createContext = function(options) {
     var DropInstance, defaultOptions, drop, _name;
@@ -1425,6 +1513,7 @@
         constrainToScrollParent: true,
         constrainToWindow: true,
         classes: '',
+        remove: false,
         tetherOptions: {}
       }
     };
@@ -1466,10 +1555,20 @@
         }
         drop.drops.push(this);
         allDrops[drop.classPrefix].push(this);
+        this._boundEvents = [];
         this.setupElements();
         this.setupEvents();
         this.setupTether();
       }
+
+      DropInstance.prototype._on = function(element, event, handler) {
+        this._boundEvents.push({
+          element: element,
+          event: event,
+          handler: handler
+        });
+        return element.addEventListener(event, handler);
+      };
 
       DropInstance.prototype.setupElements = function() {
         this.drop = document.createElement('div');
@@ -1477,14 +1576,14 @@
         if (this.options.classes) {
           addClass(this.drop, this.options.classes);
         }
-        this.dropContent = document.createElement('div');
-        addClass(this.dropContent, "" + drop.classPrefix + "-content");
+        this.content = document.createElement('div');
+        addClass(this.content, "" + drop.classPrefix + "-content");
         if (typeof this.options.content === 'object') {
-          this.dropContent.appendChild(this.options.content);
+          this.content.appendChild(this.options.content);
         } else {
-          this.dropContent.innerHTML = this.options.content;
+          this.content.innerHTML = this.options.content;
         }
-        return this.drop.appendChild(this.dropContent);
+        return this.drop.appendChild(this.content);
       };
 
       DropInstance.prototype.setupTether = function() {
@@ -1507,7 +1606,6 @@
         if (this.options.constrainToWindow !== false) {
           constraints.push({
             to: 'window',
-            pin: true,
             attachment: 'together'
           });
         } else {
@@ -1526,23 +1624,28 @@
           enabled: false,
           constraints: constraints
         };
-        if (this.options.tether !== false) {
-          return this.tether = new Tether(extend({}, options, this.options.tether));
+        if (this.options.tetherOptions !== false) {
+          return this.tether = new Tether(extend({}, options, this.options.tetherOptions));
         }
       };
 
       DropInstance.prototype.setupEvents = function() {
-        var closeHandler, event, events, onUs, openHandler, out, outTimeout, over, _i, _len, _ref1,
+        var clickEvent, closeHandler, events, onUs, openHandler, out, outTimeout, over, _i, _len,
           _this = this;
         if (!this.options.openOn) {
           return;
         }
+        if (this.options.openOn === 'always') {
+          setTimeout(this.open.bind(this));
+          return;
+        }
         events = this.options.openOn.split(' ');
         if (__indexOf.call(events, 'click') >= 0) {
-          openHandler = debounce(function() {
-            return _this.toggle();
-          });
-          closeHandler = debounce(function(event) {
+          openHandler = function(event) {
+            _this.toggle();
+            return event.preventDefault();
+          };
+          closeHandler = function(event) {
             if (!_this.isOpened()) {
               return;
             }
@@ -1553,12 +1656,11 @@
               return;
             }
             return _this.close();
-          });
-          _ref1 = ['click', 'touchstart'];
-          for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-            event = _ref1[_i];
-            this.target.addEventListener(event, openHandler);
-            document.addEventListener(event, closeHandler);
+          };
+          for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
+            clickEvent = clickEvents[_i];
+            this._on(this.target, clickEvent, openHandler);
+            this._on(document, clickEvent, closeHandler);
           }
         }
         if (__indexOf.call(events, 'hover') >= 0) {
@@ -1580,10 +1682,10 @@
               return outTimeout = null;
             }, 50);
           };
-          this.target.addEventListener('mouseover', over);
-          this.drop.addEventListener('mouseover', over);
-          this.target.addEventListener('mouseout', out);
-          return this.drop.addEventListener('mouseout', out);
+          this._on(this.target, 'mouseover', over);
+          this._on(this.drop, 'mouseover', over);
+          this._on(this.target, 'mouseout', out);
+          return this._on(this.drop, 'mouseout', out);
         }
       };
 
@@ -1600,8 +1702,11 @@
       };
 
       DropInstance.prototype.open = function() {
-        var _ref1,
+        var _ref1, _ref2,
           _this = this;
+        if (this.isOpened()) {
+          return;
+        }
         if (!this.drop.parentNode) {
           document.body.appendChild(this.drop);
         }
@@ -1613,26 +1718,68 @@
         setTimeout(function() {
           return addClass(_this.drop, "" + drop.classPrefix + "-after-open");
         });
-        this.tether.position();
+        if ((_ref2 = this.tether) != null) {
+          _ref2.position();
+        }
         this.trigger('open');
         return drop.updateBodyClasses();
       };
 
       DropInstance.prototype.close = function() {
-        var _ref1,
+        var handler, _ref1,
           _this = this;
+        if (!this.isOpened()) {
+          return;
+        }
         removeClass(this.drop, "" + drop.classPrefix + "-open");
         removeClass(this.drop, "" + drop.classPrefix + "-after-open");
-        this.drop.addEventListener('transitionend', function() {
+        this.drop.addEventListener('transitionend', handler = function() {
           if (!hasClass(_this.drop, "" + drop.classPrefix + "-open")) {
-            return removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
+            removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
           }
+          return _this.drop.removeEventListener('transitionend', handler);
         });
         this.trigger('close');
         if ((_ref1 = this.tether) != null) {
           _ref1.disable();
         }
-        return drop.updateBodyClasses();
+        drop.updateBodyClasses();
+        if (this.options.remove) {
+          return this.remove();
+        }
+      };
+
+      DropInstance.prototype.remove = function() {
+        var _ref1;
+        this.close();
+        return (_ref1 = this.drop.parentNode) != null ? _ref1.removeChild(this.drop) : void 0;
+      };
+
+      DropInstance.prototype.position = function() {
+        var _ref1;
+        if (this.isOpened()) {
+          return (_ref1 = this.tether) != null ? _ref1.position() : void 0;
+        }
+      };
+
+      DropInstance.prototype.destroy = function() {
+        var element, event, handler, _i, _len, _ref1, _ref2, _ref3;
+        this.remove();
+        if ((_ref1 = this.tether) != null) {
+          _ref1.destroy();
+        }
+        _ref2 = this._boundEvents;
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          _ref3 = _ref2[_i], element = _ref3.element, event = _ref3.event, handler = _ref3.handler;
+          element.removeEventListener(event, handler);
+        }
+        this._boundEvents = [];
+        this.tether = null;
+        this.drop = null;
+        this.content = null;
+        this.target = null;
+        removeFromArray(allDrops[drop.classPrefix], this);
+        return removeFromArray(drop.drops, this);
       };
 
       return DropInstance;

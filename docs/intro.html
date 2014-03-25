@@ -79,10 +79,16 @@
 <p>Opens the drop. Specifically, this adds <code>drop-open</code> and other classes to the drop.</p>
 <h4 id="-close-"><code>close()</code></h4>
 <p>Opens the drop. Specifically, this removes <code>drop-open</code> and other classes from the drop. Closed drops will still remain in the DOM.</p>
+<h4 id="-remove-"><code>remove()</code></h4>
+<p>Remove the drop from the DOM.  The drop will be readded when it&#39;s next opened.  It can be used as an alternative to <code>close</code>.</p>
 <h4 id="-toggle-"><code>toggle()</code></h4>
 <p>Will close the drop if opened, and open if closed.</p>
 <h4 id="-isopened-"><code>isOpened()</code></h4>
-<p>Returns true if the drop is openened.</p>
+<p>Returns true if the drop is opened.</p>
+<h4 id="-position-"><code>position()</code></h4>
+<p>Reposition the drop.  Call if you change the content of the drop or the position of the element its attached to.</p>
+<h4 id="-destroy-"><code>destroy()</code></h4>
+<p>Remove the drop along with all of it&#39;s event bindings.  Calling any method after <code>destroy</code> is undefined.</p>
 <h3 id="options">Options</h3>
 <p>The following options can be passed to the drop constructor:</p>
 <h4 id="-target-"><code>target</code></h4>
@@ -104,21 +110,27 @@ a click or hover can be set to open the drop.</p>
 <span class="string">'right top'</span>
 <span class="string">'top right'</span>
 <span class="string">'top center'</span></code></pre>
-<p>More information about attachment can be found in the <a href="http://github.hubspot.com/tether">Tether documentation</a>.</p>
+<p>More information about attachment can be found in the <a href="http://tether.io">Tether documentation</a>.</p>
 <h4 id="-openon-"><code>openOn</code></h4>
-<p>Specifies what event on the target opens the drop. If you set this to <code>undefined</code> or <code>null</code> you will need to manually call <code>.open()</code>/<code>.close()</code> on the <code>drop</code> instance.</p>
+<p>Specifies what event on the target opens the drop. If you set this to <code>undefined</code> or <code>null</code> you will need to manually call <code>.open()</code>/<code>.close()</code> on the <code>drop</code> instance.
+<code>&#39;always&#39;</code> will open the drop immediately when it&#39;s rendered and leave it open.</p>
 <pre><code class="lang-coffeescript"><span class="string">'click'</span>
-<span class="string">'hover'</span></code></pre>
+<span class="string">'hover'</span>
+<span class="string">'always'</span></code></pre>
 <h4 id="-constraintowindow-"><code>constrainToWindow</code></h4>
-<p>If set to <code>true</code>, uses <a href="http://github.hubspot.com/tether">Tether&#39;s</a> <code>constraints</code> list to keep the drop within the visible window, or viewport. This will cause drops with bottom attachments to switch to top when colliding with the bottom of the page and vice-versa. Dropdowns will also pin to the edge of the window if the user scrolls away from the target after opening a drop.</p>
+<p>If set to <code>true</code>, uses <a href="http://github.hubspot.com/tether">Tether&#39;s</a> <code>constraints</code> list to flip the drop when it would otherwise be outside the viewport. This will cause drops with bottom attachments to switch to top when colliding with the bottom of the page and vice-versa. Dropdowns will not pin to the edge of the window if the user scrolls away from the target after opening a drop, but you can add that behavior by adding constraints through the <code>tetherOptions</code> option.</p>
 <pre><code class="lang-coffeescript"><span class="literal">true</span>
 <span class="literal">false</span></code></pre>
 <h4 id="-constraintoscrollparent-"><code>constrainToScrollParent</code></h4>
 <p>Similar to <code>constrainToWindow</code> but for the target element&#39;s first scroll parent, that is the first parent which has <code>overflow: auto</code> or <code>overflow: scroll</code> set, or the body, whichever comes first.</p>
 <h4 id="-classes-"><code>classes</code></h4>
 <p>Additional class names to be added to the drop. These can be set to apply a theme (for example, <a href="https://github.com/HubSpot/drop/blob/master/css/drop-theme-arrows-bounce-dark.css"><code>drop-theme-arrows-bounce-dark</code></a>) and/or they can be set to apply custom styling to child elements of the drop.</p>
+<h4 id="-remove-"><code>remove</code></h4>
+<p>Set to <code>false</code> if you&#39;d like the drop element to be removed from the DOM when the drop is closed, and recreated when it&#39;s opened.</p>
+<pre><code class="lang-coffeescript"><span class="literal">true</span>
+<span class="literal">false</span></code></pre>
 <h4 id="-tetheroptions-"><code>tetherOptions</code></h4>
-<p>Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the <a href="http://github.hubspot.com/tether">Tether documentation</a> for more information.</p>
+<p>Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the <a href="http://tether.io">Tether documentation</a> for more information.  Set to <code>false</code> to disable tether.</p>
 <h4 id="defaults">Defaults</h4>
 <p>The default option values are:</p>
 <pre><code class="lang-coffeescript">defaultOptions =
@@ -128,6 +140,21 @@ a click or hover can be set to open the drop.</p>
     constrainToScrollParent: <span class="literal">true</span>
     classes: <span class="string">''</span>
     tetherOptions: {}</code></pre>
+<h3 id="events">Events</h3>
+<p>The drop instance has a few additional methods which are used for event binding:</p>
+<ul>
+<li><code>on(eventName, handler, [ctx])</code></li>
+<li><code>off(eventName, [handler])</code></li>
+<li><code>once(eventName, handelr, [ctx])</code></li>
+</ul>
+<p>The following events are fired:</p>
+<ul>
+<li><code>open</code></li>
+<li><code>close</code></li>
+</ul>
+<h3 id="changing-content">Changing Content</h3>
+<p>You can access the DOM element which contains the drop&#39;s content at <code>.content</code>.  If you manipulate this content, make sure to call <code>.position()</code> to ensure that the
+drop remains positioned correctly.</p>
 <h3 id="body-class">Body Class</h3>
 <p>Drop adds a class to the body whenever a drop is open.  It defaults to <code>drop-open</code>, see
 the Embedding doc for more details.</p>
@@ -148,7 +175,7 @@ the Embedding doc for more details.</p>
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-45159009-1', 'hubspot.com');
+  ga('create', 'UA-45159009-1', 'auto');
   ga('send', 'pageview');
 </script>
 </body></html>
