@@ -4,6 +4,18 @@ touchDevice = 'ontouchstart' of document.documentElement
 clickEvents = ['click']
 clickEvents.push('touchstart') if touchDevice
 
+transitionEndEvents =
+  'WebkitTransition' : 'webkitTransitionEnd'
+  'MozTransition'    : 'transitionend'
+  'OTransition'      : 'otransitionend'
+  'transition'       : 'transitionend'
+
+transitionEndEvent = ''
+
+for name,end of transitionEndEvents
+  tempEl = document.createElement 'p'
+  transitionEndEvent = end if tempEl.style[name] isnt undefined
+
 sortAttach = (str) ->
   [first, second] = str.split(' ')
 
