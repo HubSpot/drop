@@ -305,11 +305,11 @@
         }
         removeClass(this.drop, "" + drop.classPrefix + "-open");
         removeClass(this.drop, "" + drop.classPrefix + "-after-open");
-        this.drop.addEventListener('transitionend', handler = function() {
+        this.drop.addEventListener(transitionEndEvent, handler = function() {
           if (!hasClass(_this.drop, "" + drop.classPrefix + "-open")) {
             removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
           }
-          return _this.drop.removeEventListener('transitionend', handler);
+          return _this.drop.removeEventListener(transitionEndEvent, handler);
         });
         this.trigger('close');
         if ((_ref1 = this.tether) != null) {
