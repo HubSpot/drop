@@ -4,6 +4,18 @@ touchDevice = 'ontouchstart' of document.documentElement
 clickEvents = ['click']
 clickEvents.push('touchstart') if touchDevice
 
+transitionEndEvents =
+  'WebkitTransition' : 'webkitTransitionEnd'
+  'MozTransition'    : 'transitionend'
+  'OTransition'      : 'otransitionend'
+  'transition'       : 'transitionend'
+
+transitionEndEvent = ''
+
+for name,end of transitionEndEvents
+  tempEl = document.createElement 'p'
+  transitionEndEvent = end if tempEl.style[name] isnt undefined
+
 sortAttach = (str) ->
   [first, second] = str.split(' ')
 
@@ -242,11 +254,11 @@ createContext = (options={}) ->
       removeClass @drop, "#{ drop.classPrefix }-open"
       removeClass @drop, "#{ drop.classPrefix }-after-open"
 
-      @drop.addEventListener 'transitionend', handler = =>
+      @drop.addEventListener transitionEndEvent, handler = =>
         unless hasClass @drop, "#{ drop.classPrefix }-open"
           removeClass @drop, "#{ drop.classPrefix }-open-transitionend"
 
-        @drop.removeEventListener 'transitionend', handler
+        @drop.removeEventListener transitionEndEvent, handler
 
       @trigger 'close'
 
