@@ -153,7 +153,7 @@ Additional class names to be added to the drop. These can be set to apply a them
 
 #### `remove`
 
-Set to `false` if you'd like the drop element to be removed from the DOM when the drop is closed, and recreated when it's opened.
+Set to `true` if you'd like the drop element to be removed from the DOM when the drop is closed, and recreated when it's opened.
 
 ```coffeescript
 true
