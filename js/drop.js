@@ -262,7 +262,9 @@
       };
 
       DropInstance.prototype.isOpened = function() {
-        return hasClass(this.drop, "" + drop.classPrefix + "-open");
+        if (this.drop) {
+          return hasClass(this.drop, "" + drop.classPrefix + "-open");
+        }
       };
 
       DropInstance.prototype.toggle = function() {

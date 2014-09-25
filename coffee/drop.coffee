@@ -220,7 +220,7 @@ createContext = (options={}) ->
         @_on @drop, 'mouseout', out
 
     isOpened: ->
-      hasClass @drop, "#{ drop.classPrefix }-open"
+      hasClass @drop, "#{ drop.classPrefix }-open" if @drop
 
     toggle: ->
       if @isOpened()
