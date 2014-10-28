@@ -99,7 +99,8 @@ a click or hover can be set to open the drop.
 
 #### `content`
 
-The content which should be rendered into the Drop.  Can be a DOM element or an HTML string.
+The content which should be rendered into the Drop.  Can be a DOM element, an HTML string, or a function that returns html.
+In this case, the function is called on each open, with drop instance passed as the first argument.
 
 #### `position`
 
