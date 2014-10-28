@@ -114,7 +114,12 @@ createContext = (options={}) ->
 
       @content = document.createElement 'div'
       addClass @content, "#{ drop.classPrefix }-content"
-      if typeof @options.content is 'object'
+
+      if typeof @options.content is 'function'
+        @content.innerHTML = @options.content.call(@, @)
+        @on 'open', =>
+          @content.innerHTML = @options.content.call(@, @)
+      else if typeof @options.content is 'object'
         @content.appendChild @options.content
       else
         @content.innerHTML = @options.content
