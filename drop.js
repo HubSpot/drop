@@ -1588,6 +1588,7 @@ return this.Tether;
       };
 
       DropInstance.prototype.setupElements = function() {
+        var _this = this;
         this.drop = document.createElement('div');
         addClass(this.drop, drop.classPrefix);
         if (this.options.classes) {
@@ -1595,7 +1596,12 @@ return this.Tether;
         }
         this.content = document.createElement('div');
         addClass(this.content, "" + drop.classPrefix + "-content");
-        if (typeof this.options.content === 'object') {
+        if (typeof this.options.content === 'function') {
+          this.content.innerHTML = this.options.content.call(this, this);
+          this.on('open', function() {
+            return _this.content.innerHTML = _this.options.content.call(_this, _this);
+          });
+        } else if (typeof this.options.content === 'object') {
           this.content.appendChild(this.options.content);
         } else {
           this.content.innerHTML = this.options.content;
