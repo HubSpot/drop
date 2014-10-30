@@ -262,8 +262,8 @@
           };
           this._on(this.target, 'mouseover', over);
           this._on(this.drop, 'mouseover', over);
-          this._on(this.target, 'mouseout', out);
-          return this._on(this.drop, 'mouseout', out);
+          this._on(this.target, 'mouseleave', out);
+          return this._on(this.drop, 'mouseleave', out);
         }
       };
 

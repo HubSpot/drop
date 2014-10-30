@@ -1,6 +1,6 @@
 .drop-element, .drop-element:after, .drop-element:before, .drop-element *, .drop-element *:after, .drop-element *:before {
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 .drop-element {
@@ -15,107 +15,105 @@
   src: url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("../fonts/icomoon.svg#icomoon") format("svg"), url("../fonts/icomoon.woff") format("woff"), url("../fonts/icomoon.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
-
 .icon-monkey:before {
-  content: "\38"; }
+  content: "8"; }
 
 .icon-bear:before {
-  content: "\28"; }
+  content: "("; }
 
 .icon-squirrel:before {
-  content: "\6f"; }
+  content: "o"; }
 
 .icon-elephant:before {
-  content: "\65"; }
+  content: "e"; }
 
 .icon-google-plus:before {
-  content: "\21"; }
+  content: "!"; }
 
 .icon-facebook:before {
-  content: "\22"; }
+  content: '"'; }
 
 .icon-twitter:before {
-  content: "\23"; }
+  content: "#"; }
 
 .icon-github:before {
-  content: "\24"; }
+  content: "$"; }
 
 .icon-tux:before {
-  content: "\25"; }
+  content: "%"; }
 
 .icon-apple:before {
-  content: "\26"; }
+  content: "&"; }
 
 .icon-android:before {
-  content: "\27"; }
+  content: "'"; }
 
 .icon-windows:before {
-  content: "\29"; }
+  content: ")"; }
 
 .icon-sun:before {
-  content: "\2a"; }
+  content: "*"; }
 
 .icon-cloudy:before {
-  content: "\2b"; }
+  content: "+"; }
 
 .icon-weather:before {
-  content: "\2c"; }
+  content: ","; }
 
 .icon-lightning:before {
-  content: "\2d"; }
+  content: "-"; }
 
 .icon-rainy:before {
-  content: "\2e"; }
+  content: "."; }
 
 .icon-windy:before {
-  content: "\2f"; }
+  content: "/"; }
 
 .icon-chrome:before {
-  content: "\30"; }
+  content: "0"; }
 
 .icon-firefox:before {
-  content: "\31"; }
+  content: "1"; }
 
 .icon-IE:before {
-  content: "\32"; }
+  content: "2"; }
 
 .icon-opera:before {
-  content: "\33"; }
+  content: "3"; }
 
 .icon-safari:before {
-  content: "\34"; }
+  content: "4"; }
 
 .icon-finder:before {
-  content: "\35"; }
+  content: "5"; }
 
 .icon-camera:before {
-  content: "\3a"; }
+  content: ":"; }
 
 .icon-diamond:before {
-  content: "\36"; }
+  content: "6"; }
 
 .icon-rocket:before {
-  content: "\37"; }
+  content: "7"; }
 
 .icon-cars:before {
-  content: "\39"; }
+  content: "9"; }
 
 .icon-clock:before {
-  content: "\3b"; }
+  content: ";"; }
 
 .icon-star:before {
-  content: "\3c"; }
+  content: "<"; }
 
 .drop-example-theme-social-sharing.drop-target {
-  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  zoom: 1;
+  *zoom: 1;
   *display: inline;
   cursor: pointer;
-  background: black;
-  color: white;
+  background: #000;
+  color: #fff;
   display: inline-block;
   padding: 0 20px;
   height: 60px;
@@ -124,14 +122,13 @@
   width: 137px;
   text-align: center; }
 .drop-example-theme-social-sharing.drop-element {
-  -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-transition: opacity 360ms;
   -moz-transition: opacity 360ms;
   -o-transition: opacity 360ms;
+  -webkit-transition: opacity 360ms;
   transition: opacity 360ms;
   opacity: 0.999;
   width: 177px; }
@@ -140,9 +137,9 @@
   .drop-example-theme-social-sharing.drop-element.drop-open-transitionend {
     display: block; }
   .drop-example-theme-social-sharing.drop-element.drop-after-open {
-    -webkit-transition: none;
     -moz-transition: none;
     -o-transition: none;
+    -webkit-transition: none;
     transition: none;
     opacity: 1; }
   .drop-example-theme-social-sharing.drop-element .drop-content {
@@ -175,8 +172,9 @@
         position: relative;
         display: block; }
         .drop-example-theme-social-sharing.drop-element .drop-content ul li span {
+          -moz-user-select: -moz-none;
+          -ms-user-select: none;
           -webkit-user-select: none;
-          -moz-user-select: none;
           user-select: none;
           width: 100%;
           background: #e0e0e0;
@@ -190,143 +188,130 @@
           -webkit-touch-callout: none;
           font-size: 20px;
           font-weight: normal;
-          -webkit-transform: translate3d(0, 0, 0);
           -moz-transform: translate3d(0, 0, 0);
           -ms-transform: translate3d(0, 0, 0);
-          -o-transform: translate3d(0, 0, 0);
+          -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0); }
           .drop-example-theme-social-sharing.drop-element .drop-content ul li span:hover {
-            background: black;
-            color: white; }
+            background: #000;
+            color: #fff; }
         .drop-example-theme-social-sharing.drop-element .drop-content ul li:nth-child(1) span {
-          -webkit-transform: translate3d(0, -60px, 0);
           -moz-transform: translate3d(0, -60px, 0);
           -ms-transform: translate3d(0, -60px, 0);
-          -o-transform: translate3d(0, -60px, 0);
+          -webkit-transform: translate3d(0, -60px, 0);
           transform: translate3d(0, -60px, 0);
-          -webkit-transition: -webkit-transform 240ms ease;
-          -webkit-transition-delay: 0ms;
           -moz-transition: -moz-transform 240ms ease 0ms;
           -o-transition: -o-transform 240ms ease 0ms;
+          -webkit-transition: -webkit-transform 240ms ease;
+          -webkit-transition-delay: 0ms;
           transition: transform 240ms ease 0ms; }
         .drop-example-theme-social-sharing.drop-element .drop-content ul li:nth-child(2) span {
-          -webkit-transform: translate3d(0, -120px, 0);
           -moz-transform: translate3d(0, -120px, 0);
           -ms-transform: translate3d(0, -120px, 0);
-          -o-transform: translate3d(0, -120px, 0);
+          -webkit-transform: translate3d(0, -120px, 0);
           transform: translate3d(0, -120px, 0);
-          -webkit-transition: -webkit-transform 240ms ease;
-          -webkit-transition-delay: 60ms;
           -moz-transition: -moz-transform 240ms ease 60ms;
           -o-transition: -o-transform 240ms ease 60ms;
+          -webkit-transition: -webkit-transform 240ms ease;
+          -webkit-transition-delay: 60ms;
           transition: transform 240ms ease 60ms; }
         .drop-example-theme-social-sharing.drop-element .drop-content ul li:nth-child(3) span {
-          -webkit-transform: translate3d(0, -180px, 0);
           -moz-transform: translate3d(0, -180px, 0);
           -ms-transform: translate3d(0, -180px, 0);
-          -o-transform: translate3d(0, -180px, 0);
+          -webkit-transform: translate3d(0, -180px, 0);
           transform: translate3d(0, -180px, 0);
-          -webkit-transition: -webkit-transform 240ms ease;
-          -webkit-transition-delay: 120ms;
           -moz-transition: -moz-transform 240ms ease 120ms;
           -o-transition: -o-transform 240ms ease 120ms;
+          -webkit-transition: -webkit-transform 240ms ease;
+          -webkit-transition-delay: 120ms;
           transition: transform 240ms ease 120ms; }
   .drop-example-theme-social-sharing.drop-element.drop-after-open .drop-content ul li:nth-child(1) span {
-    -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 120ms;
     -moz-transition: -moz-transform 240ms ease 120ms;
     -o-transition: -o-transform 240ms ease 120ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 120ms;
     transition: transform 240ms ease 120ms; }
   .drop-example-theme-social-sharing.drop-element.drop-after-open .drop-content ul li:nth-child(2) span {
-    -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 60ms;
     -moz-transition: -moz-transform 240ms ease 60ms;
     -o-transition: -o-transform 240ms ease 60ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 60ms;
     transition: transform 240ms ease 60ms; }
   .drop-example-theme-social-sharing.drop-element.drop-after-open .drop-content ul li:nth-child(3) span {
-    -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 0ms;
     -moz-transition: -moz-transform 240ms ease 0ms;
     -o-transition: -o-transform 240ms ease 0ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 0ms;
     transition: transform 240ms ease 0ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom .drop-content ul li:nth-child(1) span {
-    -webkit-transform: translate3d(0, 180px, 0);
     -moz-transform: translate3d(0, 180px, 0);
     -ms-transform: translate3d(0, 180px, 0);
-    -o-transform: translate3d(0, 180px, 0);
+    -webkit-transform: translate3d(0, 180px, 0);
     transform: translate3d(0, 180px, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 120ms;
     -moz-transition: -moz-transform 240ms ease 120ms;
     -o-transition: -o-transform 240ms ease 120ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 120ms;
     transition: transform 240ms ease 120ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom .drop-content ul li:nth-child(2) span {
-    -webkit-transform: translate3d(0, 120px, 0);
     -moz-transform: translate3d(0, 120px, 0);
     -ms-transform: translate3d(0, 120px, 0);
-    -o-transform: translate3d(0, 120px, 0);
+    -webkit-transform: translate3d(0, 120px, 0);
     transform: translate3d(0, 120px, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 60ms;
     -moz-transition: -moz-transform 240ms ease 60ms;
     -o-transition: -o-transform 240ms ease 60ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 60ms;
     transition: transform 240ms ease 60ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom .drop-content ul li:nth-child(3) span {
-    -webkit-transform: translate3d(0, 60px, 0);
     -moz-transform: translate3d(0, 60px, 0);
     -ms-transform: translate3d(0, 60px, 0);
-    -o-transform: translate3d(0, 60px, 0);
+    -webkit-transform: translate3d(0, 60px, 0);
     transform: translate3d(0, 60px, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 0ms;
     -moz-transition: -moz-transform 240ms ease 0ms;
     -o-transition: -o-transform 240ms ease 0ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 0ms;
     transition: transform 240ms ease 0ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom.drop-after-open .drop-content ul li:nth-child(1) span {
-    -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 0ms;
     -moz-transition: -moz-transform 240ms ease 0ms;
     -o-transition: -o-transform 240ms ease 0ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 0ms;
     transition: transform 240ms ease 0ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom.drop-after-open .drop-content ul li:nth-child(2) span {
-    -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 60ms;
     -moz-transition: -moz-transform 240ms ease 60ms;
     -o-transition: -o-transform 240ms ease 60ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 60ms;
     transition: transform 240ms ease 60ms; }
   .drop-example-theme-social-sharing.drop-element.drop-element-attached-bottom.drop-after-open .drop-content ul li:nth-child(3) span {
-    -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 240ms ease;
-    -webkit-transition-delay: 120ms;
     -moz-transition: -moz-transform 240ms ease 120ms;
     -o-transition: -o-transform 240ms ease 120ms;
+    -webkit-transition: -webkit-transform 240ms ease;
+    -webkit-transition-delay: 120ms;
     transition: transform 240ms ease 120ms; }

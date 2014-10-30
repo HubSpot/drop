@@ -221,8 +221,8 @@ createContext = (options={}) ->
 
         @_on @target, 'mouseover', over
         @_on @drop, 'mouseover', over
-        @_on @target, 'mouseout', out
-        @_on @drop, 'mouseout', out
+        @_on @target, 'mouseleave', out
+        @_on @drop, 'mouseleave', out
 
     isOpened: ->
       hasClass @drop, "#{ drop.classPrefix }-open"
