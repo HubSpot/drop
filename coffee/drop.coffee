@@ -192,7 +192,7 @@ createContext = (options={}) ->
           # Clicking target
           if event.target is @target or @target.contains(event.target)
             return
-  
+
           @close()
 
         for clickEvent in clickEvents
@@ -299,6 +299,8 @@ createContext = (options={}) ->
       @target = null
 
       removeFromArray allDrops[drop.classPrefix], @
+      if allDrops[drop.classPrefix].length is 0
+        delete allDrops[drop.classPrefix]
       removeFromArray drop.drops, @
 
   drop
