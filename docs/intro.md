@@ -66,7 +66,7 @@ Opens the drop. Specifically, this adds `drop-open` and other classes to the dro
 
 #### `close()`
 
-Opens the drop. Specifically, this removes `drop-open` and other classes from the drop. Closed drops will still remain in the DOM.
+Closes the drop. Specifically, this removes `drop-open` and other classes from the drop. Closed drops will still remain in the DOM.
 
 #### `remove()`
 
