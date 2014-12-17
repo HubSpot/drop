@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>drop</title><link rel="icon" href="http://static.hubspot.com/favicon.ico"><link rel="stylesheet" href="https://static2cdn.hubspot.com/hubspot_public_assets/static-1.112/shared/sass/hubspot_public_assets.css"><link rel="stylesheet" href="https://static.hubspot.com/bundles/navigation.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/print.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/highlight-theme-github.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/navigation-tweaks.css"><link rel="stylesheet" href="//github.hubspot.com/static-resources/css/documentation.css"><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/codemirror.css"><link rel="stylesheet" href="//github.hubspot.com/drop//resources/executr/build/css/executr.css"><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/codemirror.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/mode/coffeescript/coffeescript.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/mode/javascript/javascript.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/coffee-script.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/underscore.min.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/js2coffee.min.js"></script><script src="//github.hubspot.com/drop//resources/executr/build/js/executr.js"></script><script src="//github.hubspot.com/drop//resources/executr/build/js/executr-run.js"></script><script src="//use.typekit.net/ghy0wve.js"></script><script>try{Typekit.load();}catch(e){}
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>drop</title><link rel="icon" href="http://static.hubspot.com/favicon.ico"><link rel="stylesheet" href="https://static2cdn.hubspot.com/hubspot_public_assets/static-1.112/shared/sass/hubspot_public_assets.css"><link rel="stylesheet" href="https://static.hubspot.com/bundles/navigation.css"><link rel="stylesheet" href="http://github.hubspot.com/static-resources/css/print.css"><link rel="stylesheet" href="http://github.hubspot.com/static-resources/css/highlight-theme-github.css"><link rel="stylesheet" href="http://github.hubspot.com/static-resources/css/navigation-tweaks.css"><link rel="stylesheet" href="http://github.hubspot.com/static-resources/css/documentation.css"><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/codemirror.css"><link rel="stylesheet" href="//github.hubspot.com/drop//resources/executr/build/css/executr.css"><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/codemirror.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/mode/coffeescript/coffeescript.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/CodeMirror/mode/javascript/javascript.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/coffee-script.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/underscore.min.js"></script><script src="//github.hubspot.com/drop//resources/executr/lib/js2coffee.min.js"></script><script src="//github.hubspot.com/drop//resources/executr/build/js/executr.js"></script><script src="//github.hubspot.com/drop//resources/executr/build/js/executr-run.js"></script><script src="//use.typekit.net/ghy0wve.js"></script><script>try{Typekit.load();}catch(e){}
 </script></head><body><div id="hs-nav-v3" class="nav-width-flex signed-out-nav">
     <div class="hs-nav-section main-nav">
         <div class="nav-section-inner">
@@ -53,7 +53,7 @@
 <p>Drop is a Javascript and CSS library for creating dropdowns and other popups attached to elements on the page. Drop uses <a href="http://github.hubspot.com/tether">Tether.js</a> to efficiently position its elements.</p>
 <p>Thank you for considering Drop, we believe it&#39;s the best way of creating dropdown-style elements available right now.</p>
 <h3 id="features">Features</h3>
-<p>Because Drop is built on <a href="http://github.hubspot.com/tether">Tether</a>, you get all of the benefits of its effecient and powerful positioning.</p>
+<p>Because Drop is built on <a href="http://github.hubspot.com/tether">Tether</a>, you get all of the benefits of its efficient and powerful positioning.</p>
 <ul>
 <li>Drops automatically reposition on page resizes and scrolls, reorienting to stay in view.</li>
 <li>Drop uses GPU accelerated positioning to maintain 60fps scrolling, even with dozens or hundreds of drops on screen and complex animation</li>
@@ -78,7 +78,7 @@
 <h4 id="-open-"><code>open()</code></h4>
 <p>Opens the drop. Specifically, this adds <code>drop-open</code> and other classes to the drop.</p>
 <h4 id="-close-"><code>close()</code></h4>
-<p>Opens the drop. Specifically, this removes <code>drop-open</code> and other classes from the drop. Closed drops will still remain in the DOM.</p>
+<p>Closes the drop. Specifically, this removes <code>drop-open</code> and other classes from the drop. Closed drops will still remain in the DOM.</p>
 <h4 id="-remove-"><code>remove()</code></h4>
 <p>Remove the drop from the DOM.  The drop will be readded when it&#39;s next opened.  It can be used as an alternative to <code>close</code>.</p>
 <h4 id="-toggle-"><code>toggle()</code></h4>
@@ -95,7 +95,8 @@
 <p>The element (or a selector for an element) the Drop should stay adjacent to on the page.  An action on this element like
 a click or hover can be set to open the drop.</p>
 <h4 id="-content-"><code>content</code></h4>
-<p>The content which should be rendered into the Drop.  Can be a DOM element or an HTML string.</p>
+<p>The content which should be rendered into the Drop.  Can be a DOM element, an HTML string, or a function that returns html.
+In this case, the function is called on each open, with drop instance passed as the first argument.</p>
 <h4 id="-position-"><code>position</code></h4>
 <p>Position specifies the attachment point (on the target) to attach the drop to. Options include:</p>
 <pre><code class="lang-coffeescript"><span class="string">'top left'</span>
@@ -126,7 +127,7 @@ a click or hover can be set to open the drop.</p>
 <h4 id="-classes-"><code>classes</code></h4>
 <p>Additional class names to be added to the drop. These can be set to apply a theme (for example, <a href="https://github.com/HubSpot/drop/blob/master/css/drop-theme-arrows-bounce-dark.css"><code>drop-theme-arrows-bounce-dark</code></a>) and/or they can be set to apply custom styling to child elements of the drop.</p>
 <h4 id="-remove-"><code>remove</code></h4>
-<p>Set to <code>false</code> if you&#39;d like the drop element to be removed from the DOM when the drop is closed, and recreated when it&#39;s opened.</p>
+<p>Set to <code>true</code> if you&#39;d like the drop element to be removed from the DOM when the drop is closed, and recreated when it&#39;s opened.</p>
 <pre><code class="lang-coffeescript"><span class="literal">true</span>
 <span class="literal">false</span></code></pre>
 <h4 id="-tetheroptions-"><code>tetherOptions</code></h4>

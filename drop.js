@@ -1444,7 +1444,7 @@ return this.Tether;
 }));
 
 (function() {
-  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, extend, hasClass, removeClass, removeFromArray, sortAttach, touchDevice, _ref,
+  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, end, extend, hasClass, name, removeClass, removeFromArray, sortAttach, tempEl, touchDevice, transitionEndEvent, transitionEndEvents, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -1457,6 +1457,23 @@ return this.Tether;
 
   if (touchDevice) {
     clickEvents.push('touchstart');
+  }
+
+  transitionEndEvents = {
+    'WebkitTransition': 'webkitTransitionEnd',
+    'MozTransition': 'transitionend',
+    'OTransition': 'otransitionend',
+    'transition': 'transitionend'
+  };
+
+  transitionEndEvent = '';
+
+  for (name in transitionEndEvents) {
+    end = transitionEndEvents[name];
+    tempEl = document.createElement('p');
+    if (tempEl.style[name] !== void 0) {
+      transitionEndEvent = end;
+    }
   }
 
   sortAttach = function(str) {
@@ -1571,6 +1588,7 @@ return this.Tether;
       };
 
       DropInstance.prototype.setupElements = function() {
+        var _this = this;
         this.drop = document.createElement('div');
         addClass(this.drop, drop.classPrefix);
         if (this.options.classes) {
@@ -1578,7 +1596,12 @@ return this.Tether;
         }
         this.content = document.createElement('div');
         addClass(this.content, "" + drop.classPrefix + "-content");
-        if (typeof this.options.content === 'object') {
+        if (typeof this.options.content === 'function') {
+          this.content.innerHTML = this.options.content.call(this, this);
+          this.on('open', function() {
+            return _this.content.innerHTML = _this.options.content.call(_this, _this);
+          });
+        } else if (typeof this.options.content === 'object') {
           this.content.appendChild(this.options.content);
         } else {
           this.content.innerHTML = this.options.content;
@@ -1733,11 +1756,11 @@ return this.Tether;
         }
         removeClass(this.drop, "" + drop.classPrefix + "-open");
         removeClass(this.drop, "" + drop.classPrefix + "-after-open");
-        this.drop.addEventListener('transitionend', handler = function() {
+        this.drop.addEventListener(transitionEndEvent, handler = function() {
           if (!hasClass(_this.drop, "" + drop.classPrefix + "-open")) {
             removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
           }
-          return _this.drop.removeEventListener('transitionend', handler);
+          return _this.drop.removeEventListener(transitionEndEvent, handler);
         });
         this.trigger('close');
         if ((_ref1 = this.tether) != null) {
