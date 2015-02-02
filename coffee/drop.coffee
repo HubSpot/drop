@@ -192,7 +192,7 @@ createContext = (options={}) ->
           # Clicking target
           if event.target is @target or @target.contains(event.target)
             return
-  
+
           @close()
 
         for clickEvent in clickEvents
@@ -303,7 +303,8 @@ createContext = (options={}) ->
 
   drop
 
-window.Drop = createContext()
+Drop = createContext()
+@Drop = Drop
 
 document.addEventListener 'DOMContentLoaded', ->
   Drop.updateBodyClasses()

@@ -17,6 +17,7 @@
     "gulp-concat": "~2.1.7",
     "gulp-rename": "~0.2.1",
     "gulp-util": "~2.2.9",
-    "gulp-bower": "0.0.1"
+    "gulp-bower": "0.0.1",
+    "gulp-wrap-umd": "^0.2.1"
   }
 }
