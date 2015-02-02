@@ -7,6 +7,7 @@ header = require('gulp-header')
 rename = require('gulp-rename')
 bower = require('gulp-bower')
 gutil = require('gulp-util')
+wrap = require('gulp-wrap-umd')
 
 pkg = require('./package.json')
 banner = "/*! #{ pkg.name } #{ pkg.version } */\n"
@@ -25,6 +26,19 @@ gulp.task 'coffee', ->
       .pipe(gulp.dest('./docs/welcome/js/'))
   catch e
 
+gulp.task 'wrap', ->
+  gulp.src('js/drop.js', {base: './'})
+    .pipe(wrap(
+      namespace: 'Drop'
+      exports: 'this.Drop',
+      deps: [{
+        name: 'Tether',
+        cjsName: 'tether',
+        amdName: 'tether'
+      }]
+    ))
+    .pipe(gulp.dest('./'))
+
 gulp.task 'concat', ->
   gulp.src(['./bower_components/tether/tether.js', 'js/drop.js'])
     .pipe(concat('drop.js'))
@@ -40,8 +54,9 @@ gulp.task 'uglify', ->
 
 gulp.task 'js', ->
   gulp.run 'coffee', ->
-    gulp.run 'concat', ->
-      gulp.run 'uglify', ->
+    gulp.run 'wrap', ->
+      gulp.run 'concat', ->
+        gulp.run 'uglify', ->
 
 gulp.task 'compass', ->
   for path in ['', 'docs/welcome/', 'docs/welcome/examples/social-sharing/']

@@ -1,5 +1,16 @@
+
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(["tether"], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('tether'));
+  } else {
+    root.Drop = factory(root.Tether);
+  }
+}(this, function(Tether) {
+
 (function() {
-  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, end, extend, hasClass, name, removeClass, removeFromArray, sortAttach, tempEl, touchDevice, transitionEndEvent, transitionEndEvents, _ref,
+  var Drop, Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, end, extend, hasClass, name, removeClass, removeFromArray, sortAttach, tempEl, touchDevice, transitionEndEvent, transitionEndEvents, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -366,10 +377,16 @@
     return drop;
   };
 
-  window.Drop = createContext();
+  Drop = createContext();
+
+  this.Drop = Drop;
 
   document.addEventListener('DOMContentLoaded', function() {
     return Drop.updateBodyClasses();
   });
 
 }).call(this);
+
+return this.Drop;
+
+}));
