@@ -294,7 +294,11 @@
         addClass(this.drop, "" + drop.classPrefix + "-open");
         addClass(this.drop, "" + drop.classPrefix + "-open-transitionend");
         setTimeout(function() {
-          return addClass(_this.drop, "" + drop.classPrefix + "-after-open");
+          if (_this.drop) {
+            return addClass(_this.drop, "" + drop.classPrefix + "-after-open");
+          } else {
+            return _this.drop;
+          }
         });
         if ((_ref2 = this.tether) != null) {
           _ref2.position();

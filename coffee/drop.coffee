@@ -245,7 +245,7 @@ createContext = (options={}) ->
       addClass @drop, "#{ drop.classPrefix }-open-transitionend"
 
       setTimeout =>
-        addClass @drop, "#{ drop.classPrefix }-after-open"
+        if @drop then addClass @drop, "#{ drop.classPrefix }-after-open" else @drop
 
       @tether?.position()
 
