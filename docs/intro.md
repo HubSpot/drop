@@ -13,9 +13,9 @@
         constrainToScrollParent: true,
         openOn: 'click'
       }, $(this).data('options'));
-      
+
       new Drop(options);
-    }) 
+    })
   });
 </script>
 
