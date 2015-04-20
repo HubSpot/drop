@@ -123,6 +123,7 @@ createContext = (options={}) ->
           if typeof contentElementOrHTML is 'string'
             @content.innerHTML = contentElementOrHTML
           else if typeof contentElementOrHTML is 'object'
+            @content.innerHTML = ""
             @content.appendChild(contentElementOrHTML)
           else
             throw new Error 'Drop Error: Content function should return a string or HTMLElement.'
