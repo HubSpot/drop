@@ -45,7 +45,7 @@
       }, $(this).data('options'));
 
       new Drop(options);
-    }) 
+    })
   });
 </script>
 
@@ -95,8 +95,12 @@
 <p>The element (or a selector for an element) the Drop should stay adjacent to on the page.  An action on this element like
 a click or hover can be set to open the drop.</p>
 <h4 id="-content-"><code>content</code></h4>
-<p>The content which should be rendered into the Drop.  Can be a DOM element, an HTML string, or a function that returns html.
-In this case, the function is called on each open, with drop instance passed as the first argument.</p>
+<p>The content which should be rendered into the Drop.  Can be:</p>
+<ul>
+<li>A DOM element</li>
+<li>An HTML string</li>
+<li>A function that returns an HTML string or a DOM element.  <code>content()</code> is called on each open, with the drop instance passed as the first argument.</li>
+</ul>
 <h4 id="-position-"><code>position</code></h4>
 <p>Position specifies the attachment point (on the target) to attach the drop to. Options include:</p>
 <pre><code class="lang-coffeescript"><span class="string">'top left'</span>
