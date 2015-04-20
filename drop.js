@@ -1588,7 +1588,8 @@ return this.Tether;
       };
 
       DropInstance.prototype.setupElements = function() {
-        var _this = this;
+        var generateAndSetContent,
+          _this = this;
         this.drop = document.createElement('div');
         addClass(this.drop, drop.classPrefix);
         if (this.options.classes) {
@@ -1597,10 +1598,19 @@ return this.Tether;
         this.content = document.createElement('div');
         addClass(this.content, "" + drop.classPrefix + "-content");
         if (typeof this.options.content === 'function') {
-          this.content.innerHTML = this.options.content.call(this, this);
-          this.on('open', function() {
-            return _this.content.innerHTML = _this.options.content.call(_this, _this);
-          });
+          generateAndSetContent = function() {
+            var contentElementOrHTML;
+            contentElementOrHTML = _this.options.content.call(_this, _this);
+            if (typeof contentElementOrHTML === 'string') {
+              return _this.content.innerHTML = contentElementOrHTML;
+            } else if (typeof contentElementOrHTML === 'object') {
+              return _this.content.appendChild(contentElementOrHTML);
+            } else {
+              throw new Error('Drop Error: Content function should return a string or HTMLElement.');
+            }
+          };
+          generateAndSetContent();
+          this.on('open', generateAndSetContent.bind(this));
         } else if (typeof this.options.content === 'object') {
           this.content.appendChild(this.options.content);
         } else {
