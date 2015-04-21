@@ -159,6 +159,7 @@
             if (typeof contentElementOrHTML === 'string') {
               return _this.content.innerHTML = contentElementOrHTML;
             } else if (typeof contentElementOrHTML === 'object') {
+              _this.content.innerHTML = "";
               return _this.content.appendChild(contentElementOrHTML);
             } else {
               throw new Error('Drop Error: Content function should return a string or HTMLElement.');
