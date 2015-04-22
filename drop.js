@@ -1,5 +1,5 @@
 /*! drop 0.5.4 */
-/*! tether 0.6.5 */
+/*! tether 0.7.0 */
 
 
 (function(root, factory) {
@@ -13,7 +13,7 @@
 }(this, function(require,exports,module) {
 
 (function() {
-  var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollBarSize, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
+  var Evented, addClass, defer, deferred, extend, flush, getBounds, getClassName, getOffsetParent, getOrigin, getScrollBarSize, getScrollParent, hasClass, node, removeClass, setClassName, uniqueId, updateClasses, zeroPosCache,
     __hasProp = {}.hasOwnProperty,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = [].slice;
@@ -39,7 +39,7 @@
       if (style == null) {
         return parent;
       }
-      if (/(auto|scroll)/.test(style['overflow'] + style['overflow-y'] + style['overflow-x'])) {
+      if (/(auto|scroll)/.test(style['overflow'] + style['overflowY'] + style['overflowX'])) {
         if (position !== 'absolute' || ((_ref = style['position']) === 'relative' || _ref === 'absolute' || _ref === 'fixed')) {
           return parent;
         }
@@ -178,7 +178,7 @@
   };
 
   removeClass = function(el, name) {
-    var cls, _i, _len, _ref, _results;
+    var className, cls, _i, _len, _ref, _results;
     if (el.classList != null) {
       _ref = name.split(' ');
       _results = [];
@@ -190,7 +190,8 @@
       }
       return _results;
     } else {
-      return el.className = el.className.replace(new RegExp("(^| )" + (name.split(' ').join('|')) + "( |$)", 'gi'), ' ');
+      className = getClassName(el).replace(new RegExp("(^| )" + (name.split(' ').join('|')) + "( |$)", 'gi'), ' ');
+      return setClassName(el, className);
     }
   };
 
@@ -208,7 +209,8 @@
       return _results;
     } else {
       removeClass(el, name);
-      return el.className += " " + name;
+      cls = getClassName(el) + (" " + name);
+      return setClassName(el, cls);
     }
   };
 
@@ -216,8 +218,20 @@
     if (el.classList != null) {
       return el.classList.contains(name);
     } else {
-      return new RegExp("(^| )" + name + "( |$)", 'gi').test(el.className);
+      return new RegExp("(^| )" + name + "( |$)", 'gi').test(getClassName(el));
     }
+  };
+
+  getClassName = function(el) {
+    if (el.className instanceof SVGAnimatedString) {
+      return el.className.baseVal;
+    } else {
+      return el.className;
+    }
+  };
+
+  setClassName = function(el, className) {
+    return el.setAttribute('class', className);
   };
 
   updateClasses = function(el, add, all) {
@@ -833,10 +847,10 @@
           manualTargetOffset: manualTargetOffset,
           scrollbarSize: scrollbarSize
         });
-        if ((ret == null) || typeof ret !== 'object') {
-          continue;
-        } else if (ret === false) {
+        if (ret === false) {
           return false;
+        } else if ((ret == null) || typeof ret !== 'object') {
+          continue;
         } else {
           top = ret.top, left = ret.left;
         }
