@@ -6,7 +6,7 @@
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
     "Zack Bloom <zackbloom@gmail.com>"
   ],
-  "contributors": [
+  "maintainers": [
     "Nicholas Hwang <nick.joosung.hwang@gmail.com>"
   ],
   "description": "Client-side library for creating dropdowns",
@@ -16,7 +16,7 @@
     "tether"
   ],
   "license": "MIT",
-  "main": "drop.js",
+  "main": "dist/js/drop.js",
   "ignore": [
     "**/.*",
     "node_modules",

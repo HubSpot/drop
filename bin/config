@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Colors
+YELLOW='\e[0;33m'
+CLEAR='\e[0m'
+
+# Directories
+NODE_MODULES="node_modules"
+BUILD_DIR="dist"
+
+# Commands
+BROCCOLI="$NODE_MODULES/broccoli-cli/bin/broccoli"
+TRASH="$NODE_MODULES/trash/cli.js --force"
+
+# Functions
+function try {
+    "$@"
+    local status=$?
+    if [ $status -ne 0 ]; then
+        exit $status
+    fi
+    return $status
+}
+
+function logger {
+    printf "\n${YELLOW}$1${CLEAR}\n"
+}

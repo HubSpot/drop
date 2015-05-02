@@ -316,7 +316,9 @@ createContext = (options={}) ->
 
   drop
 
-window.Drop = createContext()
+Drop = createContext()
 
 document.addEventListener 'DOMContentLoaded', ->
   Drop.updateBodyClasses()
+
+return Drop

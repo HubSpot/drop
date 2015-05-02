@@ -1,5 +1,22 @@
 /*! drop 0.5.4 */
-/*! tether 0.6.5 */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module unless amdModuleId is set
+    define([], function () {
+      return (factory());
+    });
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory();
+  } else {
+    factory();
+  }
+}(this, function () {
+
+/*! tether 0.7.0 */
 
 
 (function(root, factory) {
@@ -13,7 +30,7 @@
 }(this, function(require,exports,module) {
 
 (function() {
-  var Evented, addClass, defer, deferred, extend, flush, getBounds, getOffsetParent, getOrigin, getScrollBarSize, getScrollParent, hasClass, node, removeClass, uniqueId, updateClasses, zeroPosCache,
+  var Evented, addClass, defer, deferred, extend, flush, getBounds, getClassName, getOffsetParent, getOrigin, getScrollBarSize, getScrollParent, hasClass, node, removeClass, setClassName, uniqueId, updateClasses, zeroPosCache,
     __hasProp = {}.hasOwnProperty,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = [].slice;
@@ -39,7 +56,7 @@
       if (style == null) {
         return parent;
       }
-      if (/(auto|scroll)/.test(style['overflow'] + style['overflow-y'] + style['overflow-x'])) {
+      if (/(auto|scroll)/.test(style['overflow'] + style['overflowY'] + style['overflowX'])) {
         if (position !== 'absolute' || ((_ref = style['position']) === 'relative' || _ref === 'absolute' || _ref === 'fixed')) {
           return parent;
         }
@@ -178,7 +195,7 @@
   };
 
   removeClass = function(el, name) {
-    var cls, _i, _len, _ref, _results;
+    var className, cls, _i, _len, _ref, _results;
     if (el.classList != null) {
       _ref = name.split(' ');
       _results = [];
@@ -190,7 +207,8 @@
       }
       return _results;
     } else {
-      return el.className = el.className.replace(new RegExp("(^| )" + (name.split(' ').join('|')) + "( |$)", 'gi'), ' ');
+      className = getClassName(el).replace(new RegExp("(^| )" + (name.split(' ').join('|')) + "( |$)", 'gi'), ' ');
+      return setClassName(el, className);
     }
   };
 
@@ -208,7 +226,8 @@
       return _results;
     } else {
       removeClass(el, name);
-      return el.className += " " + name;
+      cls = getClassName(el) + (" " + name);
+      return setClassName(el, cls);
     }
   };
 
@@ -216,8 +235,20 @@
     if (el.classList != null) {
       return el.classList.contains(name);
     } else {
-      return new RegExp("(^| )" + name + "( |$)", 'gi').test(el.className);
+      return new RegExp("(^| )" + name + "( |$)", 'gi').test(getClassName(el));
     }
+  };
+
+  getClassName = function(el) {
+    if (el.className instanceof SVGAnimatedString) {
+      return el.className.baseVal;
+    } else {
+      return el.className;
+    }
+  };
+
+  setClassName = function(el, className) {
+    return el.setAttribute('class', className);
   };
 
   updateClasses = function(el, add, all) {
@@ -833,10 +864,10 @@
           manualTargetOffset: manualTargetOffset,
           scrollbarSize: scrollbarSize
         });
-        if ((ret == null) || typeof ret !== 'object') {
-          continue;
-        } else if (ret === false) {
+        if (ret === false) {
           return false;
+        } else if ((ret == null) || typeof ret !== 'object') {
+          continue;
         } else {
           top = ret.top, left = ret.left;
         }
@@ -1443,162 +1474,161 @@ return this.Tether;
 
 }));
 
-(function() {
-  var Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, end, extend, hasClass, name, removeClass, removeFromArray, sortAttach, tempEl, touchDevice, transitionEndEvent, transitionEndEvents, _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+var Drop, Evented, MIRROR_ATTACH, addClass, allDrops, clickEvents, createContext, end, extend, hasClass, name, ref, removeClass, removeFromArray, sortAttach, tempEl, touchDevice, transitionEndEvent, transitionEndEvents,
+  extend1 = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty,
+  indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  _ref = Tether.Utils, extend = _ref.extend, addClass = _ref.addClass, removeClass = _ref.removeClass, hasClass = _ref.hasClass, Evented = _ref.Evented;
+ref = Tether.Utils, extend = ref.extend, addClass = ref.addClass, removeClass = ref.removeClass, hasClass = ref.hasClass, Evented = ref.Evented;
 
-  touchDevice = 'ontouchstart' in document.documentElement;
+touchDevice = 'ontouchstart' in document.documentElement;
 
-  clickEvents = ['click'];
+clickEvents = ['click'];
 
-  if (touchDevice) {
-    clickEvents.push('touchstart');
+if (touchDevice) {
+  clickEvents.push('touchstart');
+}
+
+transitionEndEvents = {
+  'WebkitTransition': 'webkitTransitionEnd',
+  'MozTransition': 'transitionend',
+  'OTransition': 'otransitionend',
+  'transition': 'transitionend'
+};
+
+transitionEndEvent = '';
+
+for (name in transitionEndEvents) {
+  end = transitionEndEvents[name];
+  tempEl = document.createElement('p');
+  if (tempEl.style[name] !== void 0) {
+    transitionEndEvent = end;
   }
+}
 
-  transitionEndEvents = {
-    'WebkitTransition': 'webkitTransitionEnd',
-    'MozTransition': 'transitionend',
-    'OTransition': 'otransitionend',
-    'transition': 'transitionend'
-  };
-
-  transitionEndEvent = '';
-
-  for (name in transitionEndEvents) {
-    end = transitionEndEvents[name];
-    tempEl = document.createElement('p');
-    if (tempEl.style[name] !== void 0) {
-      transitionEndEvent = end;
-    }
+sortAttach = function(str) {
+  var first, ref1, ref2, second;
+  ref1 = str.split(' '), first = ref1[0], second = ref1[1];
+  if (first === 'left' || first === 'right') {
+    ref2 = [second, first], first = ref2[0], second = ref2[1];
   }
+  return [first, second].join(' ');
+};
 
-  sortAttach = function(str) {
-    var first, second, _ref1, _ref2;
-    _ref1 = str.split(' '), first = _ref1[0], second = _ref1[1];
-    if (first === 'left' || first === 'right') {
-      _ref2 = [second, first], first = _ref2[0], second = _ref2[1];
-    }
-    return [first, second].join(' ');
+MIRROR_ATTACH = {
+  left: 'right',
+  right: 'left',
+  top: 'bottom',
+  bottom: 'top',
+  middle: 'middle',
+  center: 'center'
+};
+
+allDrops = {};
+
+removeFromArray = function(arr, item) {
+  var index, results;
+  results = [];
+  while ((index = arr.indexOf(item)) !== -1) {
+    results.push(arr.splice(index, 1));
+  }
+  return results;
+};
+
+createContext = function(options) {
+  var DropInstance, defaultOptions, drop, name1;
+  if (options == null) {
+    options = {};
+  }
+  drop = function() {
+    return (function(func, args, ctor) {
+      ctor.prototype = func.prototype;
+      var child = new ctor, result = func.apply(child, args);
+      return Object(result) === result ? result : child;
+    })(DropInstance, arguments, function(){});
   };
-
-  MIRROR_ATTACH = {
-    left: 'right',
-    right: 'left',
-    top: 'bottom',
-    bottom: 'top',
-    middle: 'middle',
-    center: 'center'
+  extend(drop, {
+    createContext: createContext,
+    drops: [],
+    defaults: {}
+  });
+  defaultOptions = {
+    classPrefix: 'drop',
+    defaults: {
+      position: 'bottom left',
+      openOn: 'click',
+      constrainToScrollParent: true,
+      constrainToWindow: true,
+      classes: '',
+      remove: false,
+      tetherOptions: {}
+    }
   };
-
-  allDrops = {};
-
-  removeFromArray = function(arr, item) {
-    var index, _results;
-    _results = [];
-    while ((index = arr.indexOf(item)) !== -1) {
-      _results.push(arr.splice(index, 1));
+  extend(drop, defaultOptions, options);
+  extend(drop.defaults, defaultOptions.defaults, options.defaults);
+  if (allDrops[name1 = drop.classPrefix] == null) {
+    allDrops[name1] = [];
+  }
+  drop.updateBodyClasses = function() {
+    var _drop, anyOpen, i, len, ref1;
+    anyOpen = false;
+    ref1 = allDrops[drop.classPrefix];
+    for (i = 0, len = ref1.length; i < len; i++) {
+      _drop = ref1[i];
+      if (!(_drop.isOpened())) {
+        continue;
+      }
+      anyOpen = true;
+      break;
     }
-    return _results;
+    if (anyOpen) {
+      return addClass(document.body, drop.classPrefix + "-open");
+    } else {
+      return removeClass(document.body, drop.classPrefix + "-open");
+    }
   };
+  DropInstance = (function(superClass) {
+    extend1(DropInstance, superClass);
 
-  createContext = function(options) {
-    var DropInstance, defaultOptions, drop, _name;
-    if (options == null) {
-      options = {};
+    function DropInstance(options1) {
+      this.options = options1;
+      this.options = extend({}, drop.defaults, this.options);
+      this.target = this.options.target;
+      if (this.target == null) {
+        throw new Error('Drop Error: You must provide a target.');
+      }
+      if (this.options.classes) {
+        addClass(this.target, this.options.classes);
+      }
+      drop.drops.push(this);
+      allDrops[drop.classPrefix].push(this);
+      this._boundEvents = [];
+      this.setupElements();
+      this.setupEvents();
+      this.setupTether();
     }
-    drop = function() {
-      return (function(func, args, ctor) {
-        ctor.prototype = func.prototype;
-        var child = new ctor, result = func.apply(child, args);
-        return Object(result) === result ? result : child;
-      })(DropInstance, arguments, function(){});
-    };
-    extend(drop, {
-      createContext: createContext,
-      drops: [],
-      defaults: {}
-    });
-    defaultOptions = {
-      classPrefix: 'drop',
-      defaults: {
-        position: 'bottom left',
-        openOn: 'click',
-        constrainToScrollParent: true,
-        constrainToWindow: true,
-        classes: '',
-        remove: false,
-        tetherOptions: {}
-      }
-    };
-    extend(drop, defaultOptions, options);
-    extend(drop.defaults, defaultOptions.defaults, options.defaults);
-    if (allDrops[_name = drop.classPrefix] == null) {
-      allDrops[_name] = [];
-    }
-    drop.updateBodyClasses = function() {
-      var anyOpen, _drop, _i, _len, _ref1;
-      anyOpen = false;
-      _ref1 = allDrops[drop.classPrefix];
-      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-        _drop = _ref1[_i];
-        if (!(_drop.isOpened())) {
-          continue;
-        }
-        anyOpen = true;
-        break;
-      }
-      if (anyOpen) {
-        return addClass(document.body, "" + drop.classPrefix + "-open");
-      } else {
-        return removeClass(document.body, "" + drop.classPrefix + "-open");
-      }
-    };
-    DropInstance = (function(_super) {
-      __extends(DropInstance, _super);
 
-      function DropInstance(options) {
-        this.options = options;
-        this.options = extend({}, drop.defaults, this.options);
-        this.target = this.options.target;
-        if (this.target == null) {
-          throw new Error('Drop Error: You must provide a target.');
-        }
-        if (this.options.classes && this.options.addTargetClasses !== false) {
-          addClass(this.target, this.options.classes);
-        }
-        drop.drops.push(this);
-        allDrops[drop.classPrefix].push(this);
-        this._boundEvents = [];
-        this.setupElements();
-        this.setupEvents();
-        this.setupTether();
+    DropInstance.prototype._on = function(element, event, handler) {
+      this._boundEvents.push({
+        element: element,
+        event: event,
+        handler: handler
+      });
+      return element.addEventListener(event, handler);
+    };
+
+    DropInstance.prototype.setupElements = function() {
+      var generateAndSetContent;
+      this.drop = document.createElement('div');
+      addClass(this.drop, drop.classPrefix);
+      if (this.options.classes) {
+        addClass(this.drop, this.options.classes);
       }
-
-      DropInstance.prototype._on = function(element, event, handler) {
-        this._boundEvents.push({
-          element: element,
-          event: event,
-          handler: handler
-        });
-        return element.addEventListener(event, handler);
-      };
-
-      DropInstance.prototype.setupElements = function() {
-        var generateAndSetContent,
-          _this = this;
-        this.drop = document.createElement('div');
-        addClass(this.drop, drop.classPrefix);
-        if (this.options.classes) {
-          addClass(this.drop, this.options.classes);
-        }
-        this.content = document.createElement('div');
-        addClass(this.content, "" + drop.classPrefix + "-content");
-        if (typeof this.options.content === 'function') {
-          generateAndSetContent = function() {
+      this.content = document.createElement('div');
+      addClass(this.content, drop.classPrefix + "-content");
+      if (typeof this.options.content === 'function') {
+        generateAndSetContent = (function(_this) {
+          return function() {
             var contentElementOrHTML;
             contentElementOrHTML = _this.options.content.call(_this, _this);
             if (typeof contentElementOrHTML === 'string') {
@@ -1610,77 +1640,79 @@ return this.Tether;
               throw new Error('Drop Error: Content function should return a string or HTMLElement.');
             }
           };
-          generateAndSetContent();
-          this.on('open', generateAndSetContent.bind(this));
-        } else if (typeof this.options.content === 'object') {
-          this.content.appendChild(this.options.content);
-        } else {
-          this.content.innerHTML = this.options.content;
-        }
-        return this.drop.appendChild(this.content);
-      };
+        })(this);
+        generateAndSetContent();
+        this.on('open', generateAndSetContent.bind(this));
+      } else if (typeof this.options.content === 'object') {
+        this.content.appendChild(this.options.content);
+      } else {
+        this.content.innerHTML = this.options.content;
+      }
+      return this.drop.appendChild(this.content);
+    };
 
-      DropInstance.prototype.setupTether = function() {
-        var constraints, dropAttach;
-        dropAttach = this.options.position.split(' ');
-        dropAttach[0] = MIRROR_ATTACH[dropAttach[0]];
-        dropAttach = dropAttach.join(' ');
-        constraints = [];
-        if (this.options.constrainToScrollParent) {
-          constraints.push({
-            to: 'scrollParent',
-            pin: 'top, bottom',
-            attachment: 'together none'
-          });
-        } else {
-          constraints.push({
-            to: 'scrollParent'
-          });
-        }
-        if (this.options.constrainToWindow !== false) {
-          constraints.push({
-            to: 'window',
-            attachment: 'together'
-          });
-        } else {
-          constraints.push({
-            to: 'window'
-          });
-        }
-        options = {
-          element: this.drop,
-          target: this.target,
-          attachment: sortAttach(dropAttach),
-          targetAttachment: sortAttach(this.options.position),
-          classPrefix: drop.classPrefix,
-          offset: '0 0',
-          targetOffset: '0 0',
-          enabled: false,
-          constraints: constraints,
-          addTargetClasses: this.options.addTargetClasses
-        };
-        if (this.options.tetherOptions !== false) {
-          return this.tether = new Tether(extend({}, options, this.options.tetherOptions));
-        }
+    DropInstance.prototype.setupTether = function() {
+      var constraints, dropAttach;
+      dropAttach = this.options.position.split(' ');
+      dropAttach[0] = MIRROR_ATTACH[dropAttach[0]];
+      dropAttach = dropAttach.join(' ');
+      constraints = [];
+      if (this.options.constrainToScrollParent) {
+        constraints.push({
+          to: 'scrollParent',
+          pin: 'top, bottom',
+          attachment: 'together none'
+        });
+      } else {
+        constraints.push({
+          to: 'scrollParent'
+        });
+      }
+      if (this.options.constrainToWindow !== false) {
+        constraints.push({
+          to: 'window',
+          attachment: 'together'
+        });
+      } else {
+        constraints.push({
+          to: 'window'
+        });
+      }
+      options = {
+        element: this.drop,
+        target: this.target,
+        attachment: sortAttach(dropAttach),
+        targetAttachment: sortAttach(this.options.position),
+        classPrefix: drop.classPrefix,
+        offset: '0 0',
+        targetOffset: '0 0',
+        enabled: false,
+        constraints: constraints
       };
+      if (this.options.tetherOptions !== false) {
+        return this.tether = new Tether(extend({}, options, this.options.tetherOptions));
+      }
+    };
 
-      DropInstance.prototype.setupEvents = function() {
-        var clickEvent, closeHandler, events, onUs, openHandler, out, outTimeout, over, _i, _len,
-          _this = this;
-        if (!this.options.openOn) {
-          return;
-        }
-        if (this.options.openOn === 'always') {
-          setTimeout(this.open.bind(this));
-          return;
-        }
-        events = this.options.openOn.split(' ');
-        if (__indexOf.call(events, 'click') >= 0) {
-          openHandler = function(event) {
+    DropInstance.prototype.setupEvents = function() {
+      var clickEvent, closeHandler, events, i, len, onUs, openHandler, out, outTimeout, over;
+      if (!this.options.openOn) {
+        return;
+      }
+      if (this.options.openOn === 'always') {
+        setTimeout(this.open.bind(this));
+        return;
+      }
+      events = this.options.openOn.split(' ');
+      if (indexOf.call(events, 'click') >= 0) {
+        openHandler = (function(_this) {
+          return function(event) {
             _this.toggle();
             return event.preventDefault();
           };
-          closeHandler = function(event) {
+        })(this);
+        closeHandler = (function(_this) {
+          return function(event) {
             if (!_this.isOpened()) {
               return;
             }
@@ -1692,20 +1724,24 @@ return this.Tether;
             }
             return _this.close();
           };
-          for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
-            clickEvent = clickEvents[_i];
-            this._on(this.target, clickEvent, openHandler);
-            this._on(document, clickEvent, closeHandler);
-          }
+        })(this);
+        for (i = 0, len = clickEvents.length; i < len; i++) {
+          clickEvent = clickEvents[i];
+          this._on(this.target, clickEvent, openHandler);
+          this._on(document, clickEvent, closeHandler);
         }
-        if (__indexOf.call(events, 'hover') >= 0) {
-          onUs = false;
-          over = function() {
+      }
+      if (indexOf.call(events, 'hover') >= 0) {
+        onUs = false;
+        over = (function(_this) {
+          return function() {
             onUs = true;
             return _this.open();
           };
-          outTimeout = null;
-          out = function() {
+        })(this);
+        outTimeout = null;
+        out = (function(_this) {
+          return function() {
             onUs = false;
             if (outTimeout != null) {
               clearTimeout(outTimeout);
@@ -1717,116 +1753,122 @@ return this.Tether;
               return outTimeout = null;
             }, 50);
           };
-          this._on(this.target, 'mouseover', over);
-          this._on(this.drop, 'mouseover', over);
-          this._on(this.target, 'mouseout', out);
-          return this._on(this.drop, 'mouseout', out);
-        }
-      };
+        })(this);
+        this._on(this.target, 'mouseover', over);
+        this._on(this.drop, 'mouseover', over);
+        this._on(this.target, 'mouseout', out);
+        return this._on(this.drop, 'mouseout', out);
+      }
+    };
 
-      DropInstance.prototype.isOpened = function() {
-        return hasClass(this.drop, "" + drop.classPrefix + "-open");
-      };
+    DropInstance.prototype.isOpened = function() {
+      return hasClass(this.drop, drop.classPrefix + "-open");
+    };
 
-      DropInstance.prototype.toggle = function() {
-        if (this.isOpened()) {
-          return this.close();
-        } else {
-          return this.open();
-        }
-      };
+    DropInstance.prototype.toggle = function() {
+      if (this.isOpened()) {
+        return this.close();
+      } else {
+        return this.open();
+      }
+    };
 
-      DropInstance.prototype.open = function() {
-        var _ref1, _ref2,
-          _this = this;
-        if (this.isOpened()) {
-          return;
-        }
-        if (!this.drop.parentNode) {
-          document.body.appendChild(this.drop);
-        }
-        if ((_ref1 = this.tether) != null) {
-          _ref1.enable();
-        }
-        addClass(this.drop, "" + drop.classPrefix + "-open");
-        addClass(this.drop, "" + drop.classPrefix + "-open-transitionend");
-        setTimeout(function() {
-          return addClass(_this.drop, "" + drop.classPrefix + "-after-open");
-        });
-        if ((_ref2 = this.tether) != null) {
-          _ref2.position();
-        }
-        this.trigger('open');
-        return drop.updateBodyClasses();
-      };
+    DropInstance.prototype.open = function() {
+      var ref1, ref2;
+      if (this.isOpened()) {
+        return;
+      }
+      if (!this.drop.parentNode) {
+        document.body.appendChild(this.drop);
+      }
+      if ((ref1 = this.tether) != null) {
+        ref1.enable();
+      }
+      addClass(this.drop, drop.classPrefix + "-open");
+      addClass(this.drop, drop.classPrefix + "-open-transitionend");
+      setTimeout((function(_this) {
+        return function() {
+          return addClass(_this.drop, drop.classPrefix + "-after-open");
+        };
+      })(this));
+      if ((ref2 = this.tether) != null) {
+        ref2.position();
+      }
+      this.trigger('open');
+      return drop.updateBodyClasses();
+    };
 
-      DropInstance.prototype.close = function() {
-        var handler, _ref1,
-          _this = this;
-        if (!this.isOpened()) {
-          return;
-        }
-        removeClass(this.drop, "" + drop.classPrefix + "-open");
-        removeClass(this.drop, "" + drop.classPrefix + "-after-open");
-        this.drop.addEventListener(transitionEndEvent, handler = function() {
-          if (!hasClass(_this.drop, "" + drop.classPrefix + "-open")) {
-            removeClass(_this.drop, "" + drop.classPrefix + "-open-transitionend");
+    DropInstance.prototype.close = function() {
+      var handler, ref1;
+      if (!this.isOpened()) {
+        return;
+      }
+      removeClass(this.drop, drop.classPrefix + "-open");
+      removeClass(this.drop, drop.classPrefix + "-after-open");
+      this.drop.addEventListener(transitionEndEvent, handler = (function(_this) {
+        return function() {
+          if (!hasClass(_this.drop, drop.classPrefix + "-open")) {
+            removeClass(_this.drop, drop.classPrefix + "-open-transitionend");
           }
           return _this.drop.removeEventListener(transitionEndEvent, handler);
-        });
-        this.trigger('close');
-        if ((_ref1 = this.tether) != null) {
-          _ref1.disable();
-        }
-        drop.updateBodyClasses();
-        if (this.options.remove) {
-          return this.remove();
-        }
-      };
+        };
+      })(this));
+      this.trigger('close');
+      if ((ref1 = this.tether) != null) {
+        ref1.disable();
+      }
+      drop.updateBodyClasses();
+      if (this.options.remove) {
+        return this.remove();
+      }
+    };
 
-      DropInstance.prototype.remove = function() {
-        var _ref1;
-        this.close();
-        return (_ref1 = this.drop.parentNode) != null ? _ref1.removeChild(this.drop) : void 0;
-      };
+    DropInstance.prototype.remove = function() {
+      var ref1;
+      this.close();
+      return (ref1 = this.drop.parentNode) != null ? ref1.removeChild(this.drop) : void 0;
+    };
 
-      DropInstance.prototype.position = function() {
-        var _ref1;
-        if (this.isOpened()) {
-          return (_ref1 = this.tether) != null ? _ref1.position() : void 0;
-        }
-      };
+    DropInstance.prototype.position = function() {
+      var ref1;
+      if (this.isOpened()) {
+        return (ref1 = this.tether) != null ? ref1.position() : void 0;
+      }
+    };
 
-      DropInstance.prototype.destroy = function() {
-        var element, event, handler, _i, _len, _ref1, _ref2, _ref3;
-        this.remove();
-        if ((_ref1 = this.tether) != null) {
-          _ref1.destroy();
-        }
-        _ref2 = this._boundEvents;
-        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-          _ref3 = _ref2[_i], element = _ref3.element, event = _ref3.event, handler = _ref3.handler;
-          element.removeEventListener(event, handler);
-        }
-        this._boundEvents = [];
-        this.tether = null;
-        this.drop = null;
-        this.content = null;
-        this.target = null;
-        removeFromArray(allDrops[drop.classPrefix], this);
-        return removeFromArray(drop.drops, this);
-      };
+    DropInstance.prototype.destroy = function() {
+      var element, event, handler, i, len, ref1, ref2, ref3;
+      this.remove();
+      if ((ref1 = this.tether) != null) {
+        ref1.destroy();
+      }
+      ref2 = this._boundEvents;
+      for (i = 0, len = ref2.length; i < len; i++) {
+        ref3 = ref2[i], element = ref3.element, event = ref3.event, handler = ref3.handler;
+        element.removeEventListener(event, handler);
+      }
+      this._boundEvents = [];
+      this.tether = null;
+      this.drop = null;
+      this.content = null;
+      this.target = null;
+      removeFromArray(allDrops[drop.classPrefix], this);
+      return removeFromArray(drop.drops, this);
+    };
 
-      return DropInstance;
+    return DropInstance;
 
-    })(Evented);
-    return drop;
-  };
+  })(Evented);
+  return drop;
+};
 
-  window.Drop = createContext();
+Drop = createContext();
 
-  document.addEventListener('DOMContentLoaded', function() {
-    return Drop.updateBodyClasses();
-  });
+document.addEventListener('DOMContentLoaded', function() {
+  return Drop.updateBodyClasses();
+});
 
-}).call(this);
+return Drop;
+
+
+}));
