@@ -1,7 +1,6 @@
 var path   = require('path')
 var umd    = require('broccoli-umd')
 var funnel = require('broccoli-funnel')
-var coffee = require('broccoli-coffee')
 var concat = require('broccoli-concat')
 var uglify = require('broccoli-uglify-js')
 var merge  = require('broccoli-merge-trees')
@@ -22,17 +21,23 @@ var vendorTree = funnel('bower_components', {
 })
 
 
-// Coffeescript
-var coffeeTree = coffee(funnel('src/js', {
-  include: ['drop.coffee'],
+// Compile/Transpile
+var transpiledTree = babel(funnel('src/js', {
+  include: ['drop.js'],
   getDestinationPath: function(relativePath) {
     return path.basename(relativePath)
   }
-}), { bare: true })
+}))
 
 
 // Standalone UMD
-var standaloneTree = umd([coffeeTree], 'drop.js', 'drop.js', {
+var standaloneTree = umd([
+  concat(transpiledTree, {
+    inputFiles: ['drop.js'],
+    outputFile: '/drop.js',
+    footer: 'return Drop;'
+  })
+], 'drop.js', 'drop.js', {
   deps: {
     'default': ['Tether']
   }
@@ -41,9 +46,10 @@ var standaloneTree = umd([coffeeTree], 'drop.js', 'drop.js', {
 
 // Combined UMD
 var combinedTree = umd([
-  concat(merge([vendorTree, coffeeTree]), {
+  concat(merge([vendorTree, transpiledTree]), {
     inputFiles: ['tether.js', 'drop.js'],
-    outputFile: '/drop.js'
+    outputFile: '/drop.js',
+    footer: 'return Drop;'
   })
 ], 'drop.js', 'drop.js')
 
