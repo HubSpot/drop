@@ -6,6 +6,9 @@
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
     "Zack Bloom <zackbloom@gmail.com>"
   ],
+  "contributors": [
+    "Nicholas Hwang <nick.joosung.hwang@gmail.com>"
+  ],
   "description": "Client-side library for creating dropdowns",
   "keywords": [
     "dropdown",
@@ -22,6 +25,6 @@
     "tests"
   ],
   "dependencies": {
-    "tether": "~0.6.5"
+    "tether": "~0.7.0"
   }
 }
