@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "install": "bower install",
-    "build": "./bin/build"
+    "clean": "trash --force dist 2>/dev/null",
+    "build": "broccoli build dist"
   },
   "license": "MIT",
   "main": "dist/js/drop.js",
