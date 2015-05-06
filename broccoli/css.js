@@ -2,6 +2,7 @@ var funnel  = require('broccoli-funnel')
 var compass = require('broccoli-compass')
 var merge   = require('broccoli-merge-trees')
 
+
 // Stylesheets
 var sassTree = merge([
   funnel('src/css', {
@@ -25,5 +26,3 @@ var cssTree = funnel(compass(sassTree, {
 
 // Export tree
 module.exports = cssTree
-
-

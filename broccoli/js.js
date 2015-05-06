@@ -67,7 +67,6 @@ var combinedTree = umd([
 ], 'drop.js', 'drop.js');
 
 
-
 // Uglify
 var uglifyCombinedTree = uglify(combinedTree);
 var uglifyStandaloneTree = uglify(standaloneTree);
