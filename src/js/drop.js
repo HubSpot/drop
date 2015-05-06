@@ -307,7 +307,9 @@ function createContext(options={}) {
     }
 
     isOpened() {
-      return hasClass(this.drop, `${ drop.classPrefix }-open`);
+      if (this.drop) {
+        return hasClass(this.drop, `${ drop.classPrefix }-open`);
+      }
     }
 
     toggle() {
