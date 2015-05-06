@@ -88,7 +88,7 @@ createContext = (options={}) ->
       unless @target?
         throw new Error 'Drop Error: You must provide a target.'
 
-      if @options.classes
+      if @options.classes and @options.addTargetClasses isnt false
         addClass @target, @options.classes
 
       drop.drops.push @
@@ -177,6 +177,7 @@ createContext = (options={}) ->
         targetOffset: '0 0'
         enabled: false
         constraints: constraints
+        addTargetClasses: @options.addTargetClasses
 
       if @options.tetherOptions isnt false
         @tether = new Tether extend {}, options, @options.tetherOptions
