@@ -3,14 +3,14 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
-    define(["Tether"], function (a0) {
+    define(["tether"], function (a0) {
       return (factory(a0));
     });
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
-    module.exports = factory(require("Tether"));
+    module.exports = factory(require("tether"));
   } else {
     factory(Tether);
   }
@@ -31,6 +31,8 @@ function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else i
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/* global Tether */
 
 var _Tether$Utils = Tether.Utils;
 var extend = _Tether$Utils.extend;
@@ -134,7 +136,7 @@ function createContext() {
   extend(drop, defaultOptions, options);
   extend(drop.defaults, defaultOptions.defaults, options.defaults);
 
-  if (allDrops[drop.classPrefix] === null) {
+  if (typeof allDrops[drop.classPrefix] === 'undefined') {
     allDrops[drop.classPrefix] = [];
   }
 
@@ -167,7 +169,7 @@ function createContext() {
       this.options = extend({}, drop.defaults, opts);
       this.target = this.options.target;
 
-      if (this.target === null) {
+      if (typeof this.target === 'undefined') {
         throw new Error('Drop Error: You must provide a target.');
       }
 
@@ -345,7 +347,7 @@ function createContext() {
             var out = function out() {
               onUs = false;
 
-              if (outTimeout !== null) {
+              if (typeof outTimeout !== 'undefined') {
                 clearTimeout(outTimeout);
               }
 
@@ -391,8 +393,7 @@ function createContext() {
           document.body.appendChild(this.drop);
         }
 
-        if (this.tether !== null) {
-          ;
+        if (typeof this.tether !== 'undefined') {
           this.tether.enable();
         }
 
@@ -403,7 +404,7 @@ function createContext() {
           addClass(_this4.drop, '' + drop.classPrefix + '-after-open');
         });
 
-        if (this.tether !== null) {
+        if (typeof this.tether !== 'undefined') {
           this.tether.position();
         }
 
@@ -414,6 +415,8 @@ function createContext() {
     }, {
       key: 'close',
       value: function close() {
+        var _this5 = this;
+
         if (!this.isOpened()) {
           return;
         }
@@ -421,16 +424,18 @@ function createContext() {
         removeClass(this.drop, '' + drop.classPrefix + '-open');
         removeClass(this.drop, '' + drop.classPrefix + '-after-open');
 
-        this.drop.addEventListener(transitionEndEvent, function handler() {
-          if (!hasClass(this.drop, '' + drop.classPrefix + '-open')) {
-            removeClass(this.drop, '' + drop.classPrefix + '-open-transitionend');
+        var handler = function handler() {
+          if (!hasClass(_this5.drop, '' + drop.classPrefix + '-open')) {
+            removeClass(_this5.drop, '' + drop.classPrefix + '-open-transitionend');
           }
-          this.drop.removeEventListener(transitionEndEvent, handler);
-        });
+          _this5.drop.removeEventListener(transitionEndEvent, handler);
+        };
+
+        this.drop.addEventListener(transitionEndEvent, handler);
 
         this.trigger('close');
 
-        if (this.tether !== null) {
+        if (typeof this.tether !== 'undefined') {
           this.tether.disable();
         }
 
@@ -444,14 +449,14 @@ function createContext() {
       key: 'remove',
       value: function remove() {
         this.close();
-        if (this.drop.parentNode !== null) {
+        if (typeof this.drop.parentNode !== 'undefined') {
           this.drop.parentNode.removeChild(this.drop);
         }
       }
     }, {
       key: 'position',
       value: function position() {
-        if (this.isOpened() && this.tether !== null) {
+        if (this.isOpened() && typeof this.tether !== 'undefined') {
           this.tether.position();
         }
       }
@@ -460,7 +465,7 @@ function createContext() {
       value: function destroy() {
         this.remove();
 
-        if (this.tether !== null) {
+        if (typeof this.tether !== 'undefined') {
           this.tether.destroy();
         }
 
@@ -492,6 +497,7 @@ function createContext() {
 }
 
 var Drop = createContext();
+self.Drop = Drop;
 
 document.addEventListener('DOMContentLoaded', function () {
   Drop.updateBodyClasses();

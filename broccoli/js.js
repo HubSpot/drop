@@ -12,22 +12,31 @@ var pkg = require('../package.json')
 var banner = ['/*!', pkg.name, pkg.version, '*/\n'].join(' ')
 
 
-// Bower
-var vendorTree = funnel('bower_components', {
-  files: ['tether/tether.js'],
+// Vendor
+// NOTE: Wait until Tether provides UMD-less version for bundle
+// var vendorTree = funnel('bower_components', {
+//   files: ['tether/tether.js'],
+//   getDestinationPath: function(relativePath) {
+//     return path.basename(relativePath)
+//   }
+// })
+var vendorTree = funnel('src/vendor', {
+  files: ['tether-no-umd.js'],
   getDestinationPath: function(relativePath) {
-    return path.basename(relativePath)
+    return 'tether.js';
   }
-})
+});
 
 
-// Compile/Transpile
-var transpiledTree = babel(funnel('src/js', {
-  include: ['drop.js'],
-  getDestinationPath: function(relativePath) {
-    return path.basename(relativePath)
-  }
-}))
+// Transpile
+var transpiledTree = babel(
+  funnel('src/js', {
+    include: ['drop.js'],
+    getDestinationPath: function(relativePath) {
+      return path.basename(relativePath);
+    }
+  })
+);
 
 
 // Standalone UMD
@@ -39,24 +48,29 @@ var standaloneTree = umd([
   })
 ], 'drop.js', 'drop.js', {
   deps: {
-    'default': ['Tether']
+    'default': ['Tether'],
+    'global': ['Tether'],
+    'amd': ['tether'],
+    'cjs': ['tether']
   }
-})
+});
 
 
 // Combined UMD
 var combinedTree = umd([
-  concat(merge([vendorTree, transpiledTree]), {
-    inputFiles: ['tether.js', 'drop.js'],
-    outputFile: '/drop.js',
-    footer: 'return Drop;'
-  })
-], 'drop.js', 'drop.js')
+  concat(
+    merge([vendorTree, transpiledTree]), {
+      inputFiles: ['tether.js', 'drop.js'],
+      outputFile: '/drop.js',
+      footer: 'return Drop;'
+    })
+], 'drop.js', 'drop.js');
+
 
 
 // Uglify
-var uglifyCombinedTree = uglify(combinedTree)
-var uglifyStandaloneTree = uglify(standaloneTree)
+var uglifyCombinedTree = uglify(combinedTree);
+var uglifyStandaloneTree = uglify(standaloneTree);
 
 
 // JS files
@@ -65,23 +79,25 @@ var trees = {
   'drop-standalone.js': standaloneTree,
   'drop.min.js': uglifyCombinedTree,
   'drop-standalone.min.js': uglifyStandaloneTree
-}
+};
 
-var jsTrees = []
+var jsTrees = [];
 for (var file in trees) {
   if ({}.hasOwnProperty.call(trees, file)) {
     jsTrees.push(concat(trees[file], {
       inputFiles: ['**/*'],
       outputFile: '/' + file,
       header: banner
-    }))
+    }));
   }
 }
 
-var jsTree = funnel(merge(jsTrees), {
-  srcDir: '.',
-  destDir: 'js'
-})
+var jsTree = funnel(
+  merge(jsTrees), {
+    srcDir: '.',
+    destDir: 'js'
+  }
+);
 
 
 // Return files

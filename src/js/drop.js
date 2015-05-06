@@ -1,3 +1,5 @@
+/* global Tether */
+
 const {
   extend,
   addClass,
@@ -85,7 +87,7 @@ function createContext(options={}) {
   extend(drop, defaultOptions, options);
   extend(drop.defaults, defaultOptions.defaults, options.defaults);
 
-  if (allDrops[drop.classPrefix] === null) {
+  if (typeof allDrops[drop.classPrefix] === 'undefined') {
     allDrops[drop.classPrefix] = [];
   }
 
@@ -117,7 +119,7 @@ function createContext(options={}) {
       this.options = extend({}, drop.defaults, opts);
       this.target = this.options.target;
 
-      if (this.target === null) {
+      if (typeof this.target === 'undefined') {
         throw new Error('Drop Error: You must provide a target.');
       }
 
@@ -284,7 +286,7 @@ function createContext(options={}) {
         let out = () => {
           onUs = false
 
-          if (outTimeout !== null) {
+          if (typeof outTimeout !== 'undefined') {
             clearTimeout(outTimeout)
           }
 
@@ -324,7 +326,7 @@ function createContext(options={}) {
         document.body.appendChild(this.drop);
       }
 
-      if (this.tether !== null) {;
+      if (typeof this.tether !== 'undefined') {
         this.tether.enable()
       }
 
@@ -335,7 +337,7 @@ function createContext(options={}) {
         addClass(this.drop, `${ drop.classPrefix }-after-open`);
       })
 
-      if (this.tether !== null) {
+      if (typeof this.tether !== 'undefined') {
         this.tether.position();
       }
 
@@ -352,16 +354,18 @@ function createContext(options={}) {
       removeClass(this.drop, `${ drop.classPrefix }-open`);
       removeClass(this.drop, `${ drop.classPrefix }-after-open`);
 
-      this.drop.addEventListener(transitionEndEvent, function handler() {
+      let handler = () => {
         if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
           removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
         }
         this.drop.removeEventListener(transitionEndEvent, handler);
-      });
+      }
+
+      this.drop.addEventListener(transitionEndEvent, handler);
 
       this.trigger('close');
 
-      if (this.tether !== null) {
+      if (typeof this.tether !== 'undefined') {
         this.tether.disable();
       }
 
@@ -374,13 +378,13 @@ function createContext(options={}) {
 
     remove() {
       this.close();
-      if (this.drop.parentNode !== null) {
+      if (typeof this.drop.parentNode !== 'undefined') {
         this.drop.parentNode.removeChild(this.drop);
       }
     }
 
     position() {
-      if (this.isOpened() && this.tether !== null) {
+      if (this.isOpened() && typeof this.tether !== 'undefined') {
         this.tether.position();
       }
     }
@@ -388,7 +392,7 @@ function createContext(options={}) {
     destroy() {
       this.remove();
 
-      if (this.tether !== null) {
+      if (typeof this.tether !== 'undefined') {
         this.tether.destroy();
       }
 
@@ -414,6 +418,7 @@ function createContext(options={}) {
 }
 
 let Drop = createContext();
+self.Drop = Drop;
 
 document.addEventListener('DOMContentLoaded', () => {
   Drop.updateBodyClasses();
