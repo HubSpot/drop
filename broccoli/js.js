@@ -41,12 +41,9 @@ var transpiledTree = babel(
 
 // Standalone UMD
 var standaloneTree = umd([
-  concat(transpiledTree, {
-    inputFiles: ['drop.js'],
-    outputFile: '/drop.js',
-    footer: 'return Drop;'
-  })
+  transpiledTree
 ], 'drop.js', 'drop.js', {
+  objectToExport: 'Drop',
   deps: {
     'default': ['Tether'],
     'global': ['Tether'],
@@ -62,9 +59,10 @@ var combinedTree = umd([
     merge([vendorTree, transpiledTree]), {
       inputFiles: ['tether.js', 'drop.js'],
       outputFile: '/drop.js',
-      footer: 'return Drop;'
     })
-], 'drop.js', 'drop.js');
+], 'drop.js', 'drop.js', {
+  objectToExport: 'Drop'
+});
 
 
 // Uglify

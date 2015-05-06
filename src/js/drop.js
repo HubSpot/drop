@@ -421,7 +421,6 @@ function createContext(options={}) {
 }
 
 let Drop = createContext();
-self.Drop = Drop;
 
 document.addEventListener('DOMContentLoaded', () => {
   Drop.updateBodyClasses();

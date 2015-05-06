@@ -4,7 +4,7 @@
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
     define(["tether"], function (a0) {
-      return (factory(a0));
+      return (root['Drop'] = factory(a0));
     });
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
@@ -12,7 +12,7 @@
     // like Node.
     module.exports = factory(require("tether"));
   } else {
-    factory(Tether);
+    root['Drop'] = factory(Tether);
   }
 }(this, function (Tether) {
 
@@ -500,7 +500,6 @@ function createContext() {
 }
 
 var Drop = createContext();
-self.Drop = Drop;
 
 document.addEventListener('DOMContentLoaded', function () {
   Drop.updateBodyClasses();
