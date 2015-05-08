@@ -1,5 +1,3 @@
-/* global Tether */
-
 const {
   extend,
   addClass,
