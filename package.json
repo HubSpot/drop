@@ -1,22 +1,31 @@
 {
-  "name": "drop",
-  "version": "0.5.8",
+  "name": "tether-drop",
+  "version": "1.0.0",
   "description": "",
   "authors": [
     "Zack Bloom <zackbloom@gmail.com>",
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>"
   ],
+  "maintainers": [
+    "Nicholas Hwang <nick.joosung.hwang@gmail.com>"
+  ],
+  "scripts": {
+    "install": "bower install",
+    "build": "gulp build"
+  },
   "license": "MIT",
+  "main": "dist/js/drop.js",
   "devDependencies": {
-    "coffee-script": "~1.6.3",
-    "gulp": "~3.4.0",
-    "gulp-header": "~1.0.2",
-    "gulp-uglify": "~0.1.0",
-    "gulp-compass": "~1.0.3",
-    "gulp-coffee": "~1.2.5",
-    "gulp-concat": "~2.1.7",
-    "gulp-rename": "~0.2.1",
-    "gulp-util": "~2.2.9",
-    "gulp-bower": "0.0.1"
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-header": "^1.2.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-uglify": "^1.2.0",
+    "gulp-wrap-umd": "^0.2.1"
+  },
+  "dependencies": {
+    "tether": "^0.7.1"
   }
 }

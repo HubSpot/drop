@@ -1,6 +1,6 @@
 .drop-element, .drop-element:after, .drop-element:before, .drop-element *, .drop-element *:after, .drop-element *:before {
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 .drop-element {
@@ -13,15 +13,13 @@
   max-width: 100%;
   max-height: 100%; }
   .drop-element.drop-theme-hubspot-popovers .drop-content {
-    -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    -webkit-border-radius: 5px;
     border-radius: 5px;
     position: relative;
     font-family: inherit;
     background: #ebebeb;
-    color: #444444;
+    color: #444;
     padding: 1em;
     font-size: 1.1em;
     line-height: 1.5em; }
@@ -112,13 +110,11 @@
       border-right-color: #ebebeb; }
 
 .drop-element.drop-theme-hubspot-popovers .drop-content {
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  -webkit-border-radius: 2px;
   border-radius: 2px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 3px;
@@ -126,7 +122,7 @@
   .drop-element.drop-theme-hubspot-popovers .drop-content .drop-content-inner {
     border: 1px solid #dbdbdb;
     padding: 14px;
-    background: white;
+    background: #fff;
     overflow: hidden;
     width: 280px; }
     .drop-element.drop-theme-hubspot-popovers .drop-content .drop-content-inner .title {
