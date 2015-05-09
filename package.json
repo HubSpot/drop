@@ -24,5 +24,8 @@
     "gulp-ruby-sass": "^1.0.5",
     "gulp-uglify": "^1.2.0",
     "gulp-wrap-umd": "^0.2.1"
+  },
+  "dependencies": {
+    "tether": "^0.7.1"
   }
 }
