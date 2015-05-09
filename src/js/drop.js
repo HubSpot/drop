@@ -1,3 +1,5 @@
+/* global Tether */
+
 const {
   extend,
   addClass,
@@ -69,7 +71,7 @@ function createContext(options={}) {
     defaults: {}
   });
 
-  let defaultOptions = {
+  const defaultOptions = {
     classPrefix: 'drop',
     defaults: {
       position: 'bottom left',
@@ -94,8 +96,8 @@ function createContext(options={}) {
     // drops which share our classPrefix.
 
     let anyOpen = false;
-    let drops = allDrops[drop.classPrefix];
-    let len = drops.length;
+    const drops = allDrops[drop.classPrefix];
+    const len = drops.length;
     for (let i = 0; i < len; ++i) {
       if (drops[i].isOpened()) {
         anyOpen = true;
@@ -151,9 +153,9 @@ function createContext(options={}) {
       addClass(this.content, `${ drop.classPrefix }-content`);
 
       if (typeof this.options.content === 'function') {
-        let generateAndSetContent = () => {
+        const generateAndSetContent = () => {
           // content function might return a string or an element
-          let contentElementOrHTML = this.options.content.call(this, this);
+          const contentElementOrHTML = this.options.content.call(this, this);
 
           if (typeof contentElementOrHTML === 'string') {
             this.content.innerHTML = contentElementOrHTML;
@@ -212,7 +214,7 @@ function createContext(options={}) {
         });
       }
 
-      let opts = {
+      const opts = {
         element: this.drop,
         target: this.target,
         attachment: sortAttach(dropAttach),
@@ -240,15 +242,15 @@ function createContext(options={}) {
         return;
       }
 
-      let events = this.options.openOn.split(' ');
+      const events = this.options.openOn.split(' ');
 
       if (events.indexOf('click') >= 0) {
-        let openHandler = (event) => {
+        const openHandler = (event) => {
           this.toggle()
           event.preventDefault()
         };
 
-        let closeHandler = (event) => {
+        const closeHandler = (event) => {
           if (!this.isOpened()) {
             return;
           }
@@ -267,7 +269,7 @@ function createContext(options={}) {
         };
 
         for (let i = 0; i < clickEvents.length; ++i) {
-          let clickEvent = clickEvents[i];
+          const clickEvent = clickEvents[i];
           this._on(this.target, clickEvent, openHandler);
           this._on(document, clickEvent, closeHandler);
         }
@@ -276,13 +278,13 @@ function createContext(options={}) {
       if (events.indexOf('hover') >= 0) {
         let onUs = false;
 
-        let over = () => {
+        const over = () => {
           onUs = true;
           this.open();
         };
 
         let outTimeout = null;
-        let out = () => {
+        const out = () => {
           onUs = false
 
           if (typeof outTimeout !== 'undefined') {
@@ -355,7 +357,7 @@ function createContext(options={}) {
       removeClass(this.drop, `${ drop.classPrefix }-open`);
       removeClass(this.drop, `${ drop.classPrefix }-after-open`);
 
-      let handler = () => {
+      const handler = () => {
         if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
           removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
         }
@@ -398,7 +400,7 @@ function createContext(options={}) {
       }
 
       for (let i = 0; i < this._boundEvents.lengt; ++i) {
-        let {element, event, handler} = this._boundEvents[i];
+        const {element, event, handler} = this._boundEvents[i];
         element.removeEventListener(event, handler);
       }
 
@@ -418,7 +420,7 @@ function createContext(options={}) {
   return drop;
 }
 
-let Drop = createContext();
+const Drop = createContext();
 
 document.addEventListener('DOMContentLoaded', () => {
   Drop.updateBodyClasses();
