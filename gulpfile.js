@@ -1,6 +1,7 @@
 var del     = require('del');
 var gulp    = require('gulp');
 var babel   = require('gulp-babel');
+var bump    = require('gulp-bump');
 var sass    = require('gulp-ruby-sass');
 var header  = require('gulp-header');
 var rename  = require('gulp-rename');
@@ -58,8 +59,17 @@ gulp.task('css', function() {
 });
 
 
-// Documentation
-// TODO: Redo documentation
+// Version bump
+var VERSIONS = ['patch', 'minor', 'major'];
+for (var i = 0; i < VERSIONS.length; ++i){
+  (function(version) {
+    gulp.task('version:' + version, function() {
+      gulp.src(['package.json', 'bower.json'])
+        .pipe(bump({type: version}))
+        .pipe(gulp.dest('.'))
+    });
+  })(VERSIONS[i]);
+}
 
 
 // Watch
