@@ -167,7 +167,7 @@ function createContext() {
         throw new Error('Drop Error: You must provide a target.');
       }
 
-      if (this.options.classes && this.options.addTargetOptions !== false) {
+      if (this.options.classes && this.options.addTargetClasses !== false) {
         addClass(this.target, this.options.classes);
       }
 
@@ -275,7 +275,7 @@ function createContext() {
           targetOffset: '0 0',
           enabled: false,
           constraints: constraints,
-          addTargetOptions: this.options.addTargetClasses
+          addTargetClasses: this.options.addTargetClasses
         };
 
         if (this.options.tetherOptions !== false) {
