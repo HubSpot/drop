@@ -381,7 +381,7 @@ function createContext(options={}) {
 
     remove() {
       this.close();
-      if (typeof this.drop.parentNode !== 'undefined') {
+      if (this.drop.parentNode) {
         this.drop.parentNode.removeChild(this.drop);
       }
     }
@@ -399,7 +399,7 @@ function createContext(options={}) {
         this.tether.destroy();
       }
 
-      for (let i = 0; i < this._boundEvents.lengt; ++i) {
+      for (let i = 0; i < this._boundEvents.length; ++i) {
         const {element, event, handler} = this._boundEvents[i];
         element.removeEventListener(event, handler);
       }
