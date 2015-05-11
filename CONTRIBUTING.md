@@ -34,6 +34,7 @@ to contribute, we ask that you take the following steps:
 
 1. Most of the _editable_ code lives in the `src` directory while built code
    will end up in the `dist` directory upon running `npm run build`.
+
 2. Depending on how big your changes are, bump the version numbers appropriately
    in `bower.json` and `package.json`. We try to follow semver, so a good rule
    of thumb for how to bump the version is:
@@ -44,9 +45,16 @@ to contribute, we ask that you take the following steps:
 
    Versioning is hard, so just use good judgement and we'll be more than happy
    to help out.
+
+   __NOTE__: There is a `gulp` task that will automate some of the versioning.
+   You can run `gulp version:{type}` where type is `patch|minor|major` to
+   update both `bower.json` and `package.json` as well as add the appropriate
+   git tag.
+
 3. Provide a thoughtful commit message and push your changes to your fork using
    `git push origin master` (assuming your forked project is using `origin` for
    the remote name and you are on the `master` branch).
+
 4. Open a Pull Request on GitHub with a description of your changes.
 
 
