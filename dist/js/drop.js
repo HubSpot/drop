@@ -1,4 +1,4 @@
-/*! tether-drop 1.0.0 */
+/*! tether-drop 1.0.1 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -446,7 +446,7 @@ function createContext() {
       key: 'remove',
       value: function remove() {
         this.close();
-        if (typeof this.drop.parentNode !== 'undefined') {
+        if (this.drop.parentNode) {
           this.drop.parentNode.removeChild(this.drop);
         }
       }
@@ -466,7 +466,7 @@ function createContext() {
           this.tether.destroy();
         }
 
-        for (var i = 0; i < this._boundEvents.lengt; ++i) {
+        for (var i = 0; i < this._boundEvents.length; ++i) {
           var _boundEvents$i = this._boundEvents[i];
           var element = _boundEvents$i.element;
           var _event = _boundEvents$i.event;
