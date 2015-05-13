@@ -1,7 +1,7 @@
 {
   "name": "tether-drop",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "Client-side library for creating dropdowns",
   "authors": [
     "Zack Bloom <zackbloom@gmail.com>",
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>"
@@ -16,6 +16,7 @@
   "license": "MIT",
   "main": "dist/js/drop.js",
   "devDependencies": {
+    "bower": "^1.4.1",
     "del": "^1.1.1",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.2.0",
