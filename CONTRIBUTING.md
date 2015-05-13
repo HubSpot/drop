@@ -5,9 +5,6 @@ You will need:
 - Node.js/io.js & npm
 - Bower
 - Gulp
-- _Ruby_ (to be deprecated)
-- _Sass gem_ (to be deprecated)
-- _Compass gem_ (to be deprecated)
 
 
 ## Getting started
@@ -20,10 +17,6 @@ You will need:
    directory and running `npm run build`
 5. Assuming everything went well, you should now have a `dist` directory that
    matches the one you moved in step 4.
-6. __NOTE__: Depending on your local version of Sass and Compass, you may end up
-   with slightly different stylesheets. In most cases, the changes are
-   equivalents and nothing to worry about. That said, we are planning on
-   removing the Ruby dependencies to alleviate issues like this.
 
 
 ## Writing code!
