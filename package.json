@@ -1,6 +1,6 @@
 {
   "name": "tether-drop",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "authors": [
     "Zack Bloom <zackbloom@gmail.com>",
@@ -30,6 +30,6 @@
     "gulp-wrap-umd": "^0.2.1"
   },
   "dependencies": {
-    "tether": "^0.7.1"
+    "tether": "^0.7.2"
   }
 }

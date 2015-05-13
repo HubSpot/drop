@@ -1,6 +1,6 @@
 {
   "name": "tether-drop",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/HubSpot/drop",
   "authors": [
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
@@ -25,6 +25,6 @@
     "tests"
   ],
   "dependencies": {
-    "tether": "~0.7.1"
+    "tether": "~0.7.2"
   }
 }
