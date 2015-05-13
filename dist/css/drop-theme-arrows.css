@@ -1,6 +1,4 @@
 .drop-element, .drop-element:after, .drop-element:before, .drop-element *, .drop-element *:after, .drop-element *:before {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 .drop-element {
@@ -13,8 +11,6 @@
   max-width: 100%;
   max-height: 100%; }
   .drop-element.drop-theme-arrows .drop-content {
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
     border-radius: 5px;
     position: relative;
     font-family: inherit;
@@ -23,12 +19,10 @@
     padding: 1em;
     font-size: 1.1em;
     line-height: 1.5em;
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
     -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+            transform: translateZ(0);
     -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); }
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); }
     .drop-element.drop-theme-arrows .drop-content:before {
       content: "";
       display: block;

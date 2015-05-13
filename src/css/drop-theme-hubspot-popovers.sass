@@ -1,8 +1,3 @@
-@import compass/css3
-@import compass/utilities/general/clearfix
-
-@import ../bower_components/tether/sass/mixins/pointer-events
-
 @import ../bower_components/tether/sass/helpers/tether
 @import ../bower_components/tether/sass/helpers/tether-theme-arrows
 
@@ -19,8 +14,8 @@ $useDropShadow: false
 .drop-element.drop-theme-hubspot-popovers
 
     .drop-content
-        +box-shadow(0 3px 7px rgba(0, 0, 0, .2))
-        +border-radius(2px)
+        box-shadow: 0 3px 7px rgba(0, 0, 0, .2)
+        border-radius: 2px
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
         //border: 1px solid #b3b3b3
         padding: 3px

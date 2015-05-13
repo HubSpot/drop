@@ -1,6 +1,4 @@
 .drop-element, .drop-element:after, .drop-element:before, .drop-element *, .drop-element *:after, .drop-element *:before {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 .drop-element {
@@ -13,8 +11,6 @@
   max-width: 100%;
   max-height: 100%; }
   .drop-element.drop-theme-arrows-bounce .drop-content {
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
     border-radius: 5px;
     position: relative;
     font-family: inherit;
@@ -23,12 +19,10 @@
     padding: 1em;
     font-size: 1.1em;
     line-height: 1.5em;
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
     -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+            transform: translateZ(0);
     -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); }
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); }
     .drop-element.drop-theme-arrows-bounce .drop-content:before {
       content: "";
       display: block;
@@ -116,96 +110,72 @@
       border-right-color: #fff; }
 
 .drop-element.drop-theme-arrows-bounce {
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
   -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -moz-transition: opacity 0.1s;
-  -o-transition: opacity 0.1s;
-  -webkit-transition: opacity 0.1s;
-  transition: opacity 0.1s;
+          transform: translateZ(0);
+  -webkit-transition: opacity 100ms;
+          transition: opacity 100ms;
   opacity: 0; }
   .drop-element.drop-theme-arrows-bounce .drop-content {
-    -moz-transition: -moz-transform 0.3s cubic-bezier(0, 0, 0.265, 1.55);
-    -o-transition: -o-transform 0.3s cubic-bezier(0, 0, 0.265, 1.55);
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0, 0, 0.265, 1.55);
-    transition: transform 0.3s cubic-bezier(0, 0, 0.265, 1.55);
-    -moz-transform: scale(0) translateZ(0);
-    -ms-transform: scale(0) translateZ(0);
+            transition: transform 0.3s cubic-bezier(0, 0, 0.265, 1.55);
     -webkit-transform: scale(0) translateZ(0);
-    transform: scale(0) translateZ(0); }
+            transform: scale(0) translateZ(0); }
   .drop-element.drop-theme-arrows-bounce.drop-open {
     display: none; }
   .drop-element.drop-theme-arrows-bounce.drop-open-transitionend {
     display: block; }
   .drop-element.drop-theme-arrows-bounce.drop-after-open {
-    -moz-transition: none;
-    -o-transition: none;
     -webkit-transition: none;
-    transition: none;
+            transition: none;
     opacity: 1; }
     .drop-element.drop-theme-arrows-bounce.drop-after-open .drop-content {
-      -moz-transform: scale(1) translateZ(0);
-      -ms-transform: scale(1) translateZ(0);
       -webkit-transform: scale(1) translateZ(0);
-      transform: scale(1) translateZ(0); }
+              transform: scale(1) translateZ(0); }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-center .drop-content {
-    -moz-transform-origin: 50% calc(100% + 12px);
-    -ms-transform-origin: 50% calc(100% + 12px);
-    -webkit-transform-origin: 50% calc(100% + 12px);
-    transform-origin: 50% calc(100% + 12px); }
+    -webkit-transform-origin: 50%, calc(100% + 12px);
+        -ms-transform-origin: 50%, calc(100% + 12px);
+            transform-origin: 50%, calc(100% + 12px); }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-center .drop-content {
-    -moz-transform-origin: 50% -12px;
-    -ms-transform-origin: 50% -12px;
-    -webkit-transform-origin: 50% -12px;
-    transform-origin: 50% -12px; }
+    -webkit-transform-origin: 50%, -12px;
+        -ms-transform-origin: 50%, -12px;
+            transform-origin: 50%, -12px; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-right.drop-element-attached-middle .drop-content {
-    -moz-transform-origin: calc(100% + 12px) 50%;
-    -ms-transform-origin: calc(100% + 12px) 50%;
-    -webkit-transform-origin: calc(100% + 12px) 50%;
-    transform-origin: calc(100% + 12px) 50%; }
+    -webkit-transform-origin: calc(100% + 12px), 50%;
+        -ms-transform-origin: calc(100% + 12px), 50%;
+            transform-origin: calc(100% + 12px), 50%; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-left.drop-element-attached-middle .drop-content {
-    -moz-transform-origin: -12px 50%;
-    -ms-transform-origin: -12px 50%;
-    -webkit-transform-origin: -12px 50%;
-    transform-origin: -12px 50%; }
+    -webkit-transform-origin: -12px, 50%;
+        -ms-transform-origin: -12px, 50%;
+            transform-origin: -12px, 50%; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content {
-    -moz-transform-origin: 0 -12px;
-    -ms-transform-origin: 0 -12px;
-    -webkit-transform-origin: 0 -12px;
-    transform-origin: 0 -12px; }
+    -webkit-transform-origin: 0, -12px;
+        -ms-transform-origin: 0, -12px;
+            transform-origin: 0, -12px; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-right.drop-target-attached-bottom .drop-content {
-    -moz-transform-origin: 100% -12px;
-    -ms-transform-origin: 100% -12px;
-    -webkit-transform-origin: 100% -12px;
-    transform-origin: 100% -12px; }
+    -webkit-transform-origin: 100%, -12px;
+        -ms-transform-origin: 100%, -12px;
+            transform-origin: 100%, -12px; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-top .drop-content {
-    -moz-transform-origin: 0 calc(100% + 12px);
-    -ms-transform-origin: 0 calc(100% + 12px);
-    -webkit-transform-origin: 0 calc(100% + 12px);
-    transform-origin: 0 calc(100% + 12px); }
+    -webkit-transform-origin: 0, calc(100% + 12px);
+        -ms-transform-origin: 0, calc(100% + 12px);
+            transform-origin: 0, calc(100% + 12px); }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-top .drop-content {
-    -moz-transform-origin: 100% calc(100% + 12px);
-    -ms-transform-origin: 100% calc(100% + 12px);
-    -webkit-transform-origin: 100% calc(100% + 12px);
-    transform-origin: 100% calc(100% + 12px); }
+    -webkit-transform-origin: 100%, calc(100% + 12px);
+        -ms-transform-origin: 100%, calc(100% + 12px);
+            transform-origin: 100%, calc(100% + 12px); }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-right.drop-target-attached-left .drop-content {
-    -moz-transform-origin: calc(100% + 12px) 0;
-    -ms-transform-origin: calc(100% + 12px) 0;
-    -webkit-transform-origin: calc(100% + 12px) 0;
-    transform-origin: calc(100% + 12px) 0; }
+    -webkit-transform-origin: calc(100% + 12px), 0;
+        -ms-transform-origin: calc(100% + 12px), 0;
+            transform-origin: calc(100% + 12px), 0; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-top.drop-element-attached-left.drop-target-attached-right .drop-content {
-    -moz-transform-origin: -12px 0;
-    -ms-transform-origin: -12px 0;
-    -webkit-transform-origin: -12px 0;
-    transform-origin: -12px 0; }
+    -webkit-transform-origin: -12px, 0;
+        -ms-transform-origin: -12px, 0;
+            transform-origin: -12px, 0; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-left .drop-content {
-    -moz-transform-origin: calc(100% + 12px) 100%;
-    -ms-transform-origin: calc(100% + 12px) 100%;
-    -webkit-transform-origin: calc(100% + 12px) 100%;
-    transform-origin: calc(100% + 12px) 100%; }
+    -webkit-transform-origin: calc(100% + 12px), 100%;
+        -ms-transform-origin: calc(100% + 12px), 100%;
+            transform-origin: calc(100% + 12px), 100%; }
   .drop-element.drop-theme-arrows-bounce.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-right .drop-content {
-    -moz-transform-origin: -12px 100%;
-    -ms-transform-origin: -12px 100%;
-    -webkit-transform-origin: -12px 100%;
-    transform-origin: -12px 100%; }
+    -webkit-transform-origin: -12px, 100%;
+        -ms-transform-origin: -12px, 100%;
+            transform-origin: -12px, 100%; }
