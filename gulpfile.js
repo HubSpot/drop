@@ -35,7 +35,7 @@ gulp.task('clean', function() {
 
 
 // Javascript
-gulp.task('js', ['clean'], function() {
+gulp.task('js', function() {
   gulp.src('./src/js/drop.js')
     .pipe(babel())
     .pipe(umd(umdOptions))
