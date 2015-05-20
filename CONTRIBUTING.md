@@ -16,13 +16,13 @@ You will need:
 4. Test that you can build the source by moving/renaming the existing `dist`
    directory and running `npm run build`
 5. Assuming everything went well, you should now have a `dist` directory that
-   matches the one you moved in step 4.
+   matches the one you moved in step 4
 
 
 ## Writing code!
 
 We use `gulp` to facilitate things like transpilation, minification, etc. so
-can focus on writing relevant code. If there is a fix or feature you would like
+can you focus on writing relevant code. If there is a fix or feature you would like
 to contribute, we ask that you take the following steps:
 
 1. Most of the _editable_ code lives in the `src` directory while built code

@@ -21,9 +21,9 @@
 
 ## Drop
 
-Drop is a Javascript and CSS library for creating dropdowns and other popups attached to elements on the page. Drop uses [Tether.js](http://github.hubspot.com/tether) to efficiently position its elements.
+Drop is a JavaScript and CSS library for creating dropdowns and other popups attached to elements on the page. Drop uses [Tether.js](http://github.hubspot.com/tether) to efficiently position its elements.
 
-Thank you for considering Drop, we believe it's the best way of creating dropdown-style elements available right now.
+Thank you for considering Drop. We believe it's the best way of creating dropdown-style elements available right now.
 
 ### Features
 
@@ -34,11 +34,11 @@ Because Drop is built on [Tether](http://github.hubspot.com/tether), you get all
 - Drops can be nested within other drops
 - Drops can be attached to any of 12 attachment points on the target, or you can leverage the full power of Tether to position your drop anywhere.
 - Drops can be configured to open when the user clicks or hovers.
-- A development team at [HubSpot](http://github.hubspot.com) who care about making it do everything you need.
+- Drop is maintained by developers at [HubSpot](http://github.hubspot.com) who care about making it do everything you need.
 
 ### Dependencies
 
-None!
+Tether
 
 ### Browser Support
 
@@ -82,11 +82,11 @@ Returns true if the drop is opened.
 
 #### `position()`
 
-Reposition the drop.  Call if you change the content of the drop or the position of the element its attached to.
+Reposition the drop.  Call if you change the content of the drop or the position of the element it's attached to.
 
 #### `destroy()`
 
-Remove the drop along with all of it's event bindings.  Calling any method after `destroy` is undefined.
+Remove the drop along with all of its event bindings.  Calling any method after `destroy` is undefined.
 
 ### Options
 
@@ -94,12 +94,12 @@ The following options can be passed to the drop constructor:
 
 #### `target`
 
-The element (or a selector for an element) the Drop should stay adjacent to on the page.  An action on this element like
-a click or hover can be set to open the drop.
+The element (or a selector for an element) the Drop should stay adjacent to on the page.  An action on this element, such as
+a click or hover, can be set to open the drop.
 
 #### `content`
 
-The content which should be rendered into the Drop.  Can be:
+The content that should be rendered into the Drop.  Can be:
 
 - A DOM element
 - An HTML string
@@ -128,7 +128,7 @@ More information about attachment can be found in the [Tether documentation](htt
 
 #### `openOn`
 
-Specifies what event on the target opens the drop. If you set this to `undefined` or `null` you will need to manually call `.open()`/`.close()` on the `drop` instance.
+Specifies what event on the target opens the drop. If you set this to `undefined` or `null` you will need to manually call `.open()` and `.close()` on the `drop` instance.
 `'always'` will open the drop immediately when it's rendered and leave it open.
 
 ```coffeescript
@@ -148,7 +148,7 @@ false
 
 #### `constrainToScrollParent`
 
-Similar to `constrainToWindow` but for the target element's first scroll parent, that is the first parent which has `overflow: auto` or `overflow: scroll` set, or the body, whichever comes first.
+Similar to `constrainToWindow` but for the target element's first scroll parent: the first parent that has `overflow: auto` or `overflow: scroll` set, or the body, whichever comes first.
 
 #### `classes`
 
@@ -156,7 +156,7 @@ Additional class names to be added to the drop. These can be set to apply a them
 
 #### `remove`
 
-Set to `true` if you'd like the drop element to be removed from the DOM when the drop is closed, and recreated when it's opened.
+Set to `true` if you'd like the drop element to be removed from the DOM when the drop is closed and recreated when it's opened.
 
 ```coffeescript
 true
@@ -165,7 +165,7 @@ false
 
 #### `tetherOptions`
 
-Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://tether.io) for more information.  Set to `false` to disable tether.
+Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://tether.io) for more information.  Set to `false` to disable Tether.
 
 #### Defaults
 
@@ -201,5 +201,4 @@ drop remains positioned correctly.
 
 ### Body Class
 
-Drop adds a class to the body whenever a drop is open.  It defaults to `drop-open`, see
-the Embedding doc for more details.
+Drop adds a class to the body whenever a drop is open.  It defaults to `drop-open`. See the [Embedding documentation](http://github.hubspot.com/drop/overview/embedding_drop/) for more details.

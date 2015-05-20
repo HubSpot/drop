@@ -17,14 +17,14 @@ All of [Tether's](/tether) classes get added as well, using the `drop-` prefix.
 ### Animation
 
 To facilitate animation, Drop stratigically adds and removes three classes
-when a Drop is opened.
+when a drop is opened:
 
-- `drop-open` is added when the drop is opened and removed when it should be hidden,
-use `drop-open` if you don't need animation.
-- `drop-after-open` is added in the next event loop tick after the drop is opened,
-start your CSS transitions when `drop-after-open` appears.
+- `drop-open` is added when the drop is opened and removed when it should be hidden.
+Use `drop-open` if you don't need animation.
+- `drop-after-open` is added in the next event loop tick after the drop is opened.
+Start your CSS transitions when `drop-after-open` appears.
 - `drop-open-transitionend` is added immediately, but not removed until the `transitionend`
-event fires on the drop.  Use `drop-open-transitionend` to control the showing and hiding
+event fires on the drop. Use `drop-open-transitionend` to control the showing and hiding
 of your element when using an animation.
 
 A simple CSS setup which demonstrates the method:
@@ -54,8 +54,8 @@ the element and the target.
 
 ### Themes
 
-Drop ships with two animated themes and one nonanimated one.  They are available in the
+Drop ships with two animated themes and one non-animated one.  They are available in the
 sass and css directories of the project.
 
-If you look at the sass, you'll notice that we make use of mixins which allow you to configure
+If you look at the Sass, you'll notice that we make use of mixins which allow you to configure
 many elements of the theme to make it suit your application.
