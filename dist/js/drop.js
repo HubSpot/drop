@@ -10,23 +10,21 @@
   }
 }(this, function(Tether) {
 
-'use strict';
+/* global Tether */
 
-var _bind = Function.prototype.bind;
+'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { desc = parent = getter = undefined; _again = false; var object = _x2,
-    property = _x3,
-    receiver = _x4; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+var _bind = Function.prototype.bind;
 
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-/* global Tether */
 
 var _Tether$Utils = Tether.Utils;
 var extend = _Tether$Utils.extend;
@@ -44,10 +42,9 @@ function sortAttach(str) {
   var second = _str$split2[1];
 
   if (['left', 'right'].indexOf(first) >= 0) {
-    var _temp = [second, first];
-    first = _temp[0];
-    second = _temp[1];
-    _temp;
+    var _ref = [second, first];
+    first = _ref[0];
+    second = _ref[1];
   }
   return [first, second].join(' ');
 }
@@ -191,7 +188,7 @@ function createContext() {
     }, {
       key: 'setupElements',
       value: function setupElements() {
-        var _this2 = this;
+        var _this = this;
 
         this.drop = document.createElement('div');
         addClass(this.drop, drop.classPrefix);
@@ -206,13 +203,13 @@ function createContext() {
         if (typeof this.options.content === 'function') {
           var generateAndSetContent = function generateAndSetContent() {
             // content function might return a string or an element
-            var contentElementOrHTML = _this2.options.content.call(_this2, _this2);
+            var contentElementOrHTML = _this.options.content.call(_this, _this);
 
             if (typeof contentElementOrHTML === 'string') {
-              _this2.content.innerHTML = contentElementOrHTML;
+              _this.content.innerHTML = contentElementOrHTML;
             } else if (typeof contentElementOrHTML === 'object') {
-              _this2.content.innerHTML = '';
-              _this2.content.appendChild(contentElementOrHTML);
+              _this.content.innerHTML = '';
+              _this.content.appendChild(contentElementOrHTML);
             } else {
               throw new Error('Drop Error: Content function should return a string or HTMLElement.');
             }
@@ -285,7 +282,7 @@ function createContext() {
     }, {
       key: 'setupEvents',
       value: function setupEvents() {
-        var _this3 = this;
+        var _this2 = this;
 
         if (!this.options.openOn) {
           return;
@@ -300,26 +297,26 @@ function createContext() {
 
         if (events.indexOf('click') >= 0) {
           var openHandler = function openHandler(event) {
-            _this3.toggle();
+            _this2.toggle();
             event.preventDefault();
           };
 
           var closeHandler = function closeHandler(event) {
-            if (!_this3.isOpened()) {
+            if (!_this2.isOpened()) {
               return;
             }
 
             // Clicking inside dropdown
-            if (event.target === _this3.drop || _this3.drop.contains(event.target)) {
+            if (event.target === _this2.drop || _this2.drop.contains(event.target)) {
               return;
             }
 
             // Clicking target
-            if (event.target === _this3.target || _this3.target.contains(event.target)) {
+            if (event.target === _this2.target || _this2.target.contains(event.target)) {
               return;
             }
 
-            _this3.close();
+            _this2.close();
           };
 
           for (var i = 0; i < clickEvents.length; ++i) {
@@ -335,7 +332,7 @@ function createContext() {
 
             var over = function over() {
               onUs = true;
-              _this3.open();
+              _this2.open();
             };
 
             var outTimeout = null;
@@ -348,16 +345,16 @@ function createContext() {
 
               outTimeout = setTimeout(function () {
                 if (!onUs) {
-                  _this3.close();
+                  _this2.close();
                 }
                 outTimeout = null;
               }, 50);
             };
 
-            _this3._on(_this3.target, 'mouseover', over);
-            _this3._on(_this3.drop, 'mouseover', over);
-            _this3._on(_this3.target, 'mouseout', out);
-            _this3._on(_this3.drop, 'mouseout', out);
+            _this2._on(_this2.target, 'mouseover', over);
+            _this2._on(_this2.drop, 'mouseover', over);
+            _this2._on(_this2.target, 'mouseout', out);
+            _this2._on(_this2.drop, 'mouseout', out);
           })();
         }
       }
@@ -380,7 +377,7 @@ function createContext() {
     }, {
       key: 'open',
       value: function open() {
-        var _this4 = this;
+        var _this3 = this;
 
         if (this.isOpened()) {
           return;
@@ -398,7 +395,7 @@ function createContext() {
         addClass(this.drop, '' + drop.classPrefix + '-open-transitionend');
 
         setTimeout(function () {
-          addClass(_this4.drop, '' + drop.classPrefix + '-after-open');
+          addClass(_this3.drop, '' + drop.classPrefix + '-after-open');
         });
 
         if (typeof this.tether !== 'undefined') {
@@ -412,7 +409,7 @@ function createContext() {
     }, {
       key: 'close',
       value: function close() {
-        var _this5 = this;
+        var _this4 = this;
 
         if (!this.isOpened()) {
           return;
@@ -422,10 +419,10 @@ function createContext() {
         removeClass(this.drop, '' + drop.classPrefix + '-after-open');
 
         var handler = function handler() {
-          if (!hasClass(_this5.drop, '' + drop.classPrefix + '-open')) {
-            removeClass(_this5.drop, '' + drop.classPrefix + '-open-transitionend');
+          if (!hasClass(_this4.drop, '' + drop.classPrefix + '-open')) {
+            removeClass(_this4.drop, '' + drop.classPrefix + '-open-transitionend');
           }
-          _this5.drop.removeEventListener(transitionEndEvent, handler);
+          _this4.drop.removeEventListener(transitionEndEvent, handler);
         };
 
         this.drop.addEventListener(transitionEndEvent, handler);
