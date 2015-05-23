@@ -395,7 +395,9 @@ function createContext() {
         addClass(this.drop, '' + drop.classPrefix + '-open-transitionend');
 
         setTimeout(function () {
-          addClass(_this3.drop, '' + drop.classPrefix + '-after-open');
+          if (_this3.drop) {
+            addClass(_this3.drop, '' + drop.classPrefix + '-after-open');
+          }
         });
 
         if (typeof this.tether !== 'undefined') {

@@ -337,7 +337,9 @@ function createContext(options={}) {
       addClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
 
       setTimeout(() => {
-        addClass(this.drop, `${ drop.classPrefix }-after-open`);
+        if (this.drop) {
+          addClass(this.drop, `${ drop.classPrefix }-after-open`);
+        }
       })
 
       if (typeof this.tether !== 'undefined') {
