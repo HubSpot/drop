@@ -22,7 +22,7 @@ function removeFromArray(arr, item) {
   while((index = arr.indexOf(item)) !== -1) {
     results.push(arr.splice(index, 1));
   }
-  return results
+  return results;
 }
 
 let clickEvents = ['click'];
@@ -54,9 +54,9 @@ const MIRROR_ATTACH = {
   bottom: 'top',
   middle: 'middle',
   center: 'center'
-}
+};
 
-let allDrops = {}
+let allDrops = {};
 
 // Drop can be included in external libraries.  Calling createContext gives you a fresh
 // copy of drop which won't interact with other copies on the page (beyond calling the document events).
@@ -115,7 +115,7 @@ function createContext(options={}) {
 
   class DropInstance extends Evented {
     constructor(opts) {
-      super()
+      super();
       this.options = extend({}, drop.defaults, opts);
       this.target = this.options.target;
 
@@ -168,7 +168,7 @@ function createContext(options={}) {
 
         };
 
-        generateAndSetContent()
+        generateAndSetContent();
         this.on('open', generateAndSetContent.bind(this));
       } else if (typeof this.options.content === 'object') {
         this.content.appendChild(this.options.content);
@@ -238,7 +238,7 @@ function createContext(options={}) {
       }
 
       if (this.options.openOn === 'always') {
-        setTimeout(this.open.bind(this))
+        setTimeout(this.open.bind(this));
         return;
       }
 
@@ -246,8 +246,8 @@ function createContext(options={}) {
 
       if (events.indexOf('click') >= 0) {
         const openHandler = (event) => {
-          this.toggle()
-          event.preventDefault()
+          this.toggle();
+          event.preventDefault();
         };
 
         const closeHandler = (event) => {
@@ -265,7 +265,7 @@ function createContext(options={}) {
             return;
           }
 
-          this.close()
+          this.close();
         };
 
         for (let i = 0; i < clickEvents.length; ++i) {
@@ -285,10 +285,10 @@ function createContext(options={}) {
 
         let outTimeout = null;
         const out = () => {
-          onUs = false
+          onUs = false;
 
           if (typeof outTimeout !== 'undefined') {
-            clearTimeout(outTimeout)
+            clearTimeout(outTimeout);
           }
 
           outTimeout = setTimeout(() => {
@@ -296,8 +296,8 @@ function createContext(options={}) {
               this.close();
             }
             outTimeout = null;
-          }, 50)
-        }
+          }, 50);
+        };
 
         this._on(this.target, 'mouseover', over);
         this._on(this.drop, 'mouseover', over);
@@ -314,9 +314,9 @@ function createContext(options={}) {
 
     toggle() {
       if (this.isOpened()) {
-        this.close()
+        this.close();
       } else {
-        this.open()
+        this.open();
       }
     }
 
@@ -330,7 +330,7 @@ function createContext(options={}) {
       }
 
       if (typeof this.tether !== 'undefined') {
-        this.tether.enable()
+        this.tether.enable();
       }
 
       addClass(this.drop, `${ drop.classPrefix }-open`);
@@ -340,7 +340,7 @@ function createContext(options={}) {
         if (this.drop) {
           addClass(this.drop, `${ drop.classPrefix }-after-open`);
         }
-      })
+      });
 
       if (typeof this.tether !== 'undefined') {
         this.tether.position();
@@ -364,7 +364,7 @@ function createContext(options={}) {
           removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
         }
         this.drop.removeEventListener(transitionEndEvent, handler);
-      }
+      };
 
       this.drop.addEventListener(transitionEndEvent, handler);
 
@@ -426,5 +426,5 @@ const Drop = createContext();
 
 document.addEventListener('DOMContentLoaded', () => {
   Drop.updateBodyClasses();
-})
+});
 
