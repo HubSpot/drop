@@ -4,6 +4,7 @@ var babel       = require('gulp-babel');
 var bump        = require('gulp-bump');
 var filter      = require('gulp-filter');
 var header      = require('gulp-header');
+var minify      = require('gulp-minify-css');
 var prefixer    = require('gulp-autoprefixer');
 var rename      = require('gulp-rename');
 var uglify      = require('gulp-uglify');
@@ -58,6 +59,13 @@ gulp.task('css', function() {
       includePaths: ['./bower_components']
     }))
     .pipe(prefixer())
+
+    // Original
+    .pipe(gulp.dest(distDir + '/css'))
+
+    // Minified
+    .pipe(minify())
+    .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(distDir + '/css'));
 });
 

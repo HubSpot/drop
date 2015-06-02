@@ -1,3 +1,12 @@
+## v1.0.8
+- Add minified CSS stylesheets
+
+## v1.0.7
+- Add `Twipsy` theme [#76](https://github.com/HubSpot/drop/pull/76)
+
+## v1.0.6
+- Fix next tick `undefined` Drop [#77](https://github.com/HubSpot/drop/pull/77)
+
 ## v1.0.5
 - Remove `bower install` post-install script
 

@@ -1,4 +1,4 @@
-/*! tether-drop 1.0.7 */
+/*! tether-drop 1.0.8 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
