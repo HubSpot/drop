@@ -1,3 +1,7 @@
+## v1.1.0
+- Update `Tether` to version 1
+- Bump all dependencies
+
 ## v1.0.8
 - Add minified CSS stylesheets
 
