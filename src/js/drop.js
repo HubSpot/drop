@@ -41,7 +41,7 @@ let transitionEndEvent = '';
 for (let name in transitionEndEvents) {
   if ({}.hasOwnProperty.call(transitionEndEvents, name)) {
     let tempEl = document.createElement('p');
-    if (tempEl.style[name] !== 'undefined') {
+    if (typeof tempEl.style[name] !== 'undefined') {
       transitionEndEvent = transitionEndEvents[name];
     }
   }

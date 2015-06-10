@@ -1,4 +1,4 @@
-/*! tether-drop 1.1.0 */
+/*! tether-drop 1.1.1 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -74,7 +74,7 @@ var transitionEndEvent = '';
 for (var _name in transitionEndEvents) {
   if (({}).hasOwnProperty.call(transitionEndEvents, _name)) {
     var tempEl = document.createElement('p');
-    if (tempEl.style[_name] !== 'undefined') {
+    if (typeof tempEl.style[_name] !== 'undefined') {
       transitionEndEvent = transitionEndEvents[_name];
     }
   }
