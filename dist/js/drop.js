@@ -1,4 +1,4 @@
-/*! tether-drop 1.1.1 */
+/*! tether-drop 1.1.2 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -70,15 +70,27 @@ var transitionEndEvents = {
   'transition': 'transitionend'
 };
 
+var transitionName = '';
 var transitionEndEvent = '';
 for (var _name in transitionEndEvents) {
   if (({}).hasOwnProperty.call(transitionEndEvents, _name)) {
     var tempEl = document.createElement('p');
     if (typeof tempEl.style[_name] !== 'undefined') {
+      transitionName = _name;
       transitionEndEvent = transitionEndEvents[_name];
     }
   }
 }
+
+var hasTransition = function hasTransition(drop) {
+  var defaultTransitionStyle = 'all 0s ease 0s';
+  try {
+    var styles = getComputedStyle(drop);
+    return styles[transitionName] !== defaultTransitionStyle;
+  } catch (err) {
+    return false;
+  }
+};
 
 var MIRROR_ATTACH = {
   left: 'right',
@@ -420,14 +432,18 @@ function createContext() {
         removeClass(this.drop, '' + drop.classPrefix + '-open');
         removeClass(this.drop, '' + drop.classPrefix + '-after-open');
 
-        var handler = function handler() {
-          if (!hasClass(_this4.drop, '' + drop.classPrefix + '-open')) {
-            removeClass(_this4.drop, '' + drop.classPrefix + '-open-transitionend');
-          }
-          _this4.drop.removeEventListener(transitionEndEvent, handler);
-        };
+        if (hasTransition(this.drop)) {
+          (function () {
+            var handler = function handler() {
+              if (!hasClass(_this4.drop, '' + drop.classPrefix + '-open')) {
+                removeClass(_this4.drop, '' + drop.classPrefix + '-open-transitionend');
+              }
+              _this4.drop.removeEventListener(transitionEndEvent, handler);
+            };
 
-        this.drop.addEventListener(transitionEndEvent, handler);
+            _this4.drop.addEventListener(transitionEndEvent, handler);
+          })();
+        }
 
         this.trigger('close');
 

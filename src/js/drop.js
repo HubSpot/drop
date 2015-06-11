@@ -37,15 +37,27 @@ const transitionEndEvents = {
   'transition'       : 'transitionend'
 };
 
+let transitionName = '';
 let transitionEndEvent = '';
 for (let name in transitionEndEvents) {
   if ({}.hasOwnProperty.call(transitionEndEvents, name)) {
     let tempEl = document.createElement('p');
     if (typeof tempEl.style[name] !== 'undefined') {
+      transitionName = name;
       transitionEndEvent = transitionEndEvents[name];
     }
   }
 }
+
+const hasTransition = (drop) => {
+  const defaultTransitionStyle = 'all 0s ease 0s';
+  try {
+    const styles = getComputedStyle(drop);
+    return styles[transitionName] !== defaultTransitionStyle;
+  } catch (err) {
+    return false;
+  }
+};
 
 const MIRROR_ATTACH = {
   left: 'right',
@@ -359,14 +371,16 @@ function createContext(options={}) {
       removeClass(this.drop, `${ drop.classPrefix }-open`);
       removeClass(this.drop, `${ drop.classPrefix }-after-open`);
 
-      const handler = () => {
-        if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
-          removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
-        }
-        this.drop.removeEventListener(transitionEndEvent, handler);
-      };
+      if (hasTransition(this.drop)) {
+        const handler = () => {
+          if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
+            removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
+          }
+          this.drop.removeEventListener(transitionEndEvent, handler);
+        };
 
-      this.drop.addEventListener(transitionEndEvent, handler);
+        this.drop.addEventListener(transitionEndEvent, handler);
+      }
 
       this.trigger('close');
 
