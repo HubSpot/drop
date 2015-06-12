@@ -70,27 +70,15 @@ var transitionEndEvents = {
   'transition': 'transitionend'
 };
 
-var transitionName = '';
 var transitionEndEvent = '';
 for (var _name in transitionEndEvents) {
   if (({}).hasOwnProperty.call(transitionEndEvents, _name)) {
     var tempEl = document.createElement('p');
     if (typeof tempEl.style[_name] !== 'undefined') {
-      transitionName = _name;
       transitionEndEvent = transitionEndEvents[_name];
     }
   }
 }
-
-var hasTransition = function hasTransition(drop) {
-  var defaultTransitionStyle = 'all 0s ease 0s';
-  try {
-    var styles = getComputedStyle(drop);
-    return styles[transitionName] !== defaultTransitionStyle;
-  } catch (err) {
-    return false;
-  }
-};
 
 var MIRROR_ATTACH = {
   left: 'right',
@@ -184,6 +172,7 @@ function createContext() {
       allDrops[drop.classPrefix].push(this);
 
       this._boundEvents = [];
+      this.bindMethods();
       this.setupElements();
       this.setupEvents();
       this.setupTether();
@@ -196,6 +185,11 @@ function createContext() {
       value: function _on(element, event, handler) {
         this._boundEvents.push({ element: element, event: event, handler: handler });
         element.addEventListener(event, handler);
+      }
+    }, {
+      key: 'bindMethods',
+      value: function bindMethods() {
+        this.transitionEndHandler = this._transitionEndHandler.bind(this);
       }
     }, {
       key: 'setupElements',
@@ -421,10 +415,16 @@ function createContext() {
         drop.updateBodyClasses();
       }
     }, {
+      key: '_transitionEndHandler',
+      value: function _transitionEndHandler() {
+        if (!hasClass(this.drop, '' + drop.classPrefix + '-open')) {
+          removeClass(this.drop, '' + drop.classPrefix + '-open-transitionend');
+        }
+        this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
+      }
+    }, {
       key: 'close',
       value: function close() {
-        var _this4 = this;
-
         if (!this.isOpened()) {
           return;
         }
@@ -432,18 +432,7 @@ function createContext() {
         removeClass(this.drop, '' + drop.classPrefix + '-open');
         removeClass(this.drop, '' + drop.classPrefix + '-after-open');
 
-        if (hasTransition(this.drop)) {
-          (function () {
-            var handler = function handler() {
-              if (!hasClass(_this4.drop, '' + drop.classPrefix + '-open')) {
-                removeClass(_this4.drop, '' + drop.classPrefix + '-open-transitionend');
-              }
-              _this4.drop.removeEventListener(transitionEndEvent, handler);
-            };
-
-            _this4.drop.addEventListener(transitionEndEvent, handler);
-          })();
-        }
+        this.drop.addEventListener(transitionEndEvent, this.transitionEndHandler);
 
         this.trigger('close');
 
