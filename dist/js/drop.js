@@ -1,4 +1,4 @@
-/*! tether-drop 1.1.1 */
+/*! tether-drop 1.1.2 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -172,6 +172,7 @@ function createContext() {
       allDrops[drop.classPrefix].push(this);
 
       this._boundEvents = [];
+      this.bindMethods();
       this.setupElements();
       this.setupEvents();
       this.setupTether();
@@ -184,6 +185,11 @@ function createContext() {
       value: function _on(element, event, handler) {
         this._boundEvents.push({ element: element, event: event, handler: handler });
         element.addEventListener(event, handler);
+      }
+    }, {
+      key: 'bindMethods',
+      value: function bindMethods() {
+        this.transitionEndHandler = this._transitionEndHandler.bind(this);
       }
     }, {
       key: 'setupElements',
@@ -409,10 +415,16 @@ function createContext() {
         drop.updateBodyClasses();
       }
     }, {
+      key: '_transitionEndHandler',
+      value: function _transitionEndHandler() {
+        if (!hasClass(this.drop, '' + drop.classPrefix + '-open')) {
+          removeClass(this.drop, '' + drop.classPrefix + '-open-transitionend');
+        }
+        this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
+      }
+    }, {
       key: 'close',
       value: function close() {
-        var _this4 = this;
-
         if (!this.isOpened()) {
           return;
         }
@@ -420,14 +432,7 @@ function createContext() {
         removeClass(this.drop, '' + drop.classPrefix + '-open');
         removeClass(this.drop, '' + drop.classPrefix + '-after-open');
 
-        var handler = function handler() {
-          if (!hasClass(_this4.drop, '' + drop.classPrefix + '-open')) {
-            removeClass(_this4.drop, '' + drop.classPrefix + '-open-transitionend');
-          }
-          _this4.drop.removeEventListener(transitionEndEvent, handler);
-        };
-
-        this.drop.addEventListener(transitionEndEvent, handler);
+        this.drop.addEventListener(transitionEndEvent, this.transitionEndHandler);
 
         this.trigger('close');
 

@@ -131,6 +131,7 @@ function createContext(options={}) {
       allDrops[drop.classPrefix].push(this);
 
       this._boundEvents = [];
+      this.bindMethods();
       this.setupElements();
       this.setupEvents();
       this.setupTether();
@@ -139,6 +140,10 @@ function createContext(options={}) {
     _on(element, event, handler) {
       this._boundEvents.push({element, event, handler});
       element.addEventListener(event, handler);
+    }
+
+    bindMethods() {
+      this.transitionEndHandler = this._transitionEndHandler.bind(this);
     }
 
     setupElements() {
@@ -351,6 +356,13 @@ function createContext(options={}) {
       drop.updateBodyClasses();
     }
 
+    _transitionEndHandler() {
+      if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
+        removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
+      }
+      this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
+    }
+
     close() {
       if (!this.isOpened()) {
         return;
@@ -359,14 +371,7 @@ function createContext(options={}) {
       removeClass(this.drop, `${ drop.classPrefix }-open`);
       removeClass(this.drop, `${ drop.classPrefix }-after-open`);
 
-      const handler = () => {
-        if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
-          removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
-        }
-        this.drop.removeEventListener(transitionEndEvent, handler);
-      };
-
-      this.drop.addEventListener(transitionEndEvent, handler);
+      this.drop.addEventListener(transitionEndEvent, this.transitionEndHandler);
 
       this.trigger('close');
 
