@@ -2,14 +2,12 @@ var del         = require('del');
 var gulp        = require('gulp');
 var babel       = require('gulp-babel');
 var bump        = require('gulp-bump');
-var filter      = require('gulp-filter');
 var header      = require('gulp-header');
 var minify      = require('gulp-minify-css');
 var prefixer    = require('gulp-autoprefixer');
 var rename      = require('gulp-rename');
 var uglify      = require('gulp-uglify');
 var sass        = require('gulp-sass');
-var tagVersion  = require('gulp-tag-version');
 var umd         = require('gulp-wrap-umd');
 
 // Variables
@@ -74,14 +72,10 @@ gulp.task('css', function() {
 var VERSIONS = ['patch', 'minor', 'major'];
 for (var i = 0; i < VERSIONS.length; ++i){
   (function(version) {
-    var pkgFilter = filter('package.json');
     gulp.task('version:' + version, function() {
       gulp.src(['package.json', 'bower.json'])
         .pipe(bump({type: version}))
-        .pipe(pkgFilter)
-        .pipe(tagVersion())
-        .pipe(pkgFilter.restore())
-        .pipe(gulp.dest('.'))
+        .pipe(gulp.dest('.'));
     });
   })(VERSIONS[i]);
 }
@@ -95,6 +89,6 @@ gulp.task('watch', ['js', 'css'], function() {
 
 
 // Defaults
-gulp.task('build', ['js', 'css'])
-gulp.task('default', ['build'])
+gulp.task('build', ['js', 'css']);
+gulp.task('default', ['build']);
 
