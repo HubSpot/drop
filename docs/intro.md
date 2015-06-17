@@ -1,7 +1,8 @@
-<link rel="stylesheet" href="/drop/css/drop-theme-basic.css" />
-<link rel="stylesheet" href="/drop/css/drop-theme-arrows-bounce.css" />
-<link rel="stylesheet" href="/drop/css/drop-theme-arrows-bounce-dark.css" />
-<script src="/drop/drop.min.js"></script>
+<link rel="stylesheet" href="/drop/dist/css/drop-theme-basic.css" />
+<link rel="stylesheet" href="/drop/dist/css/drop-theme-arrows-bounce.css" />
+<link rel="stylesheet" href="/drop/dist/css/drop-theme-arrows-bounce-dark.css" />
+<script src="/drop/bower_components/tether/dist/js/tether.js"></script>
+<script src="/drop/dist/js/drop.min.js"></script>
 <script>
   $(function(){
     $('.drop-target').each(function(){
