@@ -1,4 +1,4 @@
-/*! tether-drop 1.1.2 */
+/*! tether-drop 1.2.0 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -116,6 +116,7 @@ function createContext() {
     defaults: {
       position: 'bottom left',
       openOn: 'click',
+      beforeClose: null,
       constrainToScrollParent: true,
       constrainToWindow: true,
       classes: '',
@@ -429,6 +430,14 @@ function createContext() {
           return;
         }
 
+        var _options = this.options;
+        var remove = _options.remove;
+        var beforeClose = _options.beforeClose;
+
+        if (typeof beforeClose === 'function' && beforeClose() === false) {
+          return;
+        }
+
         removeClass(this.drop, '' + drop.classPrefix + '-open');
         removeClass(this.drop, '' + drop.classPrefix + '-after-open');
 
@@ -442,7 +451,7 @@ function createContext() {
 
         drop.updateBodyClasses();
 
-        if (this.options.remove) {
+        if (remove) {
           this.remove();
         }
       }
