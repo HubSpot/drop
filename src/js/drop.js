@@ -252,7 +252,7 @@ function createContext(options={}) {
 
       if (events.indexOf('click') >= 0) {
         const openHandler = (event) => {
-          this.toggle();
+          this.toggle(event);
           event.preventDefault();
         };
 
@@ -271,7 +271,7 @@ function createContext(options={}) {
             return;
           }
 
-          this.close();
+          this.close(event);
         };
 
         for (let i = 0; i < clickEvents.length; ++i) {
@@ -284,13 +284,13 @@ function createContext(options={}) {
       if (events.indexOf('hover') >= 0) {
         let onUs = false;
 
-        const over = () => {
+        const over = (event) => {
           onUs = true;
-          this.open();
+          this.open(event);
         };
 
         let outTimeout = null;
-        const out = () => {
+        const out = (event) => {
           onUs = false;
 
           if (typeof outTimeout !== 'undefined') {
@@ -299,7 +299,7 @@ function createContext(options={}) {
 
           outTimeout = setTimeout(() => {
             if (!onUs) {
-              this.close();
+              this.close(event);
             }
             outTimeout = null;
           }, 50);
@@ -318,15 +318,15 @@ function createContext(options={}) {
       }
     }
 
-    toggle() {
+    toggle(event) {
       if (this.isOpened()) {
-        this.close();
+        this.close(event);
       } else {
-        this.open();
+        this.open(event);
       }
     }
 
-    open() {
+    open(event) {
       if (this.isOpened()) {
         return;
       }
@@ -364,13 +364,13 @@ function createContext(options={}) {
       this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
     }
 
-    close() {
+    close(event) {
       if (!this.isOpened()) {
         return;
       }
 
       const {remove, beforeClose} = this.options;
-      if (typeof beforeClose === 'function' && beforeClose() === false) {
+      if (typeof beforeClose === 'function' && beforeClose(event) === false) {
         return;
       }
 
@@ -388,12 +388,12 @@ function createContext(options={}) {
       drop.updateBodyClasses();
 
       if (remove) {
-        this.remove();
+        this.remove(event);
       }
     }
 
-    remove() {
-      this.close();
+    remove(event) {
+      this.close(event);
       if (this.drop.parentNode) {
         this.drop.parentNode.removeChild(this.drop);
       }
