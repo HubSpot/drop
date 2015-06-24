@@ -1,4 +1,4 @@
-/*! tether-drop 1.2.0 */
+/*! tether-drop 1.2.1 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -304,7 +304,7 @@ function createContext() {
 
         if (events.indexOf('click') >= 0) {
           var openHandler = function openHandler(event) {
-            _this2.toggle();
+            _this2.toggle(event);
             event.preventDefault();
           };
 
@@ -323,7 +323,7 @@ function createContext() {
               return;
             }
 
-            _this2.close();
+            _this2.close(event);
           };
 
           for (var i = 0; i < clickEvents.length; ++i) {
@@ -337,13 +337,13 @@ function createContext() {
           (function () {
             var onUs = false;
 
-            var over = function over() {
+            var over = function over(event) {
               onUs = true;
-              _this2.open();
+              _this2.open(event);
             };
 
             var outTimeout = null;
-            var out = function out() {
+            var out = function out(event) {
               onUs = false;
 
               if (typeof outTimeout !== 'undefined') {
@@ -352,7 +352,7 @@ function createContext() {
 
               outTimeout = setTimeout(function () {
                 if (!onUs) {
-                  _this2.close();
+                  _this2.close(event);
                 }
                 outTimeout = null;
               }, 50);
@@ -374,16 +374,16 @@ function createContext() {
       }
     }, {
       key: 'toggle',
-      value: function toggle() {
+      value: function toggle(event) {
         if (this.isOpened()) {
-          this.close();
+          this.close(event);
         } else {
-          this.open();
+          this.open(event);
         }
       }
     }, {
       key: 'open',
-      value: function open() {
+      value: function open(event) {
         var _this3 = this;
 
         if (this.isOpened()) {
@@ -424,17 +424,27 @@ function createContext() {
         this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
       }
     }, {
+      key: 'beforeCloseHandler',
+      value: function beforeCloseHandler(event) {
+        var shouldClose = true;
+
+        if (!this.isClosing && typeof this.options.beforeClose === 'function') {
+          this.isClosing = true;
+          shouldClose = this.options.beforeClose(event, this) !== false;
+        }
+
+        this.isClosing = false;
+
+        return shouldClose;
+      }
+    }, {
       key: 'close',
-      value: function close() {
+      value: function close(event) {
         if (!this.isOpened()) {
           return;
         }
 
-        var _options = this.options;
-        var remove = _options.remove;
-        var beforeClose = _options.beforeClose;
-
-        if (typeof beforeClose === 'function' && beforeClose() === false) {
+        if (!this.beforeCloseHandler(event)) {
           return;
         }
 
@@ -451,14 +461,14 @@ function createContext() {
 
         drop.updateBodyClasses();
 
-        if (remove) {
-          this.remove();
+        if (this.options.remove) {
+          this.remove(event);
         }
       }
     }, {
       key: 'remove',
-      value: function remove() {
-        this.close();
+      value: function remove(event) {
+        this.close(event);
         if (this.drop.parentNode) {
           this.drop.parentNode.removeChild(this.drop);
         }
