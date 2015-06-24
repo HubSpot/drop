@@ -164,6 +164,11 @@ true
 false
 ```
 
+#### `beforeClose`
+
+Function that is run before closing the drop. If the function returns `false`, the closing of the drop will be prevented. Useful if you only want to programatically close the drop.
+
+
 #### `tetherOptions`
 
 Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the [Tether documentation](http://tether.io) for more information.  Set to `false` to disable Tether.

@@ -76,6 +76,7 @@ function createContext(options={}) {
     defaults: {
       position: 'bottom left',
       openOn: 'click',
+      beforeClose: null,
       constrainToScrollParent: true,
       constrainToWindow: true,
       classes: '',
@@ -368,6 +369,11 @@ function createContext(options={}) {
         return;
       }
 
+      const {remove, beforeClose} = this.options;
+      if (typeof beforeClose === 'function' && beforeClose() === false) {
+        return;
+      }
+
       removeClass(this.drop, `${ drop.classPrefix }-open`);
       removeClass(this.drop, `${ drop.classPrefix }-after-open`);
 
@@ -381,7 +387,7 @@ function createContext(options={}) {
 
       drop.updateBodyClasses();
 
-      if (this.options.remove) {
+      if (remove) {
         this.remove();
       }
     }
