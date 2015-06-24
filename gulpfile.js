@@ -4,6 +4,7 @@ var babel       = require('gulp-babel');
 var bump        = require('gulp-bump');
 var header      = require('gulp-header');
 var minify      = require('gulp-minify-css');
+var plumber     = require('gulp-plumber');
 var prefixer    = require('gulp-autoprefixer');
 var rename      = require('gulp-rename');
 var uglify      = require('gulp-uglify');
@@ -34,6 +35,16 @@ gulp.task('clean', function() {
 
 
 // Javascript
+gulp.task('js:dev', function() {
+  gulp.src('./src/js/drop.js')
+    .pipe(plumber())
+    .pipe(babel({
+      blacklist: ['minification.removeDebugger']
+    }))
+    .pipe(umd(umdOptions))
+    .pipe(gulp.dest(distDir + '/js'));
+});
+
 gulp.task('js', function() {
   gulp.src('./src/js/drop.js')
     .pipe(babel())
@@ -82,8 +93,8 @@ for (var i = 0; i < VERSIONS.length; ++i){
 
 
 // Watch
-gulp.task('watch', ['js', 'css'], function() {
-  gulp.watch('./src/js/**/*', ['js']);
+gulp.task('watch', ['js:dev', 'css'], function() {
+  gulp.watch('./src/js/**/*', ['js:dev']);
   gulp.watch('./src/css/**/*', ['css']);
 });
 

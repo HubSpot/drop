@@ -424,17 +424,27 @@ function createContext() {
         this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
       }
     }, {
+      key: 'beforeCloseHandler',
+      value: function beforeCloseHandler(event) {
+        var shouldClose = true;
+
+        if (!this.isClosing && typeof this.options.beforeClose === 'function') {
+          this.isClosing = true;
+          shouldClose = this.options.beforeClose(event, this) !== false;
+        }
+
+        this.isClosing = false;
+
+        return shouldClose;
+      }
+    }, {
       key: 'close',
       value: function close(event) {
         if (!this.isOpened()) {
           return;
         }
 
-        var _options = this.options;
-        var remove = _options.remove;
-        var beforeClose = _options.beforeClose;
-
-        if (typeof beforeClose === 'function' && beforeClose(event) === false) {
+        if (!this.beforeCloseHandler(event)) {
           return;
         }
 
@@ -451,7 +461,7 @@ function createContext() {
 
         drop.updateBodyClasses();
 
-        if (remove) {
+        if (this.options.remove) {
           this.remove(event);
         }
       }

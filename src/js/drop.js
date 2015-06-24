@@ -364,13 +364,25 @@ function createContext(options={}) {
       this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
     }
 
+    beforeCloseHandler(event) {
+      let shouldClose = true;
+
+      if (!this.isClosing && typeof this.options.beforeClose === 'function') {
+        this.isClosing = true;
+        shouldClose = this.options.beforeClose(event, this) !== false;
+      }
+
+      this.isClosing = false;
+
+      return shouldClose;
+    }
+
     close(event) {
       if (!this.isOpened()) {
         return;
       }
 
-      const {remove, beforeClose} = this.options;
-      if (typeof beforeClose === 'function' && beforeClose(event) === false) {
+      if (!this.beforeCloseHandler(event)) {
         return;
       }
 
@@ -387,7 +399,7 @@ function createContext(options={}) {
 
       drop.updateBodyClasses();
 
-      if (remove) {
+      if (this.options.remove) {
         this.remove(event);
       }
     }
