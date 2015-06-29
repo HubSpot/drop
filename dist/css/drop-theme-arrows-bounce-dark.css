@@ -56,6 +56,34 @@
       top: 50%;
       margin-top: -12px;
       border-right-color: #000; }
+  .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-left.drop-target-attached-center .drop-content {
+    left: -24px; }
+  .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-right.drop-target-attached-center .drop-content {
+    left: 24px; }
+  .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-top.drop-element-attached-left.drop-target-attached-middle .drop-content {
+    margin-top: 12px; }
+    .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-top.drop-element-attached-left.drop-target-attached-middle .drop-content:before {
+      bottom: 100%;
+      left: 12px;
+      border-bottom-color: #000; }
+  .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-top.drop-element-attached-right.drop-target-attached-middle .drop-content {
+    margin-top: 12px; }
+    .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-top.drop-element-attached-right.drop-target-attached-middle .drop-content:before {
+      bottom: 100%;
+      right: 12px;
+      border-bottom-color: #000; }
+  .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-middle .drop-content {
+    margin-bottom: 12px; }
+    .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-middle .drop-content:before {
+      top: 100%;
+      left: 12px;
+      border-top-color: #000; }
+  .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-middle .drop-content {
+    margin-bottom: 12px; }
+    .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-middle .drop-content:before {
+      top: 100%;
+      right: 12px;
+      border-top-color: #000; }
   .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content {
     margin-top: 12px; }
     .drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content:before {

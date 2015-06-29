@@ -1,6 +1,6 @@
 {
   "name": "tether-drop",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Client-side library for creating dropdowns",
   "authors": [
     "Zack Bloom <zackbloom@gmail.com>",
@@ -30,6 +30,6 @@
     "gulp-wrap-umd": "^0.2.1"
   },
   "dependencies": {
-    "tether": "^1.0.2"
+    "tether": "^1.1.0"
   }
 }
