@@ -1,4 +1,4 @@
-/*! tether-drop 1.2.1 */
+/*! tether-drop 1.2.2 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -14,13 +14,13 @@
 
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
 var _bind = Function.prototype.bind;
 
-function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -147,9 +147,9 @@ function createContext() {
     }
 
     if (anyOpen) {
-      addClass(document.body, '' + drop.classPrefix + '-open');
+      addClass(document.body, drop.classPrefix + '-open');
     } else {
-      removeClass(document.body, '' + drop.classPrefix + '-open');
+      removeClass(document.body, drop.classPrefix + '-open');
     }
   };
 
@@ -205,7 +205,7 @@ function createContext() {
         }
 
         this.content = document.createElement('div');
-        addClass(this.content, '' + drop.classPrefix + '-content');
+        addClass(this.content, drop.classPrefix + '-content');
 
         if (typeof this.options.content === 'function') {
           var generateAndSetContent = function generateAndSetContent() {
@@ -369,7 +369,7 @@ function createContext() {
       key: 'isOpened',
       value: function isOpened() {
         if (this.drop) {
-          return hasClass(this.drop, '' + drop.classPrefix + '-open');
+          return hasClass(this.drop, drop.classPrefix + '-open');
         }
       }
     }, {
@@ -398,12 +398,12 @@ function createContext() {
           this.tether.enable();
         }
 
-        addClass(this.drop, '' + drop.classPrefix + '-open');
-        addClass(this.drop, '' + drop.classPrefix + '-open-transitionend');
+        addClass(this.drop, drop.classPrefix + '-open');
+        addClass(this.drop, drop.classPrefix + '-open-transitionend');
 
         setTimeout(function () {
           if (_this3.drop) {
-            addClass(_this3.drop, '' + drop.classPrefix + '-after-open');
+            addClass(_this3.drop, drop.classPrefix + '-after-open');
           }
         });
 
@@ -417,9 +417,13 @@ function createContext() {
       }
     }, {
       key: '_transitionEndHandler',
-      value: function _transitionEndHandler() {
-        if (!hasClass(this.drop, '' + drop.classPrefix + '-open')) {
-          removeClass(this.drop, '' + drop.classPrefix + '-open-transitionend');
+      value: function _transitionEndHandler(e) {
+        if (e.target !== e.currentTarget) {
+          return;
+        }
+
+        if (!hasClass(this.drop, drop.classPrefix + '-open')) {
+          removeClass(this.drop, drop.classPrefix + '-open-transitionend');
         }
         this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
       }
@@ -448,8 +452,8 @@ function createContext() {
           return;
         }
 
-        removeClass(this.drop, '' + drop.classPrefix + '-open');
-        removeClass(this.drop, '' + drop.classPrefix + '-after-open');
+        removeClass(this.drop, drop.classPrefix + '-open');
+        removeClass(this.drop, drop.classPrefix + '-after-open');
 
         this.drop.addEventListener(transitionEndEvent, this.transitionEndHandler);
 

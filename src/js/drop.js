@@ -357,7 +357,11 @@ function createContext(options={}) {
       drop.updateBodyClasses();
     }
 
-    _transitionEndHandler() {
+    _transitionEndHandler(e) {
+      if (e.target !== e.currentTarget){
+        return;
+      }
+
       if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
         removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
       }
