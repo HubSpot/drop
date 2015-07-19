@@ -331,6 +331,13 @@ function createContext(options={}) {
         return;
       }
 
+      if (typeof this.options.beforeOpen === 'function') {
+        let shouldOpen = this.options.beforeOpen();
+        if (shouldOpen === false) {
+          return;
+        }
+      }
+
       if (!this.drop.parentNode) {
         document.body.appendChild(this.drop);
       }
