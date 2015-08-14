@@ -1,4 +1,4 @@
-/*! tether-drop 1.2.2 */
+/*! tether-drop 1.2.3 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -165,6 +165,22 @@ function createContext() {
 
       if (typeof this.target === 'undefined') {
         throw new Error('Drop Error: You must provide a target.');
+      }
+
+      var dataPrefix = 'data-' + drop.classPrefix;
+
+      var contentAttr = this.target.getAttribute(dataPrefix);
+      if (contentAttr) {
+        this.options.content = contentAttr;
+      }
+
+      var attrsOverride = ['position', 'openOn'];
+      for (var i = 0; i < attrsOverride.length; ++i) {
+
+        var override = this.target.getAttribute(dataPrefix + '-' + attrsOverride[i]);
+        if (override) {
+          this.options[attrsOverride[i]] = override;
+        }
       }
 
       if (this.options.classes && this.options.addTargetClasses !== false) {

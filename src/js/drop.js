@@ -124,6 +124,22 @@ function createContext(options={}) {
         throw new Error('Drop Error: You must provide a target.');
       }
 
+      const dataPrefix = `data-${drop.classPrefix}`;
+
+      const contentAttr = this.target.getAttribute(dataPrefix);
+      if (contentAttr) {
+        this.options.content = contentAttr;
+      }
+
+      const attrsOverride = ['position', 'openOn'];
+      for (let i = 0; i < attrsOverride.length; ++i) {
+
+        const override = this.target.getAttribute(`${dataPrefix}-${attrsOverride[i]}`);
+        if (override) {
+          this.options[attrsOverride[i]] = override;
+        }
+      }
+
       if (this.options.classes && this.options.addTargetClasses !== false) {
         addClass(this.target, this.options.classes);
       }
