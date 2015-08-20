@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "Tether": false
+  },
+  "rules": {
+    "arrow-parens": [2, "always"],
+    "arrow-spacing": 2,
+    "no-const-assign": 2,
+    "no-var": 2,
+    "prefer-arrow-callback": 2,
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "space-before-function-paren": [2, "never"],
+    "strict": [2, "global"]
+  }
+}
