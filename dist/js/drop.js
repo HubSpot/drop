@@ -24,7 +24,7 @@ var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_a
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _Tether$Utils = Tether.Utils;
 var extend = _Tether$Utils.extend;
@@ -95,7 +95,7 @@ var allDrops = {};
 // copy of drop which won't interact with other copies on the page (beyond calling the document events).
 
 function createContext() {
-  var options = arguments[0] === undefined ? {} : arguments[0];
+  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
   var drop = function drop() {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
@@ -154,6 +154,8 @@ function createContext() {
   };
 
   var DropInstance = (function (_Evented) {
+    _inherits(DropInstance, _Evented);
+
     function DropInstance(opts) {
       _classCallCheck(this, DropInstance);
 
@@ -178,8 +180,6 @@ function createContext() {
       this.setupEvents();
       this.setupTether();
     }
-
-    _inherits(DropInstance, _Evented);
 
     _createClass(DropInstance, [{
       key: '_on',
@@ -215,7 +215,7 @@ function createContext() {
             if (typeof contentElementOrHTML === 'string') {
               _this.content.innerHTML = contentElementOrHTML;
             } else if (typeof contentElementOrHTML === 'object') {
-              _this.content.innerHTML = '';
+              _this.content.innerHTML = "";
               _this.content.appendChild(contentElementOrHTML);
             } else {
               throw new Error('Drop Error: Content function should return a string or HTMLElement.');
@@ -333,36 +333,41 @@ function createContext() {
           }
         }
 
+        var onUs = false;
+        var outTimeout = null;
+
+        var focusInHandler = function focusInHandler(event) {
+          onUs = true;
+          _this2.open(event);
+        };
+
+        var focusOutHandler = function focusOutHandler(event) {
+          onUs = false;
+
+          if (typeof outTimeout !== 'undefined') {
+            clearTimeout(outTimeout);
+          }
+
+          outTimeout = setTimeout(function () {
+            if (!onUs) {
+              _this2.close(event);
+            }
+            outTimeout = null;
+          }, 50);
+        };
+
         if (events.indexOf('hover') >= 0) {
-          (function () {
-            var onUs = false;
+          this._on(this.target, 'mouseover', focusInHandler);
+          this._on(this.drop, 'mouseover', focusInHandler);
+          this._on(this.target, 'mouseout', focusOutHandler);
+          this._on(this.drop, 'mouseout', focusOutHandler);
+        }
 
-            var over = function over(event) {
-              onUs = true;
-              _this2.open(event);
-            };
-
-            var outTimeout = null;
-            var out = function out(event) {
-              onUs = false;
-
-              if (typeof outTimeout !== 'undefined') {
-                clearTimeout(outTimeout);
-              }
-
-              outTimeout = setTimeout(function () {
-                if (!onUs) {
-                  _this2.close(event);
-                }
-                outTimeout = null;
-              }, 50);
-            };
-
-            _this2._on(_this2.target, 'mouseover', over);
-            _this2._on(_this2.drop, 'mouseover', over);
-            _this2._on(_this2.target, 'mouseout', out);
-            _this2._on(_this2.drop, 'mouseout', out);
-          })();
+        if (events.indexOf('focus') >= 0) {
+          this._on(this.target, 'focus', focusInHandler);
+          this._on(this.drop, 'focus', focusInHandler);
+          this._on(this.target, 'blur', focusOutHandler);
+          this._on(this.drop, 'blur', focusOutHandler);
         }
       }
     }, {

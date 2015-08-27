@@ -281,34 +281,41 @@ function createContext(options={}) {
         }
       }
 
-      if (events.indexOf('hover') >= 0) {
-        let onUs = false;
+      let onUs = false;
+      let outTimeout = null;
 
-        const over = (event) => {
-          onUs = true;
-          this.open(event);
-        };
+      const focusInHandler = (event) => {
+        onUs = true;
+        this.open(event);
+      }
 
-        let outTimeout = null;
-        const out = (event) => {
-          onUs = false;
+      const focusOutHandler = (event) => {
+        onUs = false;
 
-          if (typeof outTimeout !== 'undefined') {
-            clearTimeout(outTimeout);
+        if (typeof outTimeout !== 'undefined') {
+          clearTimeout(outTimeout);
+        }
+
+        outTimeout = setTimeout(() => {
+          if (!onUs) {
+            this.close(event);
           }
+          outTimeout = null;
+        }, 50);
+      }
 
-          outTimeout = setTimeout(() => {
-            if (!onUs) {
-              this.close(event);
-            }
-            outTimeout = null;
-          }, 50);
-        };
+      if (events.indexOf('hover') >= 0) {
+        this._on(this.target, 'mouseover', focusInHandler);
+        this._on(this.drop, 'mouseover', focusInHandler);
+        this._on(this.target, 'mouseout', focusOutHandler);
+        this._on(this.drop, 'mouseout', focusOutHandler);
+      }
 
-        this._on(this.target, 'mouseover', over);
-        this._on(this.drop, 'mouseover', over);
-        this._on(this.target, 'mouseout', out);
-        this._on(this.drop, 'mouseout', out);
+      if (events.indexOf('focus') >= 0) {
+        this._on(this.target, 'focus', focusInHandler);
+        this._on(this.drop, 'focus', focusInHandler);
+        this._on(this.target, 'blur', focusOutHandler);
+        this._on(this.drop, 'blur', focusOutHandler);
       }
     }
 
