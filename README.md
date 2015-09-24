@@ -1,9 +1,7 @@
 ## Drop
 
-[![npm
-version](https://badge.fury.io/js/tether-drop.svg)](http://badge.fury.io/js/tether-drop)
-[![Bower
-version](https://badge.fury.io/bo/drop.svg)](http://badge.fury.io/bo/drop)
+[![GitHub
+version](https://badge.fury.io/gh/HubSpot%2Fdrop.svg)](http://badge.fury.io/gh/HubSpot%2Fdrop)
 
 Drop.js is a powerful Javascript and CSS library for creating dropdowns and other floating displays.
 
