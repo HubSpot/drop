@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Drop</title>
-    <meta name="description" content="Drop is a Javascript and CSS library. It is free and open source and was developed by HubSpot developers Adam Schwartz (@adamfschwartz) and Zack Bloom (@zackbloom).">
+    <meta name="description" content="Drop is a JavaScript and CSS library. It is free and open source and was developed by HubSpot developers Adam Schwartz (@adamfschwartz) and Zack Bloom (@zackbloom).">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="icon" href="http://static.hubspot.com/favicon.ico">
 
@@ -11,9 +11,9 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <!-- Drop themes -->
-    <link rel="stylesheet" href="/drop/css/drop-theme-basic.css" />
-    <link rel="stylesheet" href="/drop/css/drop-theme-arrows-bounce-dark.css" />
-    <link rel="stylesheet" href="/drop/css/drop-theme-hubspot-popovers.css" />
+    <link rel="stylesheet" href="/drop/dist/css/drop-theme-basic.css" />
+    <link rel="stylesheet" href="/drop/dist/css/drop-theme-arrows-bounce-dark.css" />
+    <link rel="stylesheet" href="/drop/dist/css/drop-theme-hubspot-popovers.css" />
 
     <!-- Example themes -->
     <link rel="stylesheet" href="/drop/docs/welcome/examples/social-sharing/css/drop-example-theme-social-sharing.css" />
@@ -133,12 +133,13 @@
     <div class="showcase about">
         <div class="showcase-inner">
             <h1>How to Use</h1>
-            <p>Drop is an open-source javascript and CSS library which creates and positions dropdowns. It's powered by <a href="/tether">Tether.js</a>.</p>
-            <p>To use, first <a href="https://github.com/HubSpot/drop/releases" target="_blank">download the latest release</a>.
+            <p>Drop is an open-source JavaScript and CSS library that creates and positions dropdowns. It's powered by <a href="/tether">Tether.js</a>.</p>
+            <p>To use, first download the latest <a href="https://github.com/HubSpot/tether/releases" target="_blank">tether</a> and <a href="https://github.com/HubSpot/drop/releases" target="_blank">drop</a> releases.
             <p>Then add this to your page:</p>
 <pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>drop-theme-arrows.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tether.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
 <span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>drop.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
-            <p>Then you can start creating Drops, learn more by visiting the <a href="/drop">documentation</a>.
+            <p>Then you can start creating drops. Learn more by visiting the <a href="/drop">documentation</a>.
         </div>
     </div>
 
@@ -192,7 +193,8 @@
         </div>
     </div>
 
-    <script src="/drop/drop.js"></script>
+    <script src="/drop/bower_components/tether/dist/js/tether.js"></script>
+    <script src="/drop/dist/js/drop.js"></script>
 
     <script src="/drop/docs/welcome/js/jquery.js"></script>
     <script src="/drop/docs/welcome/js/log.js"></script>
