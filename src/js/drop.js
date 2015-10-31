@@ -350,6 +350,10 @@ function createContext(options={}) {
     }
 
     open(event) {
+      if (typeof this.options.showOn !== 'undefined' && !this.options.showOn()) {
+        return;
+      }
+
       if (this.isOpened()) {
         return;
       }
