@@ -1,4 +1,5 @@
 /* global Tether */
+'use strict';
 
 const {
   extend,
@@ -81,6 +82,13 @@ function createContext(options={}) {
       constrainToWindow: true,
       classes: '',
       remove: false,
+      openDelay: 0,
+      closeDelay: 50,
+      // inherited from openDelay and closeDelay if not explicitly defined
+      focusDelay: null,
+      blurDelay: null,
+      hoverOpenDelay: null,
+      hoverCloseDelay: null,
       tetherOptions: {}
     }
   };
@@ -182,7 +190,7 @@ function createContext(options={}) {
           if (typeof contentElementOrHTML === 'string') {
             this.content.innerHTML = contentElementOrHTML;
           } else if (typeof contentElementOrHTML === 'object') {
-            this.content.innerHTML = "";
+            this.content.innerHTML = '';
             this.content.appendChild(contentElementOrHTML);
           } else {
             throw new Error('Drop Error: Content function should return a string or HTMLElement.');
@@ -297,41 +305,49 @@ function createContext(options={}) {
         }
       }
 
-      let onUs = false;
+      let inTimeout = null;
       let outTimeout = null;
 
-      const focusInHandler = (event) => {
-        onUs = true;
-        this.open(event);
-      }
-
-      const focusOutHandler = (event) => {
-        onUs = false;
-
-        if (typeof outTimeout !== 'undefined') {
+      const inHandler = (event) => {
+        if (outTimeout !== null) {
           clearTimeout(outTimeout);
+        } else {
+          inTimeout = setTimeout(() => {
+            this.open(event);
+            inTimeout = null;
+          }, (event.type === 'focus' ?
+              this.options.focusDelay :
+              this.options.hoverOpenDelay) ||
+              this.options.openDelay);
         }
+      };
 
-        outTimeout = setTimeout(() => {
-          if (!onUs) {
+      const outHandler = (event) => {
+        if (inTimeout !== null) {
+          clearTimeout(inTimeout);
+        } else {
+          outTimeout = setTimeout(() => {
             this.close(event);
-          }
-          outTimeout = null;
-        }, 50);
-      }
+            outTimeout = null;
+          }, (event.type === 'blur' ?
+              this.options.blurDelay :
+              this.options.hoverCloseDelay) ||
+              this.options.closeDelay);
+        }
+      };
 
       if (events.indexOf('hover') >= 0) {
-        this._on(this.target, 'mouseover', focusInHandler);
-        this._on(this.drop, 'mouseover', focusInHandler);
-        this._on(this.target, 'mouseout', focusOutHandler);
-        this._on(this.drop, 'mouseout', focusOutHandler);
+        this._on(this.target, 'mouseover', inHandler);
+        this._on(this.drop, 'mouseover', inHandler);
+        this._on(this.target, 'mouseout', outHandler);
+        this._on(this.drop, 'mouseout', outHandler);
       }
 
       if (events.indexOf('focus') >= 0) {
-        this._on(this.target, 'focus', focusInHandler);
-        this._on(this.drop, 'focus', focusInHandler);
-        this._on(this.target, 'blur', focusOutHandler);
-        this._on(this.drop, 'blur', focusOutHandler);
+        this._on(this.target, 'focus', inHandler);
+        this._on(this.drop, 'focus', inHandler);
+        this._on(this.target, 'blur', outHandler);
+        this._on(this.drop, 'blur', outHandler);
       }
     }
 
@@ -350,6 +366,7 @@ function createContext(options={}) {
     }
 
     open(event) {
+      /* eslint no-unused-vars: 0 */
       if (this.isOpened()) {
         return;
       }
@@ -477,4 +494,3 @@ const Drop = createContext();
 document.addEventListener('DOMContentLoaded', () => {
   Drop.updateBodyClasses();
 });
-

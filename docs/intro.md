@@ -34,7 +34,7 @@ Because Drop is built on [Tether](http://github.hubspot.com/tether), you get all
 - Drop uses GPU accelerated positioning to maintain 60fps scrolling, even with dozens or hundreds of drops on screen and complex animation
 - Drops can be nested within other drops
 - Drops can be attached to any of 12 attachment points on the target, or you can leverage the full power of Tether to position your drop anywhere.
-- Drops can be configured to open when the user clicks or hovers.
+- Drops can be configured to open when the user clicks, hovers, or focuses an element.
 - Drop is maintained by developers at [HubSpot](http://github.hubspot.com) who care about making it do everything you need.
 
 ### Dependencies
@@ -135,6 +135,7 @@ Specifies what event on the target opens the drop. If you set this to `undefined
 ```coffeescript
 'click'
 'hover'
+'focus'
 'always'
 ```
 
@@ -168,6 +169,29 @@ false
 
 Function that is run before closing the drop. If the function returns `false`, the closing of the drop will be prevented. Useful if you only want to programatically close the drop.
 
+#### `hoverOpenDelay`
+
+Amount of time (in milliseconds) to delay opening the drop after `mouseover`
+
+#### `hoverCloseDelay`
+
+Amount of time (in milliseconds) to delay closing the drop after `mouseout`
+
+#### `focusDelay`
+
+Amount of time (in milliseconds) to delay opening the drop after `focus`
+
+#### `blurDelay`
+
+Amount of time (in milliseconds) to delay closing the drop after `blur`
+
+#### `openDelay`
+
+Sets both the `hoverOpenDelay` and `focusDelay`
+
+#### `closeDelay`
+
+Sets both the `hoverCloseDelay` and `blurDelay`
 
 #### `tetherOptions`
 
@@ -184,6 +208,10 @@ defaultOptions =
     constrainToWindow: true
     constrainToScrollParent: true
     classes: ''
+    hoverOpenDelay: 0
+    hoverCloseDelay: 50
+    focusDelay: 0
+    blurDelay: 50
     tetherOptions: {}
 ```
 
