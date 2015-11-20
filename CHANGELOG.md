@@ -1,3 +1,6 @@
+## v1.4.1
+- Remove bower install as post npm install script
+
 ## v1.1.0
 - Update `Tether` to version 1
 - Bump all dependencies
