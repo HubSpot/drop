@@ -19,7 +19,6 @@
   "license": "MIT",
   "main": "dist/js/drop.js",
   "devDependencies": {
-    "bower": "^1.4.1",
     "del": "^1.1.1",
     "eslint": "^1.7.3",
     "gulp": "^3.9.0",
