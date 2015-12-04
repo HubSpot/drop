@@ -1,6 +1,6 @@
 {
   "name": "tether-drop",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Client-side library for creating dropdowns",
   "authors": [
     "Zack Bloom <zackbloom@gmail.com>",

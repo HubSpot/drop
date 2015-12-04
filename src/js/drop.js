@@ -198,8 +198,7 @@ function createContext(options={}) {
 
         };
 
-        generateAndSetContent();
-        this.on('open', generateAndSetContent.bind(this));
+        this.on('beforeOpen', generateAndSetContent.bind(this));
       } else if (typeof this.options.content === 'object') {
         this.content.appendChild(this.options.content);
       } else {
@@ -387,6 +386,8 @@ function createContext(options={}) {
           addClass(this.drop, `${ drop.classPrefix }-after-open`);
         }
       });
+
+      this.trigger('beforeOpen');
 
       if (typeof this.tether !== 'undefined') {
         this.tether.position();
