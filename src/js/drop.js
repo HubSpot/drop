@@ -273,11 +273,21 @@ function createContext(options={}) {
       }
 
       const events = this.options.openOn.split(' ');
+      let handlingClick = false;
 
       if (events.indexOf('click') >= 0) {
         const openHandler = (event) => {
-          this.toggle(event);
           event.preventDefault();
+
+          if (handlingClick)
+            return;
+            
+          handlingClick = true;
+          setTimeout(function(){
+            handlingClick = false;
+          }, 0)
+          
+          this.toggle(event);
         };
 
         const closeHandler = (event) => {
