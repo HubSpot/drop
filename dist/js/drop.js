@@ -1,4 +1,4 @@
-/*! tether-drop 1.4.0 */
+/*! tether-drop 1.4.1 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -176,7 +176,7 @@ function createContext() {
       var dataPrefix = 'data-' + drop.classPrefix;
 
       var contentAttr = this.target.getAttribute(dataPrefix);
-      if (contentAttr) {
+      if (contentAttr && this.options.content == null) {
         this.options.content = contentAttr;
       }
 

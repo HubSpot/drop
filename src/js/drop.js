@@ -135,7 +135,7 @@ function createContext(options={}) {
       const dataPrefix = `data-${drop.classPrefix}`;
 
       const contentAttr = this.target.getAttribute(dataPrefix);
-      if (contentAttr) {
+      if (contentAttr && this.options.content == null) {
         this.options.content = contentAttr;
       }
 
