@@ -184,7 +184,7 @@ function createContext() {
       for (var i = 0; i < attrsOverride.length; ++i) {
 
         var override = this.target.getAttribute(dataPrefix + '-' + attrsOverride[i]);
-        if (override) {
+        if (override && this.options[attrsOverride[i]] == null) {
           this.options[attrsOverride[i]] = override;
         }
       }
