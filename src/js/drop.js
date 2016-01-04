@@ -135,7 +135,7 @@ function createContext(options={}) {
       const dataPrefix = `data-${drop.classPrefix}`;
 
       const contentAttr = this.target.getAttribute(dataPrefix);
-      if (contentAttr) {
+      if (contentAttr && this.options.content == null) {
         this.options.content = contentAttr;
       }
 
@@ -143,7 +143,7 @@ function createContext(options={}) {
       for (let i = 0; i < attrsOverride.length; ++i) {
 
         const override = this.target.getAttribute(`${dataPrefix}-${attrsOverride[i]}`);
-        if (override) {
+        if (override && this.options[attrsOverride[i]] == null) {
           this.options[attrsOverride[i]] = override;
         }
       }

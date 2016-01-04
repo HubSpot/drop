@@ -57,6 +57,22 @@ drop = new Drop
   openOn: 'click'
 ```
 
+You can also create Drops from a custom "context," allowing you to style Drops within that context with CSS
+classes prefixed with an arbitrary string. By default, that `classPrefix` is `drop`. To define a new context:
+
+```coffeescript
+MyDropContext = Drop.createContext
+  classPrefix: 'my-drop'
+
+drop = new MyDropContext
+  target: document.querySelector('.my-drop-target')
+  content: 'Welcome to my new Drop context!'
+```
+
+Any Drops created within this context would be styled with classes like `my-drop-open` and `my-drop-content`
+instead of `drop-open` and `drop-content`. Additionally, any options that would be set via `data-drop`
+attributes in the default context would be set via `data-my-drop` instead.
+
 ### Methods
 
 These methods can be called on the `Drop` instance returned when creating a drop.
@@ -106,6 +122,9 @@ The content that should be rendered into the Drop.  Can be:
 - An HTML string
 - A function that returns an HTML string or a DOM element.  `content()` is called on each open, with the drop instance passed as the first argument.
 
+If this option is not set, it defaults to the value of the `data-${classPrefix}` (normally `data-drop`)
+attribute on the target element.
+
 #### `position`
 
 Position specifies the attachment point (on the target) to attach the drop to. Options include:
@@ -125,6 +144,9 @@ Position specifies the attachment point (on the target) to attach the drop to. O
 'top center'
 ```
 
+If this option is not set, it defaults to the value of the `data-${classPrefix}-position` (normally
+`data-drop-position`) attribute on the target element.
+
 More information about attachment can be found in the [Tether documentation](http://tether.io).
 
 #### `openOn`
@@ -138,6 +160,9 @@ Specifies what event on the target opens the drop. If you set this to `undefined
 'focus'
 'always'
 ```
+
+If this option is not set, it defaults to the value of the `data-${classPrefix}-openOn` (normally
+`data-drop-openOn`) attribute on the target element.
 
 #### `constrainToWindow`
 
