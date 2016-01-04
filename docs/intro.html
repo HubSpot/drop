@@ -60,7 +60,7 @@
 <li>Drop uses GPU accelerated positioning to maintain 60fps scrolling, even with dozens or hundreds of drops on screen and complex animation</li>
 <li>Drops can be nested within other drops</li>
 <li>Drops can be attached to any of 12 attachment points on the target, or you can leverage the full power of Tether to position your drop anywhere.</li>
-<li>Drops can be configured to open when the user clicks or hovers.</li>
+<li>Drops can be configured to open when the user clicks, hovers, or focuses an element.</li>
 <li>Drop is maintained by developers at <a href="http://github.hubspot.com">HubSpot</a> who care about making it do everything you need.</li>
 </ul>
 <h3 id="dependencies">Dependencies</h3>
@@ -75,6 +75,18 @@
   <span class="hljs-attribute">position</span>: <span class="hljs-string">'bottom left'</span>
   <span class="hljs-attribute">openOn</span>: <span class="hljs-string">'click'</span>
 </code></pre>
+<p>You can also create Drops from a custom &quot;context,&quot; allowing you to style Drops within that context with CSS
+classes prefixed with an arbitrary string. By default, that <code>classPrefix</code> is <code>drop</code>. To define a new context:</p>
+<pre><code class="lang-coffeescript">MyDropContext = Drop.createContext
+  <span class="hljs-attribute">classPrefix</span>: <span class="hljs-string">'my-drop'</span>
+
+drop = <span class="hljs-keyword">new</span> MyDropContext
+  <span class="hljs-attribute">target</span>: <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'.my-drop-target'</span>)
+  <span class="hljs-attribute">content</span>: <span class="hljs-string">'Welcome to my new Drop context!'</span>
+</code></pre>
+<p>Any Drops created within this context would be styled with classes like <code>my-drop-open</code> and <code>my-drop-content</code>
+instead of <code>drop-open</code> and <code>drop-content</code>. Additionally, any options that would be set via <code>data-drop</code>
+attributes in the default context would be set via <code>data-my-drop</code> instead.</p>
 <h3 id="methods">Methods</h3>
 <p>These methods can be called on the <code>Drop</code> instance returned when creating a drop.</p>
 <h4 id="-open-"><code>open()</code></h4>
@@ -103,6 +115,8 @@ a click or hover, can be set to open the drop.</p>
 <li>An HTML string</li>
 <li>A function that returns an HTML string or a DOM element.  <code>content()</code> is called on each open, with the drop instance passed as the first argument.</li>
 </ul>
+<p>If this option is not set, it defaults to the value of the <code>data-${classPrefix}</code> (normally <code>data-drop</code>)
+attribute on the target element.</p>
 <h4 id="-position-"><code>position</code></h4>
 <p>Position specifies the attachment point (on the target) to attach the drop to. Options include:</p>
 <pre><code class="lang-coffeescript"><span class="hljs-string">'top left'</span>
@@ -118,14 +132,19 @@ a click or hover, can be set to open the drop.</p>
 <span class="hljs-string">'top right'</span>
 <span class="hljs-string">'top center'</span>
 </code></pre>
+<p>If this option is not set, it defaults to the value of the <code>data-${classPrefix}-position</code> (normally
+<code>data-drop-position</code>) attribute on the target element.</p>
 <p>More information about attachment can be found in the <a href="http://tether.io">Tether documentation</a>.</p>
 <h4 id="-openon-"><code>openOn</code></h4>
 <p>Specifies what event on the target opens the drop. If you set this to <code>undefined</code> or <code>null</code> you will need to manually call <code>.open()</code> and <code>.close()</code> on the <code>drop</code> instance.
 <code>&#39;always&#39;</code> will open the drop immediately when it&#39;s rendered and leave it open.</p>
 <pre><code class="lang-coffeescript"><span class="hljs-string">'click'</span>
 <span class="hljs-string">'hover'</span>
+<span class="hljs-string">'focus'</span>
 <span class="hljs-string">'always'</span>
 </code></pre>
+<p>If this option is not set, it defaults to the value of the <code>data-${classPrefix}-openOn</code> (normally
+<code>data-drop-openOn</code>) attribute on the target element.</p>
 <h4 id="-constraintowindow-"><code>constrainToWindow</code></h4>
 <p>If set to <code>true</code>, uses <a href="http://github.hubspot.com/tether">Tether&#39;s</a> <code>constraints</code> list to flip the drop when it would otherwise be outside the viewport. This will cause drops with bottom attachments to switch to top when colliding with the bottom of the page and vice-versa. Dropdowns will not pin to the edge of the window if the user scrolls away from the target after opening a drop, but you can add that behavior by adding constraints through the <code>tetherOptions</code> option.</p>
 <pre><code class="lang-coffeescript"><span class="hljs-literal">true</span>
@@ -142,6 +161,18 @@ a click or hover, can be set to open the drop.</p>
 </code></pre>
 <h4 id="-beforeclose-"><code>beforeClose</code></h4>
 <p>Function that is run before closing the drop. If the function returns <code>false</code>, the closing of the drop will be prevented. Useful if you only want to programatically close the drop.</p>
+<h4 id="-hoveropendelay-"><code>hoverOpenDelay</code></h4>
+<p>Amount of time (in milliseconds) to delay opening the drop after <code>mouseover</code></p>
+<h4 id="-hoverclosedelay-"><code>hoverCloseDelay</code></h4>
+<p>Amount of time (in milliseconds) to delay closing the drop after <code>mouseout</code></p>
+<h4 id="-focusdelay-"><code>focusDelay</code></h4>
+<p>Amount of time (in milliseconds) to delay opening the drop after <code>focus</code></p>
+<h4 id="-blurdelay-"><code>blurDelay</code></h4>
+<p>Amount of time (in milliseconds) to delay closing the drop after <code>blur</code></p>
+<h4 id="-opendelay-"><code>openDelay</code></h4>
+<p>Sets both the <code>hoverOpenDelay</code> and <code>focusDelay</code></p>
+<h4 id="-closedelay-"><code>closeDelay</code></h4>
+<p>Sets both the <code>hoverCloseDelay</code> and <code>blurDelay</code></p>
 <h4 id="-tetheroptions-"><code>tetherOptions</code></h4>
 <p>Additional options can be passed to customize Drop even further. These will get passed to the underlying Tether instance used to position the drop. See the the <a href="http://tether.io">Tether documentation</a> for more information.  Set to <code>false</code> to disable Tether.</p>
 <h4 id="defaults">Defaults</h4>
@@ -152,6 +183,10 @@ a click or hover, can be set to open the drop.</p>
     <span class="hljs-attribute">constrainToWindow</span>: <span class="hljs-literal">true</span>
     <span class="hljs-attribute">constrainToScrollParent</span>: <span class="hljs-literal">true</span>
     <span class="hljs-attribute">classes</span>: <span class="hljs-string">''</span>
+    <span class="hljs-attribute">hoverOpenDelay</span>: <span class="hljs-number">0</span>
+    <span class="hljs-attribute">hoverCloseDelay</span>: <span class="hljs-number">50</span>
+    <span class="hljs-attribute">focusDelay</span>: <span class="hljs-number">0</span>
+    <span class="hljs-attribute">blurDelay</span>: <span class="hljs-number">50</span>
     <span class="hljs-attribute">tetherOptions</span>: {}
 </code></pre>
 <h3 id="events">Events</h3>
