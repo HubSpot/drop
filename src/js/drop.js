@@ -313,7 +313,7 @@ function createContext(options={}) {
           clearTimeout(outTimeout);
         } else {
           inTimeout = setTimeout(() => {
-            this.open(event);
+            this.open();
             inTimeout = null;
           }, (event.type === 'focus' ?
               this.options.focusDelay :
@@ -361,11 +361,11 @@ function createContext(options={}) {
       if (this.isOpened()) {
         this.close(event);
       } else {
-        this.open(event);
+        this.open();
       }
     }
 
-    open(event) {
+    open() {
       /* eslint no-unused-vars: 0 */
       if (this.isOpened()) {
         return;
