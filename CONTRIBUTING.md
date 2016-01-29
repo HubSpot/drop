@@ -12,7 +12,8 @@ You will need:
 1. Fork the project
 2. Clone your forked project by running `git clone git@github.com:{
    YOUR_USERNAME }/drop.git`
-3. Run `npm install` to install node modules
+3. Run `npm install` and `bower install` to install node modules and bower
+   components.
 4. Test that you can build the source by moving/renaming the existing `dist`
    directory and running `npm run build`
 5. Assuming everything went well, you should now have a `dist` directory that
