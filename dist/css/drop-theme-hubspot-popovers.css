@@ -56,6 +56,34 @@
       top: 50%;
       margin-top: -10px;
       border-right-color: #ebebeb; }
+  .drop-element.drop-theme-hubspot-popovers.drop-element-attached-left.drop-target-attached-center .drop-content {
+    left: -20px; }
+  .drop-element.drop-theme-hubspot-popovers.drop-element-attached-right.drop-target-attached-center .drop-content {
+    left: 20px; }
+  .drop-element.drop-theme-hubspot-popovers.drop-element-attached-top.drop-element-attached-left.drop-target-attached-middle .drop-content {
+    margin-top: 10px; }
+    .drop-element.drop-theme-hubspot-popovers.drop-element-attached-top.drop-element-attached-left.drop-target-attached-middle .drop-content:before {
+      bottom: 100%;
+      left: 10px;
+      border-bottom-color: #ebebeb; }
+  .drop-element.drop-theme-hubspot-popovers.drop-element-attached-top.drop-element-attached-right.drop-target-attached-middle .drop-content {
+    margin-top: 10px; }
+    .drop-element.drop-theme-hubspot-popovers.drop-element-attached-top.drop-element-attached-right.drop-target-attached-middle .drop-content:before {
+      bottom: 100%;
+      right: 10px;
+      border-bottom-color: #ebebeb; }
+  .drop-element.drop-theme-hubspot-popovers.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-middle .drop-content {
+    margin-bottom: 10px; }
+    .drop-element.drop-theme-hubspot-popovers.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-middle .drop-content:before {
+      top: 100%;
+      left: 10px;
+      border-top-color: #ebebeb; }
+  .drop-element.drop-theme-hubspot-popovers.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-middle .drop-content {
+    margin-bottom: 10px; }
+    .drop-element.drop-theme-hubspot-popovers.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-middle .drop-content:before {
+      top: 100%;
+      right: 10px;
+      border-top-color: #ebebeb; }
   .drop-element.drop-theme-hubspot-popovers.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content {
     margin-top: 10px; }
     .drop-element.drop-theme-hubspot-popovers.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content:before {

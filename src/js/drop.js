@@ -305,16 +305,16 @@ function createContext(options={}) {
         }
       }
 
-      let inTimeout = null;
-      let outTimeout = null;
+      this.inTimeout = null;
+      this.outTimeout = null;
 
       const inHandler = (event) => {
-        if (outTimeout !== null) {
-          clearTimeout(outTimeout);
+        if (this.outTimeout !== null) {
+          clearTimeout(this.outTimeout);
         } else {
-          inTimeout = setTimeout(() => {
+          this.inTimeout = setTimeout(() => {
             this.open(event);
-            inTimeout = null;
+            this.inTimeout = null;
           }, (event.type === 'focus' ?
               this.options.focusDelay :
               this.options.hoverOpenDelay) ||
@@ -323,12 +323,12 @@ function createContext(options={}) {
       };
 
       const outHandler = (event) => {
-        if (inTimeout !== null) {
-          clearTimeout(inTimeout);
+        if (this.inTimeout !== null) {
+          clearTimeout(this.inTimeout);
         } else {
-          outTimeout = setTimeout(() => {
+          this.outTimeout = setTimeout(() => {
             this.close(event);
-            outTimeout = null;
+            this.outTimeout = null;
           }, (event.type === 'blur' ?
               this.options.blurDelay :
               this.options.hoverCloseDelay) ||
@@ -482,6 +482,13 @@ function createContext(options={}) {
 
       removeFromArray(allDrops[drop.classPrefix], this);
       removeFromArray(drop.drops, this);
+
+      if (this.outTimeout !== null) {
+        clearTimeout(this.outTimeout);
+      }
+      if (this.inTimeout !== null) {
+        clearTimeout(this.inTimeout);
+      }
     }
 
   }
