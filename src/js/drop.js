@@ -89,7 +89,8 @@ function createContext(options={}) {
       blurDelay: null,
       hoverOpenDelay: null,
       hoverCloseDelay: null,
-      tetherOptions: {}
+      tetherOptions: {},
+      parentElement: null
     }
   };
 
@@ -372,7 +373,8 @@ function createContext(options={}) {
       }
 
       if (!this.drop.parentNode) {
-        document.body.appendChild(this.drop);
+        const node = this.options.parentElement || document.body;
+        node.appendChild(this.drop);
       }
 
       if (typeof this.tether !== 'undefined') {
