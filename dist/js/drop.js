@@ -1,4 +1,4 @@
-/*! tether-drop 1.4.1 */
+/*! tether-drop 1.4.2 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -127,7 +127,8 @@ function createContext() {
       blurDelay: null,
       hoverOpenDelay: null,
       hoverCloseDelay: null,
-      tetherOptions: {}
+      tetherOptions: {},
+      parentElement: null
     }
   };
 
@@ -421,7 +422,8 @@ function createContext() {
         }
 
         if (!this.drop.parentNode) {
-          document.body.appendChild(this.drop);
+          var node = this.options.parentElement || document.body;
+          node.appendChild(this.drop);
         }
 
         if (typeof this.tether !== 'undefined') {
