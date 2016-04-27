@@ -60,6 +60,34 @@
       top: 50%;
       margin-top: -16px;
       border-right-color: #eee; }
+  .drop-element.drop-theme-arrows.drop-element-attached-left.drop-target-attached-center .drop-content {
+    left: -32px; }
+  .drop-element.drop-theme-arrows.drop-element-attached-right.drop-target-attached-center .drop-content {
+    left: 32px; }
+  .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-left.drop-target-attached-middle .drop-content {
+    margin-top: 16px; }
+    .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-left.drop-target-attached-middle .drop-content:before {
+      bottom: 100%;
+      left: 16px;
+      border-bottom-color: #eee; }
+  .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-right.drop-target-attached-middle .drop-content {
+    margin-top: 16px; }
+    .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-right.drop-target-attached-middle .drop-content:before {
+      bottom: 100%;
+      right: 16px;
+      border-bottom-color: #eee; }
+  .drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-middle .drop-content {
+    margin-bottom: 16px; }
+    .drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-left.drop-target-attached-middle .drop-content:before {
+      top: 100%;
+      left: 16px;
+      border-top-color: #eee; }
+  .drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-middle .drop-content {
+    margin-bottom: 16px; }
+    .drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-right.drop-target-attached-middle .drop-content:before {
+      top: 100%;
+      right: 16px;
+      border-top-color: #eee; }
   .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content {
     margin-top: 16px; }
     .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content:before {

@@ -363,6 +363,8 @@ function createContext(options={}) {
       } else {
         this.open(event);
       }
+
+      return this;
     }
 
     open(event) {
@@ -395,6 +397,8 @@ function createContext(options={}) {
       this.trigger('open');
 
       drop.updateBodyClasses();
+
+      return this;
     }
 
     _transitionEndHandler(e) {
@@ -459,6 +463,8 @@ function createContext(options={}) {
       if (this.isOpened() && typeof this.tether !== 'undefined') {
         this.tether.position();
       }
+
+      return this;
     }
 
     destroy() {
