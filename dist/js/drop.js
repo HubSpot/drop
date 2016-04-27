@@ -1,4 +1,4 @@
-/*! tether-drop 1.4.1 */
+/*! tether-drop 1.4.3 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -409,6 +409,8 @@ function createContext() {
         } else {
           this.open(event);
         }
+
+        return this;
       }
     }, {
       key: 'open',
@@ -444,6 +446,8 @@ function createContext() {
         this.trigger('open');
 
         drop.updateBodyClasses();
+
+        return this;
       }
     }, {
       key: '_transitionEndHandler',
@@ -513,6 +517,8 @@ function createContext() {
         if (this.isOpened() && typeof this.tether !== 'undefined') {
           this.tether.position();
         }
+
+        return this;
       }
     }, {
       key: 'destroy',
