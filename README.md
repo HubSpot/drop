@@ -14,6 +14,10 @@ __Dependencies__
 
 * __[Tether](https://github.com/HubSpot/tether)__
 
+__cdn__
+
+https://cdnjs.com/libraries/tether-drop
+
 __npm__
 ```sh
 $ npm install tether-drop
