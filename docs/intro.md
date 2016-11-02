@@ -181,6 +181,18 @@ Similar to `constrainToWindow` but for the target element's first scroll parent:
 
 Additional class names to be added to the drop. These can be set to apply a theme (for example, [`drop-theme-arrows-bounce-dark`](https://github.com/HubSpot/drop/blob/master/css/drop-theme-arrows-bounce-dark.css)) and/or they can be set to apply custom styling to child elements of the drop.
 
+#### `classSuffixOpen`
+
+Class name suffix used when the drop is opened and removed when it should be hidden. By default it's `-open`.
+
+#### `classSuffixOpenTransitionend`
+
+Class name suffix used immediately when the drop is open. By default it's `-open-transitionend`.
+
+#### `classSuffixAfterOpen`
+
+Class name suffix used when the next event loop tick after the drop is opened. By default it's `-after-open`.
+
 #### `remove`
 
 Set to `true` if you'd like the drop element to be removed from the DOM when the drop is closed and recreated when it's opened.

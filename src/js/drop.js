@@ -81,6 +81,9 @@ function createContext(options={}) {
       constrainToScrollParent: true,
       constrainToWindow: true,
       classes: '',
+      classSuffixOpen: '-open',
+      classSuffixOpenTransitionend: '-open-transitionend',
+      classSuffixAfterOpen: '-after-open',
       remove: false,
       openDelay: 0,
       closeDelay: 50,
@@ -115,9 +118,9 @@ function createContext(options={}) {
     }
 
     if (anyOpen) {
-      addClass(document.body, `${ drop.classPrefix }-open`);
+      addClass(document.body, `${ drop.classPrefix }${ drop.classSuffixOpen }`);
     } else {
-      removeClass(document.body, `${ drop.classPrefix }-open`);
+      removeClass(document.body, `${ drop.classPrefix }${ drop.classSuffixOpen }`);
     }
 
   };
@@ -353,7 +356,7 @@ function createContext(options={}) {
 
     isOpened() {
       if (this.drop) {
-        return hasClass(this.drop, `${ drop.classPrefix }-open`);
+        return hasClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixOpen }`);
       }
     }
 
@@ -379,12 +382,12 @@ function createContext(options={}) {
         this.tether.enable();
       }
 
-      addClass(this.drop, `${ drop.classPrefix }-open`);
-      addClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
+      addClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixOpen }`);
+      addClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixOpenTransitionend }`);
 
       setTimeout(() => {
         if (this.drop) {
-          addClass(this.drop, `${ drop.classPrefix }-after-open`);
+          addClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixAfterOpen }`);
         }
       });
 
@@ -402,8 +405,8 @@ function createContext(options={}) {
         return;
       }
 
-      if (!hasClass(this.drop, `${ drop.classPrefix }-open`)) {
-        removeClass(this.drop, `${ drop.classPrefix }-open-transitionend`);
+      if (!hasClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixOpen }`)) {
+        removeClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixOpenTransitionend }`);
       }
       this.drop.removeEventListener(transitionEndEvent, this.transitionEndHandler);
     }
@@ -430,8 +433,8 @@ function createContext(options={}) {
         return;
       }
 
-      removeClass(this.drop, `${ drop.classPrefix }-open`);
-      removeClass(this.drop, `${ drop.classPrefix }-after-open`);
+      removeClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixOpen }`);
+      removeClass(this.drop, `${ drop.classPrefix }${ drop.classSuffixAfterOpen }`);
 
       this.drop.addEventListener(transitionEndEvent, this.transitionEndHandler);
 
