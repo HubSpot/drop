@@ -370,6 +370,11 @@ function createContext(options={}) {
       if (this.isOpened()) {
         return;
       }
+      
+      if (!this.drop) {
+        // The instance was destroyed
+        return;
+      }
 
       if (!this.drop.parentNode) {
         document.body.appendChild(this.drop);
