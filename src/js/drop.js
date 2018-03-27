@@ -143,7 +143,7 @@ function createContext(options={}) {
       for (let i = 0; i < attrsOverride.length; ++i) {
 
         const override = this.target.getAttribute(`${dataPrefix}-${attrsOverride[i]}`);
-        if (override && this.options[attrsOverride[i]] == null) {
+        if (override && (!opts || opts[attrsOverride[i]] == null)) {
           this.options[attrsOverride[i]] = override;
         }
       }

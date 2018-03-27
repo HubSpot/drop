@@ -1,4 +1,4 @@
-/*! tether-drop 1.4.1 */
+/*! tether-drop 1.4.2 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -184,7 +184,7 @@ function createContext() {
       for (var i = 0; i < attrsOverride.length; ++i) {
 
         var override = this.target.getAttribute(dataPrefix + '-' + attrsOverride[i]);
-        if (override && this.options[attrsOverride[i]] == null) {
+        if (override && (!opts || opts[attrsOverride[i]] == null)) {
           this.options[attrsOverride[i]] = override;
         }
       }
